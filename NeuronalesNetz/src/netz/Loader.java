@@ -1,3 +1,4 @@
+package netz;
 import org.neuroph.core.NeuralNetwork;
 
 public class Loader {

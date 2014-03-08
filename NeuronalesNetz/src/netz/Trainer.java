@@ -1,3 +1,4 @@
+package netz;
 
 
 public class Trainer {

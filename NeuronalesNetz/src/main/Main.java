@@ -1,3 +1,4 @@
+package main;
 import org.neuroph.core.*;
 import org.neuroph.core.data.DataSet;
 import org.neuroph.core.data.DataSetRow;
