@@ -1,8 +1,8 @@
-package gui;
+package ui;
 
-public class GUI {
+public class UI {
 
-	public GUI() {
+	public UI() {
 		// TODO Auto-generated constructor stub
 	}
 
