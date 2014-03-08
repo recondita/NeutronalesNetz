@@ -18,7 +18,7 @@ public class Main {
 		// add training data to training set (logical OR function)
 		trainingSet.
 		addRow (new DataSetRow (new double[]{0, 0},
-		new double[]{0}));
+		new double[]{0})); // Adds a dataSetRow
 		trainingSet.
 		addRow (new DataSetRow (new double[]{0, 1},
 		new double[]{1}));
