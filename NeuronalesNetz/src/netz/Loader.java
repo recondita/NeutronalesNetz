@@ -8,11 +8,11 @@ public class Loader {
 
 	}
 
-	public void save(NeuralNetwork neuralNetwork, String destination) {
+	public static void save(NeuralNetwork neuralNetwork, String destination) {
 		neuralNetwork.save(destination);
 	}
 
-	public NeuralNetwork load(String file) {
+	public static NeuralNetwork load(String file) {
 		NeuralNetwork neuralNetwork = NeuralNetwork.load(file);
 		return neuralNetwork;
 	}
