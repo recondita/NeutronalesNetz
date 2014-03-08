@@ -1,39 +1,46 @@
 package main;
+
+import netz.Loader;
+import netz.SimpleNetwork;
+
 import org.neuroph.core.*;
 import org.neuroph.core.data.DataSet;
 import org.neuroph.core.data.DataSetRow;
 import org.neuroph.nnet.Perceptron;
 
-public class Main {
+import ui.UI;
 
-	public Main() {
-		// TODO Auto-generated constructor stub
+public class Main
+{
+
+	private UI ui;
+	private SimpleNetwork nW;
+	private boolean unsaved = false;
+
+	public Main()
+	{
+		ui = new UI(this);
 	}
 
-	public static void main(String[] args) {
-		// create new perceptron network
-		NeuralNetwork neuralNetwork = new Perceptron(2, 1);
-		// create training set
-		DataSet trainingSet =
-		new DataSet(2, 1);
-		// add training data to training set (logical OR function)
-		trainingSet.
-		addRow (new DataSetRow (new double[]{0, 0},
-		new double[]{0})); // Adds a dataSetRow
-		trainingSet.
-		addRow (new DataSetRow (new double[]{0, 1},
-		new double[]{1}));
-		trainingSet.
-		addRow (new DataSetRow (new double[]{1, 0},
-		new double[]{1}));
-		trainingSet.
-		addRow (new DataSetRow (new double[]{1, 1},
-		new double[]{1}));
-		// learn the training set
-		neuralNetwork.learn(trainingSet);
-		// save the trained network into file
-		neuralNetwork.save("or_perceptron.nnet"); 
+	public void neuesNetzwerk()
+	{
+		nW = new SimpleNetwork();
+	}
 
+	public void speichern(String dest)
+	{
+		Loader.save(nW, dest);
+	}
+
+	public void laden(String pfad)
+	{
+		nW = (SimpleNetwork) Loader.load(pfad);
+	}
+
+	public static void main(String[] args)
+	{
+		Main m=new Main();
+		m.ui.mainMenu();
 	}
 
 }
