@@ -69,7 +69,7 @@ public class UI
 		System.out.println("\nGeben sie Dateiname samt Pfad an");
 		try
 		{
-			while(!s.hasNext()){}
+			while(!s.hasNext()){} //das ist aber nicht sauber!
 			main.laden(s.next());
 			System.out.println("\nNetz gespeichert");
 		} catch (Exception e)
