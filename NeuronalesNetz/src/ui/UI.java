@@ -8,6 +8,7 @@ public class UI
 {
 
 	Main main;
+	Scanner s = new Scanner(System.in);
 
 	public UI(Main main)
 	{
@@ -20,7 +21,6 @@ public class UI
 		System.out.println("\n1.neus Netz erstellen\n2.Netz laden\n3.Netzt speichern\n4.NetzTrainieren");
 		try
 		{
-			Scanner s = new Scanner(System.in);
 			switch (s.nextInt())
 			{
 			case 1:
@@ -39,18 +39,29 @@ public class UI
 		} catch (Exception e)
 		{
 			System.out.println("Ungueltige Eingabe");
+			
 		}
 
 	}
 
 	private void netzLaden()
 	{
-
+		System.out.println("\nGeben sie Dateiname samt Pfad zum Gespeicherten Netz an");		
+		try{
+			main.laden(s.nextLine());
+			System.out.println("\nNetz geladen");
+		}
+		catch(Exception e){System.out.println("Ungueltige Eingabe");}		
 	}
 	
 	private void netzSpeichern()
 	{
-		
+		System.out.println("\nGeben sie Dateiname samt Pfad an");		
+		try{
+			main.laden(s.nextLine());
+			System.out.println("\nNetz gespeichert");
+		}
+		catch(Exception e){System.out.println("Ungueltige Eingabe");}
 	}
 
 }
