@@ -24,6 +24,7 @@ public class UI
 		{
 			try
 			{
+				while(!s.hasNext()){}
 				switch (s.nextInt())
 				{
 				case 1:
@@ -54,7 +55,8 @@ public class UI
 		System.out.println("\nGeben sie Dateiname samt Pfad zum Gespeicherten Netz an");
 		try
 		{
-			main.laden(s.nextLine());
+			while(!s.hasNext()){}
+			main.laden(s.next());
 			System.out.println("\nNetz geladen");
 		} catch (Exception e)
 		{
@@ -67,7 +69,8 @@ public class UI
 		System.out.println("\nGeben sie Dateiname samt Pfad an");
 		try
 		{
-			main.laden(s.nextLine());
+			while(!s.hasNext()){}
+			main.laden(s.next());
 			System.out.println("\nNetz gespeichert");
 		} catch (Exception e)
 		{
