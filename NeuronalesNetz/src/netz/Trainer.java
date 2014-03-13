@@ -8,7 +8,7 @@ import org.neuroph.core.data.DataSetRow;
 public class Trainer {
 
 	DataSet trainingSet;
-	
+
 	public Trainer() {
 		// create training set
 		trainingSet =new DataSet(2, 1);
