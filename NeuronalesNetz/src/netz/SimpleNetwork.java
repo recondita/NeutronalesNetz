@@ -1,6 +1,4 @@
 package netz;
-import org.neuroph.core.data.DataSet;
-import org.neuroph.core.data.DataSetRow;
 import org.neuroph.nnet.Perceptron;
 
 
