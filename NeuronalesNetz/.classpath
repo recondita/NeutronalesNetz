@@ -5,5 +5,6 @@
 	<classpathentry kind="lib" path="lib/neuroph-core.jar"/>
 	<classpathentry kind="lib" path="lib/neuroph-imgrec.jar"/>
 	<classpathentry kind="lib" path="lib/neuroph-ocr.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Snake"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
