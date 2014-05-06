@@ -4,7 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
+import java.util.LinkedList;
 
 import snake.GUI;
 import snake.Spielbrett;
@@ -15,18 +15,11 @@ public class SnakeLogger
 	private Spielbrett brett;
 	private LogSnake snake;
 	private GUI gui;
-	private Writer writer;
+	private LinkedList<String> templog;
 
 	public SnakeLogger()
 	{
-		try
-		{
-			writer = new BufferedWriter(new FileWriter(new File("spiel.log"),
-					true));
-		} catch (IOException e)
-		{
-			e.printStackTrace();
-		}
+		templog=new LinkedList<String>();
 		this.brett = new LogBrett(this);
 		gui = new GUI(this.brett);
 		gui.start();
@@ -34,8 +27,7 @@ public class SnakeLogger
 
 	public void preMove()
 	{
-		try
-		{
+
 			StringBuffer sb= new StringBuffer();
 			for (int x = 0; x < brett.getBreite(); x++)
 			{
@@ -49,12 +41,7 @@ public class SnakeLogger
 			}
 			sb.append((double)snake.getRichtung()/4);
 			sb.append("\n");
-			writer.write(sb.toString());
-		} catch (IOException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			templog.add(sb.toString());
 	}
 
 	public double feldToDouble(int i)
@@ -85,5 +72,25 @@ public class SnakeLogger
 	public static void main(String[] args)
 	{
 		new SnakeLogger();
+	}
+	
+	public void speichern(int wegschneiden)
+	{
+		try
+		{
+			BufferedWriter writer = new BufferedWriter(new FileWriter(new File("spiel.log"),
+					true));
+			for(int i=0; i<wegschneiden&&!templog.isEmpty();i++)
+				templog.removeLast();
+			while(!templog.isEmpty())
+			{
+				writer.write(templog.removeFirst());
+			}
+			writer.close();
+			templog=new LinkedList<String>();
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 }
