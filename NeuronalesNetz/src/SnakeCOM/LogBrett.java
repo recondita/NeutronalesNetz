@@ -13,6 +13,7 @@ public class LogBrett extends Spielbrett
 	
 	public LogBrett(SnakeLogger sl)
 	{
+		super(10,10);
 		this.sl=sl;
 	}
 	
