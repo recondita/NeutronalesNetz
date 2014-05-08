@@ -1,4 +1,4 @@
-package SnakeCOM;
+package snakeCOM;
 
 import snake.Snake;
 import snake.Spielbrett;

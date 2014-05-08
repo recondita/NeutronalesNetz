@@ -1,4 +1,4 @@
-package SnakeCOM;
+package snakeCOM;
 
 import javax.swing.JOptionPane;
 
@@ -26,9 +26,10 @@ public class LogBrett extends Spielbrett
 	@Override
 	public void verloren(int laenge)
 	{
-		boolean loop=false;
+		boolean loop;
 		int auswahl;
 		do{
+			loop=false;
 		auswahl=JOptionPane.showConfirmDialog(null, "Speichern?");
 		if(auswahl>0)
 			loop=0!=JOptionPane.showConfirmDialog(null, "Wirklich?");

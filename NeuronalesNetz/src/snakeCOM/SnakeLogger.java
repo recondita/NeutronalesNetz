@@ -1,4 +1,4 @@
-package SnakeCOM;
+package snakeCOM;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -65,7 +65,7 @@ public class SnakeLogger
 	public LogSnake newSnake()
 	{
 		this.snake = new LogSnake(brett.getBreite() / 2, brett.getHoehe() / 2,
-				1, 200L, this.brett, this);
+				1, 300L, this.brett, this);
 		return snake;
 	}
 
