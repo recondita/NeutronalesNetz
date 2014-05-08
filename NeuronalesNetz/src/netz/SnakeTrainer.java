@@ -1,16 +1,52 @@
 package netz;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import org.neuroph.core.NeuralNetwork;
 import org.neuroph.core.data.DataSet;
+import org.neuroph.nnet.learning.BackPropagation;
+import org.neuroph.util.TrainingSetImport;
 
-public class SnakeTrainer extends DataSet
+public class SnakeTrainer implements Trainer
 {
-
-	private static final long serialVersionUID = 1L;
-
-	public SnakeTrainer()
+	DataSet trainingSet;
+	public SnakeTrainer() throws NumberFormatException, FileNotFoundException, IOException
 	{
-		super(100,2);
-		// TODO Auto-generated constructor stub
+			System.out.println("Lade Dataset");
+            trainingSet = TrainingSetImport.importFromFile("kleinesSet", 100, 1, ",");
+            System.out.println("fertig!");
+	}
+	
+	public void train(NeuralNetwork<BackPropagation> netz)
+	{
+		System.out.println("Beginne das Netz zu Trainieren");
+		netz.learn(trainingSet);
+		System.out.println("fertig Trainiert");
 	}
 
+	public static void main(String[] agrs)
+	{
+		System.out.println("Erstelle Netz");
+		SnakeNetz netz=SnakeNetz.newNetz(10, 10);
+		System.out.println("fertig");
+		try
+		{
+			new SnakeTrainer().train(netz);
+		} catch (NumberFormatException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FileNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("fertig");
+	}
 }
