@@ -1,36 +1,44 @@
 package netz;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Scanner;
 
 import org.neuroph.core.NeuralNetwork;
 import org.neuroph.core.data.DataSet;
 import org.neuroph.nnet.learning.BackPropagation;
 import org.neuroph.util.TrainingSetImport;
 
+import ui.Abbrecher;
+
 public class SnakeTrainer implements Trainer
 {
 	DataSet trainingSet;
-	public SnakeTrainer() throws NumberFormatException, FileNotFoundException, IOException
+	public SnakeTrainer() throws NumberFormatException, FileNotFoundException,
+			IOException
 	{
-			System.out.println("Lade Dataset");
-            trainingSet = TrainingSetImport.importFromFile("kleinesSet", 100, 1, ",");
-            System.out.println("fertig!");
+		System.out.println("Lade Dataset");
+		trainingSet = TrainingSetImport
+				.importFromFile("spiel.log", 100, 1, ",");
+		System.out.println("fertig!");
 	}
-	
+
 	public void train(NeuralNetwork<BackPropagation> netz)
 	{
 		System.out.println("Beginne das Netz zu Trainieren");
-		netz.learn(trainingSet);
-		System.out.println("fertig Trainiert");
+			netz.learn(trainingSet);
+		System.out.println("fertig");
 	}
 
 	public static void main(String[] agrs)
 	{
+		Scanner sc=new Scanner(System.in);
+		System.out.print("Netz speichern unter: ");
+		String saveName=sc.nextLine();
 		System.out.println("Erstelle Netz");
-		SnakeNetz netz=SnakeNetz.newNetz(10, 10);
+		SnakeNetz netz = SnakeNetz.newNetz(10, 10);
 		System.out.println("fertig");
+		new Autosaver(netz,saveName);
 		try
 		{
 			new SnakeTrainer().train(netz);
@@ -47,6 +55,21 @@ public class SnakeTrainer implements Trainer
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("fertig");
+
+		
+		/*
+				Scanner sc=new Scanner(System.in);
+		System.out.print("Netz speichern unter: ");
+		String line=sc.nextLine();
+		while(!"end".equals(line.toLowerCase()))
+		{
+			netz.save(line);
+			System.out.print("Netz speichern unter: ");
+			line=sc.nextLine();
+			System.out.println();
+		}
+		*/
+		sc.close();
+		System.out.println("Ende");
 	}
 }

@@ -9,12 +9,12 @@ public class LogBrett extends Spielbrett
 
 
 	private static final long serialVersionUID = 4278636303152012557L;
-	private SnakeLogger sl;
+	private SnakeControl sl;
 	
-	public LogBrett(SnakeLogger sl)
+	public LogBrett(SnakeControl snakeControl)
 	{
 		super(10,10);
-		this.sl=sl;
+		this.sl=snakeControl;
 	}
 	
 	@Override
@@ -26,22 +26,7 @@ public class LogBrett extends Spielbrett
 	@Override
 	public void verloren(int laenge)
 	{
-		boolean loop;
-		int auswahl;
-		do{
-			loop=false;
-		auswahl=JOptionPane.showConfirmDialog(null, "Speichern?");
-		if(auswahl>0)
-			loop=0!=JOptionPane.showConfirmDialog(null, "Wirklich?");
-		}while(loop);
-		switch(auswahl)
-		{
-		case 0: sl.speichern(5);
-		break;
-		case 1: break;
-		case 2: System.exit(0);
-		}
-		
+		sl.verloren(laenge);
 		super.verloren(laenge);
 	}
 

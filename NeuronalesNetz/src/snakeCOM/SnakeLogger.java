@@ -6,22 +6,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedList;
 
-import snake.GUI;
-import snake.Spielbrett;
+import javax.swing.JOptionPane;
 
-public class SnakeLogger
+public class SnakeLogger extends SnakeControl
 {
-
-	private Spielbrett brett;
-	private LogSnake snake;
-	private GUI gui;
 	private LinkedList<String> templog;
 
 	public SnakeLogger()
 	{
 		templog=new LinkedList<String>();
-		this.brett = new LogBrett(this);
-		gui = new GUI(this.brett);
 		gui.start();
 	}
 
@@ -61,13 +54,6 @@ public class SnakeLogger
 
 	}
 
-	
-	public LogSnake newSnake()
-	{
-		this.snake = new LogSnake(brett.getBreite() / 2, brett.getHoehe() / 2,
-				1, 300L, this.brett, this);
-		return snake;
-	}
 
 	public static void main(String[] args)
 	{
@@ -92,5 +78,26 @@ public class SnakeLogger
 		{
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void verloren(int laenge)
+	{
+		boolean loop;
+		int auswahl;
+		do{
+			loop=false;
+		auswahl=JOptionPane.showConfirmDialog(null, "Speichern?");
+		if(auswahl>0)
+			loop=0!=JOptionPane.showConfirmDialog(null, "Wirklich?");
+		}while(loop);
+		switch(auswahl)
+		{
+		case 0: speichern(5);
+		break;
+		case 1: break;
+		case 2: System.exit(0);
+		}
+		
 	}
 }
