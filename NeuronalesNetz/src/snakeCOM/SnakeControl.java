@@ -1,14 +1,11 @@
 package snakeCOM;
 
-import java.util.LinkedList;
-
 import snake.GUI;
-import snake.Spielbrett;
 
 public abstract class SnakeControl
 {
 
-	protected Spielbrett brett;
+	protected LogBrett brett;
 	protected LogSnake snake;
 	protected GUI gui;
 	

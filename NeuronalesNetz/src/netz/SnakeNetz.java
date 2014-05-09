@@ -11,7 +11,7 @@ public class SnakeNetz extends MultiLayerPerceptron
 
 	private static final long serialVersionUID = 1L;;
 
-	protected SnakeNetz(List<Integer> layers)
+	protected SnakeNetz(int... layers)
 	{
 		super(layers);
 
@@ -20,14 +20,14 @@ public class SnakeNetz extends MultiLayerPerceptron
 	public static SnakeNetz newNetz(int breite, int laenge)
 	{
 		final int gleich = 0;
-		Integer[] layer = new Integer[gleich + 1
+		int[] layer = new int[gleich + 1
 				+ (laenge < breite ? laenge : breite) / 2];
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < gleich; i++)
 			layer[i] = laenge * breite;
 		for (int i = gleich; i < layer.length - 1; i++)
 			layer[i] = (laenge - 2 * i) * (breite - 2 * i);
 		layer[layer.length - 1] = 1;
-		SnakeNetz netz = new SnakeNetz(Arrays.asList(layer));
+		SnakeNetz netz = new SnakeNetz(100, 25 ,4,1);
 		MomentumBackpropagation learningRule = (MomentumBackpropagation) netz
 				.getLearningRule();
 		learningRule.setLearningRate(0.1);

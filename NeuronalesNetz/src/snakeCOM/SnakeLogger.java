@@ -27,7 +27,7 @@ public class SnakeLogger extends SnakeControl
 				for (int y = 0; y < brett.getHoehe(); y++)
 				{
 					int i = brett.getFeld(x, y);
-					sb.append(feldToDouble(i));
+					sb.append(LogBrett.feldToDouble(i));
 					sb.append(",");
 				}
 
@@ -35,23 +35,6 @@ public class SnakeLogger extends SnakeControl
 			sb.append((double)snake.getRichtung()/4);
 			sb.append("\n");
 			templog.add(sb.toString());
-	}
-
-	public double feldToDouble(int i)
-	{
-		if (i == 0)
-			return 0.3;
-		if (i >= 20 && i < 30)
-			return 0.5;
-		if (i >= 30 && i < 40)
-			return 0.7;
-		if (i == 1)
-			return 0;
-		if (i >= 10 && i < 20)
-			return 1;
-		System.out.println("Unbekanntes Objekt");
-		return 0;
-
 	}
 
 

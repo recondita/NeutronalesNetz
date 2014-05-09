@@ -69,6 +69,7 @@ public class SnakeTrainer implements Trainer
 			System.out.println();
 		}
 		*/
+		netz.save(saveName);
 		sc.close();
 		System.out.println("Ende");
 	}
