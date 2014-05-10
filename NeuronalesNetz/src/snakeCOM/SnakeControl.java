@@ -20,9 +20,10 @@ public abstract class SnakeControl
 	public LogSnake newSnake()
 	{
 		this.snake = new LogSnake(brett.getBreite() / 2, brett.getHoehe() / 2,
-				1, 300L, this.brett, this);
+				1, 500L, this.brett, this);
 		return snake;
 	}
+	
 	
 	public abstract void verloren(int laenge);
 

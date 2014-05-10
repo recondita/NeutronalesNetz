@@ -20,9 +20,30 @@ public class LogSnake extends Snake
 		logger.preMove();
 	}
 	
-	public void setRichtung(int richtung)
+	public double richtungBreite()
 	{
-		super.richtung=richtung;
+		int richtung=getRichtung();
+		return (richtung & 1) * (1 - (richtung & 2));
 	}
+	
+	public double richtungHoehe()
+	{
+		int richtung=getRichtung();
+		return (1 - (richtung & 1)) * (1 - (richtung & 2));
+	}
+	
+	public void setRichtung(double x, double y)
+	{
+		if(Math.abs(x)>Math.abs(y))
+		{
+			super.richtung=(x>0?1:3);
+		}
+		
+		else
+		{
+			super.richtung=(y>0?0:2);
+		}
+	}
+	
 
 }

@@ -19,7 +19,7 @@ public class SnakeTrainer implements Trainer
 	{
 		System.out.println("Lade Dataset");
 		trainingSet = TrainingSetImport
-				.importFromFile("spielGross.log", 100, 1, ",");
+				.importFromFile("spiel.log", 100, 2, ",");
 		System.out.println("fertig!");
 	}
 
@@ -38,7 +38,7 @@ public class SnakeTrainer implements Trainer
 		System.out.println("Erstelle Netz");
 		SnakeNetz netz = SnakeNetz.newNetz(10, 10);
 		System.out.println("fertig");
-		new Autosaver(netz,saveName);
+		Autosaver as=new Autosaver(netz,saveName);
 		try
 		{
 			new SnakeTrainer().train(netz);
@@ -69,8 +69,10 @@ public class SnakeTrainer implements Trainer
 			System.out.println();
 		}
 		*/
+		as.stop();
 		netz.save(saveName);
 		sc.close();
 		System.out.println("Ende");
+		System.exit(0);
 	}
 }

@@ -20,7 +20,6 @@ public class SnakeLogger extends SnakeControl
 
 	public void preMove()
 	{
-
 			StringBuffer sb= new StringBuffer();
 			for (int x = 0; x < brett.getBreite(); x++)
 			{
@@ -32,8 +31,11 @@ public class SnakeLogger extends SnakeControl
 				}
 
 			}
-			sb.append((double)snake.getRichtung()/4);
+			sb.append(snake.richtungBreite());//((double)(snake.getRichtung()-2)/2)-1.0);
+			sb.append(",");
+			sb.append(snake.richtungHoehe());
 			sb.append("\n");
+			//snake.setRichtung(snake.richtungBreite(), snake.richtungHoehe());
 			templog.add(sb.toString());
 	}
 

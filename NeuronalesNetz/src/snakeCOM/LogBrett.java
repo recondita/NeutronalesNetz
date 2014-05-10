@@ -39,13 +39,13 @@ public class LogBrett extends Spielbrett
 	public static double feldToDouble(int i)
 	{
 		if (i == 0)
-			return 0.3;
+			return 0.0;
 		if (i >= 20 && i < 30)
 			return 0.5;
 		if (i >= 30 && i < 40)
-			return 0.7;
+			return 0.5;
 		if (i == 1)
-			return 0;
+			return -1;
 		if (i >= 10 && i < 20)
 			return 1;
 		System.out.println("Unbekanntes Objekt");

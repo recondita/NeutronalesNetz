@@ -21,9 +21,9 @@ public class SnakePlayer extends SnakeControl
 
 		nn.setInput(brett.toDoubleArray());
 		nn.calculate();
-		double drichtung=nn.getOutput()[0];
-		System.out.println("Netz sagt: "+ drichtung);
-		snake.setRichtung((int) Math.round(drichtung * 4));
+		double[] drichtung=nn.getOutput();
+		System.out.println("Netz sagt: "+ drichtung[0]+" "+drichtung[1]);
+		snake.setRichtung(drichtung[0],drichtung[1]);
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class SnakePlayer extends SnakeControl
 
 	public static void main(String[] args)
 	{
-		new SnakePlayer(NeuralNetwork.createFromFile(new File("klein.nn")));
+		new SnakePlayer(NeuralNetwork.createFromFile(new File("gausgross.nn")));
 	}
 
 }
