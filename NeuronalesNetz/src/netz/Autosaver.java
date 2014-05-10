@@ -27,12 +27,13 @@ public class Autosaver
 					e1.printStackTrace();
 				}
 				while (weiter)
-				{
-					nn.save(file);
+				{					
 					try
 					{
+						nn.save(file);
+						System.out.println("AutoSave");
 						sleep(60000L);
-					} catch (InterruptedException e)
+					} catch (Exception e)
 					{
 						// TODO Auto-generated catch block
 						e.printStackTrace();

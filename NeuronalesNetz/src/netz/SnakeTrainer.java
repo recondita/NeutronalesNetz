@@ -19,7 +19,7 @@ public class SnakeTrainer implements Trainer
 	{
 		System.out.println("Lade Dataset");
 		trainingSet = TrainingSetImport
-				.importFromFile("spiel.log", 100, 1, ",");
+				.importFromFile("spielGross.log", 100, 1, ",");
 		System.out.println("fertig!");
 	}
 

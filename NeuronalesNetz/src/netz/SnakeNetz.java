@@ -1,10 +1,10 @@
 package netz;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.neuroph.nnet.MultiLayerPerceptron;
 import org.neuroph.nnet.learning.MomentumBackpropagation;
+import org.neuroph.util.TransferFunctionType;
 
 public class SnakeNetz extends MultiLayerPerceptron
 {
@@ -13,7 +13,7 @@ public class SnakeNetz extends MultiLayerPerceptron
 
 	protected SnakeNetz(int... layers)
 	{
-		super(layers);
+		super(TransferFunctionType.GAUSSIAN,layers);
 
 	}
 
@@ -27,7 +27,7 @@ public class SnakeNetz extends MultiLayerPerceptron
 		for (int i = gleich; i < layer.length - 1; i++)
 			layer[i] = (laenge - 2 * i) * (breite - 2 * i);
 		layer[layer.length - 1] = 1;
-		SnakeNetz netz = new SnakeNetz(100, 25 ,4,1);
+		SnakeNetz netz = new SnakeNetz(100,4,1);
 		MomentumBackpropagation learningRule = (MomentumBackpropagation) netz
 				.getLearningRule();
 		learningRule.setLearningRate(0.1);
