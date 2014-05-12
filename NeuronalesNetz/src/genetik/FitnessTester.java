@@ -46,6 +46,7 @@ public class FitnessTester extends SnakePlayer
 		{
 			tester.start();
 		}
+		tester.gui.dispose();
 		return tester.getFitness();
 	}
 
