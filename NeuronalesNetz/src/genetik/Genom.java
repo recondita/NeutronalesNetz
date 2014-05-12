@@ -1,15 +1,13 @@
 package genetik;
 
-import java.util.List;
-import java.lang.Object;
-
+import java.util.ArrayList;
 
 import org.neuroph.util.TransferFunctionType;
 
 public class Genom
 {
 
-	private List<Integer> layers;
+	private ArrayList<Integer> layers;
 	private double learningRate;
 	private double momentum;
 	private long learningTime;
@@ -23,8 +21,8 @@ public class Genom
 	}
 
 
-	public List<Integer> getLayers() {
-		return (List<Integer>) layers.clone();
+	public ArrayList<Integer> getLayers() {
+		return (ArrayList<Integer>) layers.clone();
 	}
 
 
