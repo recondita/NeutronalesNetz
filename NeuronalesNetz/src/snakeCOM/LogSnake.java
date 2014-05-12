@@ -8,9 +8,9 @@ public class LogSnake extends Snake
 
 	SnakeControl logger;
 	
-	public LogSnake(int x, int y, int richtung, long warte, Spielbrett brett, SnakeControl logger)
+	public LogSnake(int x, int y, int richtung, long warte, Spielbrett brett, SnakeControl logger,boolean wachsen)
 	{
-		super(x, y, richtung, warte, brett);
+		super(x, y, richtung, warte, brett,wachsen);
 		this.logger=logger;
 	}
 
