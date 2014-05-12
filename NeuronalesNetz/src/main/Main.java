@@ -3,11 +3,6 @@ package main;
 import netz.Loader;
 import netz.SimpleNetwork;
 
-import org.neuroph.core.*;
-import org.neuroph.core.data.DataSet;
-import org.neuroph.core.data.DataSetRow;
-import org.neuroph.nnet.Perceptron;
-
 import ui.UI;
 
 public class Main
@@ -15,7 +10,7 @@ public class Main
 
 	private UI ui;
 	private SimpleNetwork nW;
-	private boolean unsaved = false;
+	//private boolean unsaved = false;
 
 	public Main()
 	{
