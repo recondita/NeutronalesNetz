@@ -39,7 +39,7 @@ public class FitnessTester extends SnakePlayer
 				nn.stopLearning();
 			}
 		};
-		t.schedule(tt, 30000L);
+		t.schedule(tt, 300000L);
 		nn.learn(gen.getDataSet());
 		FitnessTester tester = new FitnessTester(nn);
 		for(int i=0; i<10; i++)
