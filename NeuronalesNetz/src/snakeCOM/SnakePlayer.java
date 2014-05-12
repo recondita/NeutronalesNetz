@@ -12,7 +12,6 @@ public class SnakePlayer extends SnakeControl
 	public SnakePlayer(NeuralNetwork<?> nn)
 	{
 		this.nn = nn;
-		brett.start();
 	}
 
 	@Override
@@ -26,16 +25,21 @@ public class SnakePlayer extends SnakeControl
 		snake.setRichtung(drichtung[0],drichtung[1]);
 	}
 
-	@Override
 	public void verloren(int laenge)
 	{
 		// TODO Auto-generated method stub
 
 	}
 
+	public void start()
+	{
+		brett.start();
+	}
+	
 	public static void main(String[] args)
 	{
-		new SnakePlayer(NeuralNetwork.createFromFile(new File("friss.nn")));
+		new SnakePlayer(NeuralNetwork.createFromFile(new File("friss2.nn"))).start();
 	}
+
 
 }

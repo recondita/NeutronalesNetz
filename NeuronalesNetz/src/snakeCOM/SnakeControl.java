@@ -27,5 +27,6 @@ public abstract class SnakeControl
 	
 	
 	public abstract void verloren(int laenge);
+	
 
 }

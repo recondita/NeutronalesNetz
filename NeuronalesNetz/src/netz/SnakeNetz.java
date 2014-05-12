@@ -1,7 +1,5 @@
 package netz;
 
-import java.util.List;
-
 import org.neuroph.nnet.MultiLayerPerceptron;
 import org.neuroph.nnet.learning.MomentumBackpropagation;
 import org.neuroph.util.TransferFunctionType;

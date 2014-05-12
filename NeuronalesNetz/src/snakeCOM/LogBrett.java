@@ -8,6 +8,8 @@ public class LogBrett extends Spielbrett
 
 	private static final long serialVersionUID = 4278636303152012557L;
 	private SnakeControl sl;
+	private boolean superVerloren=true;
+	
 	
 	public LogBrett(SnakeControl snakeControl)
 	{
@@ -57,10 +59,15 @@ public class LogBrett extends Spielbrett
 		return feldToDouble(getFeld(x,y));
 	}
 	
+	public void disableSuperVerloren()
+	{
+		this.superVerloren=false;
+	}
 	@Override
 	public void verloren(int laenge)
 	{
 		sl.verloren(laenge);
+		if(superVerloren)
 		super.verloren(laenge);
 	}
 

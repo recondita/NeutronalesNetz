@@ -1,4 +1,6 @@
 package netz;
+import java.io.File;
+
 import org.neuroph.core.NeuralNetwork;
 
 public class Loader {
@@ -13,7 +15,7 @@ public class Loader {
 	}
 
 	public static NeuralNetwork<?> load(String file) {
-		NeuralNetwork<?> neuralNetwork = NeuralNetwork.load(file);
+		NeuralNetwork<?> neuralNetwork = NeuralNetwork.createFromFile(new File(file));
 		return neuralNetwork;
 	}
 

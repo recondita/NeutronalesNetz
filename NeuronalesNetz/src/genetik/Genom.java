@@ -1,28 +1,29 @@
 package genetik;
 
-import java.util.ArrayList;
-
+import org.neuroph.core.data.DataSet;
 import org.neuroph.util.TransferFunctionType;
 
 public class Genom
 {
-
-	private ArrayList<Integer> layers;
+	/**
+	 * [0] muss zum feld passen und [length-1] muss 2 sein!
+	 */
+	private int[] layers;
 	private double learningRate;
 	private double momentum;
-	private long learningTime;
+	private int maxIterations;
 	private TransferFunctionType transferFunktion;
-	private int dataSet;
+	private DataSet dataSet;
 
 	public Genom()
 	{
 		// TODO Auto-generated constructor stub
 	}
+	
 
-	@SuppressWarnings("unchecked")
-	public ArrayList<Integer> getLayers()
+	public int[] getLayers()
 	{
-		return (ArrayList<Integer>) layers.clone();
+		return layers.clone();
 	}
 
 	public double getLearningRate()
@@ -35,9 +36,9 @@ public class Genom
 		return momentum;
 	}
 
-	public long getLearningTime()
+	public int getMaxIterations()
 	{
-		return learningTime;
+		return maxIterations;
 	}
 
 	public TransferFunctionType getTransferFunktion()
@@ -45,9 +46,10 @@ public class Genom
 		return transferFunktion;
 	}
 
-	public int getDataSet()
+	public DataSet getDataSet()
 	{
 		return dataSet;
 	}
+	
 
 }

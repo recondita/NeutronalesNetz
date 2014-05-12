@@ -9,8 +9,6 @@ import org.neuroph.core.data.DataSet;
 import org.neuroph.nnet.learning.BackPropagation;
 import org.neuroph.util.TrainingSetImport;
 
-import ui.Abbrecher;
-
 public class SnakeTrainer implements Trainer
 {
 	DataSet trainingSet;
