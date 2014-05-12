@@ -49,7 +49,7 @@ public class SnakeLogger extends SnakeControl
 	{
 		try
 		{
-			BufferedWriter writer = new BufferedWriter(new FileWriter(new File("spiel.log"),
+			BufferedWriter writer = new BufferedWriter(new FileWriter(new File("wachsen.log"),
 					true));
 			for(int i=0; i<wegschneiden&&!templog.isEmpty();i++)
 				templog.removeLast();

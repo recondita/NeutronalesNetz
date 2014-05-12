@@ -32,7 +32,7 @@ public class SnakeNetz extends MultiLayerPerceptron
 		SnakeNetz netz = new SnakeNetz(100,64,36,16,4,2);
 		MomentumBackpropagation learningRule = (MomentumBackpropagation) netz
 				.getLearningRule();
-		learningRule.setLearningRate(0.01);
+		learningRule.setLearningRate(0.001);
 		// learningRule.setMomentum(0.7);
 		return netz;
 	}
