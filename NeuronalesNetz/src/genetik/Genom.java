@@ -13,40 +13,40 @@ public class Genom
 	private long learningTime;
 	private TransferFunctionType transferFunktion;
 	private int dataSet;
-	
-	
+
 	public Genom()
 	{
 		// TODO Auto-generated constructor stub
 	}
 
-
-	public ArrayList<Integer> getLayers() {
+	@SuppressWarnings("unchecked")
+	public ArrayList<Integer> getLayers()
+	{
 		return (ArrayList<Integer>) layers.clone();
 	}
 
-
-	public double getLearningRate() {
+	public double getLearningRate()
+	{
 		return learningRate;
 	}
 
-
-	public double getMomentum() {
+	public double getMomentum()
+	{
 		return momentum;
 	}
 
-
-	public long getLearningTime() {
+	public long getLearningTime()
+	{
 		return learningTime;
 	}
 
-
-	public TransferFunctionType getTransferFunktion() {
+	public TransferFunctionType getTransferFunktion()
+	{
 		return transferFunktion;
 	}
 
-
-	public int getDataSet() {
+	public int getDataSet()
+	{
 		return dataSet;
 	}
 
