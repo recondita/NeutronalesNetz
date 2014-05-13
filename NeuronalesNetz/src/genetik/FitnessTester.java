@@ -22,25 +22,7 @@ public class FitnessTester extends SnakePlayer
 
 	public static int test(Genom gen)
 	{
-		int[] layers = gen.getLayers();
-		final MultiLayerPerceptron nn = new MultiLayerPerceptron(
-				gen.getTransferFunktion(), layers);
-		MomentumBackpropagation learningRule = (MomentumBackpropagation) nn
-				.getLearningRule();
-		learningRule.setLearningRate(gen.getLearningRate());
-		learningRule.setMomentum(gen.getMomentum());
-		learningRule.setMaxIterations(gen.getMaxIterations());
-		Timer t=new Timer();
-		TimerTask tt=new TimerTask(){
-
-			@Override
-			public void run()
-			{
-				nn.stopLearning();
-			}
-		};
-		t.schedule(tt, 300000L);
-		nn.learn(gen.getDataSet());
+		final MultiLayerPerceptron nn = new GenNetz(gen);
 		FitnessTester tester = new FitnessTester(nn);
 		for(int i=0; i<10; i++)
 		{

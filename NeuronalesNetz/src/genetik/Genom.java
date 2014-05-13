@@ -1,6 +1,10 @@
 package genetik;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import org.neuroph.core.data.DataSet;
+import org.neuroph.util.TrainingSetImport;
 import org.neuroph.util.TransferFunctionType;
 
 public class Genom
@@ -15,9 +19,14 @@ public class Genom
 	private TransferFunctionType transferFunktion;
 	private DataSet dataSet;
 
-	public Genom()
+	public Genom(int[] layers, double learningRate, double momentum, int maxIterations, TransferFunctionType transferFunktion, DataSet trainingSet)
 	{
-		// TODO Auto-generated constructor stub
+		this.layers=layers;
+		this.learningRate=learningRate;
+		this.momentum=momentum;
+		this.maxIterations=maxIterations;
+		this.transferFunktion=transferFunktion;
+		this.dataSet=trainingSet;
 	}
 	
 
@@ -51,5 +60,28 @@ public class Genom
 		return dataSet;
 	}
 	
+	public static void main(String[] args)
+	{
+		Genom gen;
+		try
+		{
+			gen = new Genom(new int[]{100,36,4,2},0.001,0.7,Integer.MAX_VALUE,TransferFunctionType.TANH,TrainingSetImport
+					.importFromFile("spiel.log", 100, 2, ","));
+			System.out.println(FitnessTester.test(gen));
+		} catch (NumberFormatException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FileNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 
 }
