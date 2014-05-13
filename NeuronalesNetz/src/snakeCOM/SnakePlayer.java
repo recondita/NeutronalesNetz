@@ -13,6 +13,12 @@ public class SnakePlayer extends SnakeControl
 	{
 		this.nn = nn;
 	}
+	
+	public SnakePlayer(NeuralNetwork<?> nn, boolean ausgabe)
+	{
+		super(false);
+		this.nn = nn;
+	}
 
 	@Override
 	public void preMove()
@@ -38,7 +44,7 @@ public class SnakePlayer extends SnakeControl
 	
 	public static void main(String[] args)
 	{
-		new SnakePlayer(NeuralNetwork.createFromFile(new File("friss2.nn"))).start();
+		new SnakePlayer(NeuralNetwork.createFromFile(new File("5min.nn"))).start();
 	}
 
 

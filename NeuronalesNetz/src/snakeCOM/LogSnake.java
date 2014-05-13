@@ -75,7 +75,7 @@ public class LogSnake extends Snake
 				{
 					boolean loop=true;
 					int off=i;
-					for (int j = moves.size() - 1; j >= i; j--)
+					for (int j = moves.size() - 1; j >= i&&off>0; j--)
 					{
 						off--;
 						if(moves.get(off).equals(moves.get(j)))

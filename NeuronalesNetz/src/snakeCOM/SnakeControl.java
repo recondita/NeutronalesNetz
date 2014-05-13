@@ -17,7 +17,7 @@ public abstract class SnakeControl
 
 	public SnakeControl(boolean gui)
 	{
-		this.brett = new LogBrett(this);
+		this.brett = new LogBrett(this,gui);
 		if (gui)
 			this.gui = new GUI(this.brett);
 	}
