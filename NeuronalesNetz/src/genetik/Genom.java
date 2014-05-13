@@ -83,5 +83,10 @@ public class Genom
 		}
 		
 	}
+	
+	public void mutation()
+	{
+		
+	}
 
 }
