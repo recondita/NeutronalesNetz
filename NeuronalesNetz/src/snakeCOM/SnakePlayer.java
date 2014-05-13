@@ -21,7 +21,7 @@ public class SnakePlayer extends SnakeControl
 	}
 
 	@Override
-	public void preMove()
+	public void afterMove()
 	{
 
 		nn.setInput(brett.toDoubleArray());

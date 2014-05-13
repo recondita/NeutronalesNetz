@@ -22,7 +22,7 @@ public abstract class SnakeControl
 			this.gui = new GUI(this.brett);
 	}
 
-	public abstract void preMove();
+	public abstract void afterMove();
 
 	public LogSnake newSnake()
 	{

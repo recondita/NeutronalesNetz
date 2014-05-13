@@ -29,10 +29,31 @@ public class Genom
 		this.dataSet=trainingSet;
 	}
 	
-
+	public Genom(Genom... gene )
+	{		
+		this.layers=gene[(int)(Math.random()*gene.length)].getLayers();
+		this.learningRate=gene[(int)(Math.random()*gene.length)].getLearningRate();
+		this.momentum=gene[(int)(Math.random()*gene.length)].getMomentum();
+		this.maxIterations=gene[(int)(Math.random()*gene.length)].getMaxIterations();
+		this.transferFunktion=gene[(int)(Math.random()*gene.length)].getTransferFunktion();
+		this.dataSet=gene[(int)(Math.random()*gene.length)].getDataSet();
+	}
+	
+	private int[] rekombLayers(int[]... layer)
+	{
+		int durchSchnitt=0;
+		for(int i=0; i<layer.length;i++)
+			durchSchnitt+=layer[i].length;
+		durchSchnitt=(int) Math.round((double)durchSchnitt/layer.length);
+		int[] ret=new int[durchSchnitt];
+				//TODO Sinvoll mischen?
+		return ret;
+	}
+	
+	
 	public int[] getLayers()
 	{
-		return layers.clone();
+		return layers;
 	}
 
 	public double getLearningRate()

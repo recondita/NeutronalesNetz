@@ -21,13 +21,14 @@ public class LogSnake extends Snake
 	}
 
 	@Override
-	public void preMove()
+	public void afterMove()
 	{
-		logger.preMove();
+		logger.afterMove();
 		if(detectLoop())
 		{
-			fPause=false;
+			stopp();
 			brett.verloren(getApfelCount());
+			brett.wipe();
 		}
 	}
 

@@ -18,7 +18,7 @@ public class SnakeLogger extends SnakeControl
 		gui.start();
 	}
 
-	public void preMove()
+	public void afterMove()
 	{
 			StringBuffer sb= new StringBuffer();
 			for (int x = 0; x < brett.getBreite(); x++)

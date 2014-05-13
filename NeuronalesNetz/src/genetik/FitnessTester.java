@@ -13,7 +13,7 @@ public class FitnessTester extends SnakePlayer
 
 	private FitnessTester(NeuralNetwork<?> nn)
 	{
-		super(nn);
+		super(nn,false);
 	}
 
 	public static int test(Genom gen)
