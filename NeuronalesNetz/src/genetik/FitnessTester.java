@@ -1,11 +1,7 @@
 package genetik;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import org.neuroph.core.NeuralNetwork;
 import org.neuroph.nnet.MultiLayerPerceptron;
-import org.neuroph.nnet.learning.MomentumBackpropagation;
 
 import snakeCOM.FastSnake;
 import snakeCOM.LogSnake;
