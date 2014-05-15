@@ -7,7 +7,7 @@ import org.neuroph.core.NeuralNetwork;
 public class SnakePlayer extends SnakeControl
 {
 
-	NeuralNetwork<?> nn;
+	private NeuralNetwork<?> nn;
 
 	public SnakePlayer(NeuralNetwork<?> nn)
 	{
@@ -19,6 +19,7 @@ public class SnakePlayer extends SnakeControl
 		super(false);
 		this.nn = nn;
 	}
+	
 
 	@Override
 	public void afterMove()
@@ -47,5 +48,9 @@ public class SnakePlayer extends SnakeControl
 		new SnakePlayer(NeuralNetwork.createFromFile(new File("5min.nn"))).start();
 	}
 
+	protected void setNetwork(NeuralNetwork<?> nn)
+	{
+		this.nn=nn;
+	}
 
 }

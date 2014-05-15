@@ -28,7 +28,7 @@ public class LogSnake extends Snake
 		{
 			stopp();
 			brett.verloren(getApfelCount());
-			brett.wipe();
+			//brett.wipe();
 		}
 	}
 

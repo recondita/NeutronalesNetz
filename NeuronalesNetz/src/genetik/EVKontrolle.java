@@ -10,6 +10,7 @@ public class EVKontrolle {
 	Genom gen[] = new Genom[8];
 	Genom agen[] = new Genom[8];
 	int fit[] = new int[8];
+	FitnessTester fT=new FitnessTester();
 
 	public static void main(String[] args) {
 		new EVKontrolle().init();
@@ -23,7 +24,7 @@ public class EVKontrolle {
 						Integer.MAX_VALUE, TransferFunctionType.TANH,
 						TrainingSetImport.importFromFile("kleinesSet", 100, 2,
 								","));
-				fit[i] = FitnessTester.test(gen[i]);
+				fit[i] = fT.test(gen[i],50);
 				System.out.println(fit[i]);
 			} catch (NumberFormatException e) {
 				// TODO Auto-generated catch block

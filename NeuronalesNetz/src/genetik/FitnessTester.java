@@ -1,6 +1,5 @@
 package genetik;
 
-import org.neuroph.core.NeuralNetwork;
 import org.neuroph.nnet.MultiLayerPerceptron;
 
 import snakeCOM.FastSnake;
@@ -9,23 +8,27 @@ import snakeCOM.SnakePlayer;
 
 public class FitnessTester extends SnakePlayer
 {
-	private int fitness = 0;;
+	private int fitness = 0;
 
-	private FitnessTester(NeuralNetwork<?> nn)
+	public FitnessTester()
 	{
-		super(nn,false);
+		super(null, false);
 	}
 
-	public static int test(Genom gen)
+	public int test(Genom gen, int tests)
 	{
-		final MultiLayerPerceptron nn = new GenNetz(gen);
-		FitnessTester tester = new FitnessTester(nn);
-		for(int i=0; i<10; i++)
+		MultiLayerPerceptron nn = new GenNetz(gen);
+		synchronized (this)
 		{
-			tester.start();
+			setNetwork(nn);
+			fitness = 0;
+			for (int i = 0; i < tests; i++)
+			{
+				super.start();
+			}
+			// tester.gui.dispose();
+			return fitness;
 		}
-		tester.gui.dispose();
-		return tester.getFitness();
 	}
 
 	@Override
@@ -38,12 +41,12 @@ public class FitnessTester extends SnakePlayer
 	@Override
 	public void verloren(int laenge)
 	{
-		fitness+=laenge;
+		fitness += laenge;
 	}
-
-	public int getFitness()
+	
+	public void start()
 	{
-		return fitness;
+		System.out.println("Was denn?");
 	}
 
 }

@@ -86,9 +86,9 @@ public class Genom
 		Genom gen;
 		try
 		{
-			gen = new Genom(new int[]{100,36,4,2},0.001,0.7,Integer.MAX_VALUE,TransferFunctionType.TANH,TrainingSetImport
+			gen = new Genom(new int[]{100,64,36,16,4,2},0.001,0.25,Integer.MAX_VALUE,TransferFunctionType.TANH,TrainingSetImport
 					.importFromFile("spiel.log", 100, 2, ","));
-			System.out.println(FitnessTester.test(gen));
+			System.out.println(new FitnessTester().test(gen,50));
 		} catch (NumberFormatException e)
 		{
 			// TODO Auto-generated catch block
