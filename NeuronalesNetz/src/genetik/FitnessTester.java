@@ -60,6 +60,6 @@ public class FitnessTester extends SnakePlayer
 	
 	public static void main(String[] args)
 	{
-		new FitnessTester().test(NeuralNetwork.createFromFile(new File("5min.nn")), 50000);
+		System.out.println("Das Netz hat eine Fitness von: "+(new FitnessTester().test(NeuralNetwork.createFromFile(new File("5min.nn")), 5000)));
 	}
 }
