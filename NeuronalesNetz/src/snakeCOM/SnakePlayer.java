@@ -28,7 +28,7 @@ public class SnakePlayer extends SnakeControl
 		nn.setInput(brett.toDoubleArray());
 		nn.calculate();
 		double[] drichtung=nn.getOutput();
-		System.out.println("Netz sagt: "+ drichtung[0]+" "+drichtung[1]);
+		//System.out.println("Netz sagt: "+ drichtung[0]+" "+drichtung[1]);
 		snake.setRichtung(drichtung[0],drichtung[1]);
 	}
 
