@@ -7,7 +7,7 @@ import org.neuroph.core.data.DataSet;
 import org.neuroph.util.TrainingSetImport;
 import org.neuroph.util.TransferFunctionType;
 
-public class Genom
+public class Genom implements Comparable<Genom>
 {
 	/**
 	 * [0] muss zum feld passen und [length-1] muss 2 sein!
@@ -18,6 +18,7 @@ public class Genom
 	private int maxIterations;
 	private TransferFunctionType transferFunktion;
 	private DataSet dataSet;
+	private int fitness;
 
 	public Genom(int[] layers, double learningRate, double momentum, int maxIterations, TransferFunctionType transferFunktion, DataSet trainingSet)
 	{
@@ -81,6 +82,10 @@ public class Genom
 		return dataSet;
 	}
 	
+	public int getFitness() {
+		return fitness;
+	}
+
 	public static void main(String[] args)
 	{
 		Genom gen;
@@ -107,7 +112,27 @@ public class Genom
 	
 	public void mutation()
 	{
-		
+		if((int)(Math.random()+0.5)==0){
+			learningRate = Math.random()*2*learningRate + learningRate;
+		}
+		else{
+			learningRate = Math.random()*2*learningRate - learningRate;
+			if(learningRate<=0){
+				learningRate= Math.random()*0.01;
+			}
+		}
+		fitness = new FitnessTester().test(this, 50000);
+	}
+
+	@Override
+	public int compareTo(Genom arg0) {
+		if(fitness < arg0.getFitness()){
+			return 1;
+		}
+		if(fitness > arg0.getFitness()){
+			return -1;
+		}
+		return 0;
 	}
 
 }
