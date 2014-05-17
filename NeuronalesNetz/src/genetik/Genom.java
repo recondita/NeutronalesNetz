@@ -121,7 +121,7 @@ public class Genom implements Comparable<Genom>
 				learningRate= Math.random()*0.01;
 			}
 		}
-		fitness = new FitnessTester().test(this, 50000);
+		fitness = new FitnessTester().test(this, 5000);
 	}
 
 	@Override

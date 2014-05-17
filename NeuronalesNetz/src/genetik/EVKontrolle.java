@@ -41,7 +41,7 @@ public class EVKontrolle {
 		for(int j =0; j<8;j++){
 			gen[j].mutation();
 		}
-		rekombination();
+		this.rekombination();
 	}
 	
 	public void rekombination(){
@@ -67,6 +67,7 @@ public class EVKontrolle {
 		for(int i = 0; i < 8; i++){
 			System.out.println(gen[i].getLearningRate());
 		}
+		
 		
 		
 		
