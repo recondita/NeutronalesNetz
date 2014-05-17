@@ -14,6 +14,7 @@ public class FastSnake extends LogSnake
 	@Override
 	public void start()
 	{
+		fPause=false;
 		while(!fPause&&schritt());
 	}
 	

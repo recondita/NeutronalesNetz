@@ -1,7 +1,5 @@
 package genetik;
 
-import org.neuroph.nnet.MultiLayerPerceptron;
-
 import snakeCOM.FastSnake;
 import snakeCOM.LogSnake;
 import snakeCOM.SnakePlayer;
@@ -17,7 +15,11 @@ public class FitnessTester extends SnakePlayer
 
 	public int test(Genom gen, int tests)
 	{
-		MultiLayerPerceptron nn = new GenNetz(gen);
+		return test(new GenNetz(gen),tests);
+	}
+
+	public int test(GenNetz nn, int tests)
+	{
 		synchronized (this)
 		{
 			setNetwork(nn);
@@ -30,9 +32,9 @@ public class FitnessTester extends SnakePlayer
 			return fitness;
 		}
 	}
-
+	
 	@Override
-	public LogSnake newSnake()
+	public LogSnake customSnake()
 	{
 		return new FastSnake(brett.getBreite() / 2, brett.getHoehe() / 2, 1,
 				this.brett, this, false);

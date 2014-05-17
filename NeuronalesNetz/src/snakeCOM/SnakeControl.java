@@ -24,16 +24,21 @@ public abstract class SnakeControl
 
 	public abstract void afterMove();
 
-	public LogSnake newSnake()
+	public final LogSnake newSnake()
 	{
-		this.snake = new LogSnake(brett.getBreite() / 2, brett.getHoehe() / 2,
-				1, 500L, this.brett, this, wachsen);
+		this.snake = customSnake();
 		return snake;
 	}
 
 	public void start()
 	{
 		brett.start();
+	}
+	
+	public LogSnake customSnake()
+	{
+		return new LogSnake(brett.getBreite() / 2, brett.getHoehe() / 2,
+				1, 500L, this.brett, this, wachsen);
 	}
 	
 	public abstract void verloren(int laenge);
