@@ -51,22 +51,33 @@ public class EVKontrolle
 		{
 			gen[j].mutation();
 		}
-		rekombination();
 	}
 
+	public void entwickle(int anzGenerationen)
+	{
+		for(int i=0; i<anzGenerationen; i++)
+		{
+			rekombination();
+			mutation();
+			System.out.println(toString());
+		}
+	}
+	
+	public String toString()
+	{
+		StringBuilder sb=new StringBuilder();
+		for (int j = 0; j < agen.length; j++)
+		{
+			sb.append(agen[j].getFitness());
+			sb.append("\n");
+		}
+		return sb.toString();
+	}
+	
 	public void rekombination()
 	{
 		java.util.Arrays.sort(gen);
 		agen = gen.clone();
-		for (int i = 0; i < 8; i++)
-		{
-			System.out.println(agen[i].getFitness());
-		}
-		durchlaufe++;
-		if (durchlaufe == 10)
-		{
-			System.exit(0);
-		}
 		gen[2] = new Genom(agen[0], agen[1]);
 		System.out.println("Genom 0 mit Genom 1");
 		for (int i = 3; i < 8; i++)
@@ -77,8 +88,6 @@ public class EVKontrolle
 			gen[i] = new Genom(agen[erst], agen[zweit]);
 			System.out.println("Genom " + erst + " mit Genom " + zweit);
 		}
-		mutation();
-
 	}
 
 	public void mutation()
@@ -87,7 +96,6 @@ public class EVKontrolle
 		{
 			gen[i].mutation();
 		}
-		rekombination();
 	}
 
 }
