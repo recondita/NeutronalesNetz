@@ -146,7 +146,6 @@ public class Genom implements Comparable<Genom> {
 				}
 			}
 		}
-		fitness = new FitnessTester().test(this, 5000);
 	}
 
 	@Override
@@ -160,4 +159,8 @@ public class Genom implements Comparable<Genom> {
 		return 0;
 	}
 
+	void setFitness(int fitness)
+	{
+		this.fitness=fitness;
+	}
 }

@@ -8,21 +8,25 @@ import org.neuroph.util.TransferFunctionType;
 
 public class EVKontrolle
 {
-	Genom gen[] = new Genom[8];
-	Genom agen[] = new Genom[8];
-	// int fit[] = new int[8];
-	FitnessTester fT = new FitnessTester();
-	int durchlaufe = 0;
+	private Genom[] gen;
+	private Genom[] agen;
+	private FitnessTester fT = new FitnessTester();
+	private int anzTests;
+
 
 	public static void main(String[] args)
 	{
-		new EVKontrolle().init();
+		EVKontrolle eK=new EVKontrolle(8,1000);
+		eK.entwickle(10);
 		System.exit(0);
 	}
 
-	public void init()
+	public EVKontrolle(int induvidien, int anzTests)
 	{
-		for (int i = 0; i < 8; i++)
+		this.anzTests=anzTests;
+		gen=new Genom[induvidien];
+		agen=new Genom[induvidien];
+		for (int i = 0; i < gen.length; i++)
 		{
 
 			try
@@ -31,26 +35,19 @@ public class EVKontrolle
 						TransferFunctionType.TANH,
 						TrainingSetImport.importFromFile("spiel.log", 100, 2,
 								","));
-				// fit[i] = fT.test(gen[i],1000);
-				// System.out.println(fit[i]);
 			} catch (NumberFormatException e)
 			{
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (FileNotFoundException e)
 			{
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e)
 			{
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		for (int j = 0; j < 8; j++)
-		{
-			gen[j].mutation();
-		}
+		mutation();
+		testeFitness();
 	}
 
 	public void entwickle(int anzGenerationen)
@@ -59,6 +56,7 @@ public class EVKontrolle
 		{
 			rekombination();
 			mutation();
+			testeFitness();
 			System.out.println(toString());
 		}
 	}
@@ -74,7 +72,7 @@ public class EVKontrolle
 		return sb.toString();
 	}
 	
-	public void rekombination()
+	private void rekombination()
 	{
 		java.util.Arrays.sort(gen);
 		agen = gen.clone();
@@ -90,11 +88,19 @@ public class EVKontrolle
 		}
 	}
 
-	public void mutation()
+	private void mutation()
 	{
-		for (int i = 2; i < 8; i++)
+		for (int i = 2; i < gen.length; i++)
 		{
 			gen[i].mutation();
+		}
+	}
+	
+	private void testeFitness()
+	{
+		for (int j = 0; j < gen.length; j++)
+		{
+			gen[j].setFitness(fT.test(gen[j], anzTests));
 		}
 	}
 
