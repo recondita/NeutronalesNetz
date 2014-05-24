@@ -2,7 +2,6 @@ package genetik;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
 import org.neuroph.util.TrainingSetImport;
 import org.neuroph.util.TransferFunctionType;
 
