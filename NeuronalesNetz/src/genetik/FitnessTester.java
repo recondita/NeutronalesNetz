@@ -26,7 +26,7 @@ public class FitnessTester extends SnakePlayer
 	{
 		synchronized (this)
 		{
-			nn.save("GenNetz1.nn");
+			//nn.save("GenNetz1.nn");
 			setNetwork(nn);
 			fitness = 0;
 			long time=System.currentTimeMillis();

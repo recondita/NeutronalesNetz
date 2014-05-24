@@ -6,11 +6,13 @@ import java.io.IOException;
 import org.neuroph.util.TrainingSetImport;
 import org.neuroph.util.TransferFunctionType;
 
+import java.lang.Thread;
+
 public class EVKontrolle
 {
 	private Genom[] gen;
 	private Genom[] agen;
-	private FitnessTester fT = new FitnessTester();
+	private FitnessTester[] fT;
 	private int anzTests;
 
 
@@ -26,9 +28,10 @@ public class EVKontrolle
 		this.anzTests=anzTests;
 		gen=new Genom[induvidien];
 		agen=new Genom[induvidien];
+		fT= new FitnessTester[induvidien];
 		for (int i = 0; i < gen.length; i++)
 		{
-
+			fT[i]=new FitnessTester();
 			try
 			{
 				gen[i] = new Genom(new int[] { 100, 36, 4, 2 }, 0.001, 0.7, 50,
@@ -98,10 +101,35 @@ public class EVKontrolle
 	
 	private void testeFitness()
 	{
-		for (int j = 0; j < gen.length; j++)
+		TestThread[] tt=new TestThread[gen.length];
+		for(int i= 0; i < tt.length; i++)
 		{
-			gen[j].setFitness(fT.test(gen[j], anzTests));
+			tt[i]=new TestThread(i);
+			tt[i].run();
 		}
+		for(int i=0; i<tt.length; i++)
+			try
+			{
+				tt[i].join();
+			} catch (InterruptedException e)
+			{
+				e.printStackTrace();
+			}
+	}
+	
+	private class TestThread extends Thread
+	{
+		private int nummer;
+		public TestThread(int nummer)
+		{
+			this.nummer=nummer;
+		}
+		
+		public void run()
+		{
+			gen[nummer].setFitness(fT[nummer].test(gen[nummer], anzTests));
+		}
+		
 	}
 
 }
