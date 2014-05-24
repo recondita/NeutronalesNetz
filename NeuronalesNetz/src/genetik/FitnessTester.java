@@ -29,12 +29,12 @@ public class FitnessTester extends SnakePlayer
 			//nn.save("GenNetz1.nn");
 			setNetwork(nn);
 			fitness = 0;
-			long time=System.currentTimeMillis();
+			//long time=System.currentTimeMillis();
 			for (int i = 0; i < tests; i++)
 			{
 				super.start();
 			}
-			System.out.println(((System.currentTimeMillis()-time)/1000)+" Sekunden benoetigt um das Netz zu testen");
+			//System.out.println(((System.currentTimeMillis()-time)/1000)+" Sekunden benoetigt um das Netz zu testen");
 			// tester.gui.dispose();
 			return fitness;
 		}
