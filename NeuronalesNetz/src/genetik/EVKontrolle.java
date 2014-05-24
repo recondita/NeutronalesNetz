@@ -104,7 +104,7 @@ public class EVKontrolle
 		for(int i= 0; i < tt.length; i++)
 		{
 			tt[i]=new TestThread(i);
-			tt[i].run();
+			tt[i].start();
 		}
 		for(int i=0; i<tt.length; i++)
 			try
