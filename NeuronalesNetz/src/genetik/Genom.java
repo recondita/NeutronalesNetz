@@ -19,6 +19,17 @@ public class Genom implements Comparable<Genom>
 	private TransferFunctionType transferFunktion;
 	private DataSet dataSet;
 	private int fitness;
+	private boolean isTested;
+
+	public boolean isTested()
+	{
+		return isTested;
+	}
+
+	public void setTested()
+	{
+		this.isTested = true;
+	}
 
 	public Genom(int[] layers, double learningRate, double momentum,
 			int maxIterations, TransferFunctionType transferFunktion,
@@ -102,6 +113,7 @@ public class Genom implements Comparable<Genom>
 
 	public void mutation()
 	{
+		isTested=false;
 		if ((int) (Math.random() + 0.1) == 0)
 		{
 			if ((int) (Math.random() + 0.5) == 0)
