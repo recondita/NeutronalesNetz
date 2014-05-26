@@ -18,8 +18,8 @@ public class EVKontrolle
 
 	public static void main(String[] args)
 	{
-		EVKontrolle eK = new EVKontrolle(100, 10000);
-		eK.entwickle(10);
+		EVKontrolle eK = new EVKontrolle(10, 10000);
+		eK.entwickle(100);
 		System.exit(0);
 	}
 
