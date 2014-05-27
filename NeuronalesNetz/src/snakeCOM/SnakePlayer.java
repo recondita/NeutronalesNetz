@@ -45,7 +45,7 @@ public class SnakePlayer extends SnakeControl
 	
 	public static void main(String[] args)
 	{
-		new SnakePlayer(NeuralNetwork.createFromFile(new File("5min.nn"))).start();
+		new SnakePlayer(NeuralNetwork.createFromFile(new File("afterMove.nn"))).start();
 	}
 
 	protected void setNetwork(NeuralNetwork<?> nn)
