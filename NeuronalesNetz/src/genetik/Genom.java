@@ -132,7 +132,7 @@ public class Genom implements Comparable<Genom>
 			if ((int) (Math.random() + 0.5) == 0) //50% der Fälle
 			{
 				learningRate = Math.random() * 2 * learningRate + learningRate;
-				if (learningRate >= 0)//wird immer true sein
+				if (learningRate >= 1)//wird immer true sein
 				{
 					learningRate = Math.random() * 0.7;//geneere zufaellige neue lerningRate
 				}
