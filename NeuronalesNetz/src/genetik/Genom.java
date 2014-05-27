@@ -167,7 +167,7 @@ public class Genom implements Comparable<Genom>
 		{
 			if ((int) (Math.random() + 0.5) == 0)
 			{
-				int layerso[] = layers.clone();//warum clonen?
+				int layerso[] = layers;
 				layers = new int[layerso.length + 1]; //um  vergroessern
 				int insert = (int) (Math.random() * 100);//<100, mach lieber <=100..
 				int pos = (int) (Math.random() * (layers.length - 3)) + 1;//1<=pos<=array.length-3 (Math.random macht nur <1, aber nie 1!
@@ -184,7 +184,7 @@ public class Genom implements Comparable<Genom>
 			{
 				if (layers.length > 3)//wenn mehr als 3 layer...
 				{
-					int layerso[] = layers.clone();//warum klonen? unten kopierst du doch eh...
+					int layerso[] = layers;
 					layers = new int[layerso.length - 1];//um 1 verkleinern
 					int pos = (int) (Math.random() * (layerso.length - 2)) + 1;
 					for (int i = 0; i < pos; i++)
