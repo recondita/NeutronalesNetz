@@ -96,7 +96,7 @@ public class EVKontrolle
 
 	private void mutation()
 	{
-		for (int i = 2; i < gen.length; i++)
+		for (int i = gen.length/4; i < gen.length; i++) //die oberen 20% sollen nicht mutieren (elite)
 		{
 			gen[i].mutation();
 		}

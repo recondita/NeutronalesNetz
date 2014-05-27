@@ -127,35 +127,35 @@ public class Genom implements Comparable<Genom>
 	public void mutation()
 	{
 		isTested = false;
-		if ((int) (Math.random() + 0.1) == 0)
+		if ((int) (Math.random() + 0.1) == 0) //in 9/10 der Fälle
 		{
-			if ((int) (Math.random() + 0.5) == 0)
+			if ((int) (Math.random() + 0.5) == 0) //50% der Fälle
 			{
 				learningRate = Math.random() * 2 * learningRate + learningRate;
-				if (learningRate >= 0)
+				if (learningRate >= 0)//wird immer true sein
 				{
-					learningRate = Math.random() * 0.7;
+					learningRate = Math.random() * 0.7;//geneere zufaellige neue lerningRate
 				}
 			} else
 			{
 				learningRate = Math.random() * 2 * learningRate - learningRate;
-				if (learningRate <= 0)
+				if (learningRate <= 0)//wird immer true sein
 				{
 					learningRate = Math.random() * 0.01;
 				}
 			}
 		}
-		if ((int) (Math.random() + 0.1) == 0)
+		if ((int) (Math.random() + 0.1) == 0)//in 9/10 der Faelle...
 		{
 			if ((int) (Math.random() + 0.5) == 0)
-			{
+			{								//Integer Division... hier wird 0 rauskommen
 				momentum = Math.random() * (momentum / 5) + momentum;
-				if (momentum >= 1)
+				if (momentum >= 1) //immer false
 				{
 					momentum = Math.random() * 0.7;
-				}
+				}//Das momentum ändert sich also nie
 			} else
-			{
+			{//Gleiches wie oben
 				momentum = Math.random() * (momentum / 5) - momentum;
 				if (momentum <= 0)
 				{
@@ -163,29 +163,29 @@ public class Genom implements Comparable<Genom>
 				}
 			}
 		}
-		if ((int) (Math.random() + 0.1) == 0)
+		if ((int) (Math.random() + 0.1) == 0)// 9/10... viel zu haeufig
 		{
 			if ((int) (Math.random() + 0.5) == 0)
 			{
-				int layerso[] = layers.clone();
-				layers = new int[layerso.length + 1];
-				int insert = (int) (Math.random() * 100);
-				int pos = (int) (Math.random() * (layers.length - 3)) + 1;
+				int layerso[] = layers.clone();//warum clonen?
+				layers = new int[layerso.length + 1]; //um  vergroessern
+				int insert = (int) (Math.random() * 100);//<100, mach lieber <=100..
+				int pos = (int) (Math.random() * (layers.length - 3)) + 1;//1<=pos<=array.length-3 (Math.random macht nur <1, aber nie 1!
 				for (int i = 0; i < pos; i++)
 				{
-					layers[i] = layerso[i];
+					layers[i] = layerso[i]; //kopiere bis zu pos
 				}
 				layers[pos] = insert;
 				for (int i = pos + 1; i < layers.length; i++)
-				{
+				{	//kopiere den rest
 					layers[i] = layerso[i - 1];
 				}
 			} else
 			{
-				if (layers.length > 3)
+				if (layers.length > 3)//wenn mehr als 3 layer...
 				{
-					int layerso[] = layers.clone();
-					layers = new int[layerso.length - 1];
+					int layerso[] = layers.clone();//warum klonen? unten kopierst du doch eh...
+					layers = new int[layerso.length - 1];//um 1 verkleinern
 					int pos = (int) (Math.random() * (layerso.length - 2)) + 1;
 					for (int i = 0; i < pos; i++)
 					{
