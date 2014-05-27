@@ -127,7 +127,7 @@ public class Genom implements Comparable<Genom>
 	public void mutation()
 	{
 		isTested = false;
-		if (Math.round(Math.random()*9)  < 1) //in 9/10 der Fälle
+		if ((int)(Math.random()*10)==0) //So geht das..
 		{
 			if ((int) (Math.random() + 0.5) == 0) //50% der Fälle
 			{
