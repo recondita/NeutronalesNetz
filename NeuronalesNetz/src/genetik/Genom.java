@@ -127,7 +127,7 @@ public class Genom implements Comparable<Genom>
 	public void mutation()
 	{
 		isTested = false;
-		if ((int) (Math.random() + 0.1) == 0) //in 9/10 der Fälle
+		if (Math.round(Math.random()*9)  < 1) //in 9/10 der Fälle
 		{
 			if ((int) (Math.random() + 0.5) == 0) //50% der Fälle
 			{
@@ -145,7 +145,7 @@ public class Genom implements Comparable<Genom>
 				}
 			}
 		}
-		if ((int) (Math.random() + 0.1) == 0)//in 9/10 der Faelle...
+		if (Math.round(Math.random()*9)  < 1)//in 9/10 der Faelle...
 		{
 			if ((int) (Math.random() + 0.5) == 0)
 			{								//Integer Division... hier wird 0 rauskommen
@@ -163,7 +163,7 @@ public class Genom implements Comparable<Genom>
 				}
 			}
 		}
-		if ((int) (Math.random() + 0.1) == 0)// 9/10... viel zu haeufig
+		if (Math.round(Math.random()*9)  < 1)// 9/10... viel zu haeufig
 		{
 			if ((int) (Math.random() + 0.5) == 0)
 			{
