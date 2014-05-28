@@ -201,7 +201,8 @@ public class EVKontrolle
 
 	public void speicherGeneration()
 	{
-		StringBuffer generationDir = new StringBuffer(saveDir);
+		StringBuffer generationDir = new StringBuffer();
+		generationDir.append(saveDir);
 		generationDir.append("Generation_");
 		for (int i = (generationCount + "").length(); i < 6; i++)
 			generationDir.append(0);
