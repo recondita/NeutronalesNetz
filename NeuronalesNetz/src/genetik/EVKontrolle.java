@@ -38,7 +38,7 @@ public class EVKontrolle
 			// fT[i] = new FitnessTester();
 			try
 			{
-				gen[i] = new Genom(new int[] { 100, 36, 4, 2 }, 0.001, 0.7, 50,
+				gen[i] = new Genom(new int[] { 100, 36, 4, 2 }, 0.001, 0.7, 200,
 						TransferFunctionType.TANH,
 						TrainingSetImport.importFromFile("spiel.log", 100, 2,
 								","));
