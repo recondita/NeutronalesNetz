@@ -19,7 +19,6 @@ public class Genom implements Comparable<Genom> {
 	private DataSet dataSet;
 	private int fitness;
 	private boolean isTested;
-	private boolean bias;
 
 	public boolean isTested() {
 		return isTested;
@@ -29,27 +28,16 @@ public class Genom implements Comparable<Genom> {
 		this.isTested = true;
 	}
 
+
 	public Genom(int[] layers, double learningRate, double momentum,
 			int maxIterations, TransferFunctionType transferFunktion,
 			DataSet trainingSet) {
-		this(layers, learningRate, momentum, maxIterations, transferFunktion,
-				trainingSet, false);
-	}
-
-	public boolean isBias() {
-		return bias;
-	}
-
-	public Genom(int[] layers, double learningRate, double momentum,
-			int maxIterations, TransferFunctionType transferFunktion,
-			DataSet trainingSet, boolean bias) {
 		this.layers = layers;
 		this.learningRate = learningRate;
 		this.momentum = momentum;
 		this.maxIterations = maxIterations;
 		this.transferFunktion = transferFunktion;
 		this.dataSet = trainingSet;
-		this.bias = bias;
 	}
 
 	public Genom(Genom gen1, Genom gen2) {
