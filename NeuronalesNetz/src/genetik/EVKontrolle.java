@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -36,26 +37,12 @@ public class EVKontrolle
 		{
 			dir.mkdir();
 		}
-		String[] subDirs = dir.list();
-		if (subDirs.toString().contains("Generation_"))
+		File info=new File(this.saveDir+"Generation.info");
+		if (info.exists())
 		{
-			for (String subDir : subDirs)
-			{
-				if (subDir.contains("Generation_"))
-				{
-					try
-					{
-						int i = Integer.parseInt(subDir.replace("Generation_",
-								""));
-						if (i > generationCount)
-							generationCount = i;
-					} catch (Exception e)
-					{
-						e.printStackTrace();
-					}
-				}
-			}
-			String genDir = this.saveDir + "Generation_" + generationCount;
+			String genDir;
+			 BufferedReader infoReader=new BufferedReader(new FileReader(info));
+			 genDir=this.saveDir+infoReader.readLine();
 			String[] genFiles = new File(genDir).list();
 			ArrayList<Genom> genomList = new ArrayList<Genom>(genFiles.length);
 			genDir = genDir + File.separator;
@@ -207,7 +194,18 @@ public class EVKontrolle
 		for (int i = (generationCount + "").length(); i < 6; i++)
 			generationDir.append(0);
 		generationDir.append(generationCount);
-		new File(generationDir.toString()).mkdir();
+		File genDir=new File(generationDir.toString());
+		genDir.mkdir();
+		try
+		{
+			FileWriter genWriter=new FileWriter(new File(saveDir+"Generation.info"));
+			genWriter.write(genDir.getName());
+			genWriter.close();
+		} catch (IOException e1)
+		{
+			e1.printStackTrace();
+		}
+		
 		generationDir.append(File.separator);
 		generationDir.append("Genom_");
 		for (int i = 0; i < gen.length; i++)
