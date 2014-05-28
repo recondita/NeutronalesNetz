@@ -12,26 +12,29 @@ public class GenNetz extends MultiLayerPerceptron
 
 	public GenNetz(Genom gene)
 	{
-		this(gene,30000L);
+		this(gene, 30000L);
 	}
-	
+
 	public GenNetz(Genom gene, long maxTrainTime)
 	{
-		super(gene.getTransferFunktion(),gene.getLayers());
-		MomentumBackpropagation learningRule = (MomentumBackpropagation)getLearningRule();
+		super(gene.getTransferFunktion(), gene.getLayers());
+		MomentumBackpropagation learningRule = (MomentumBackpropagation) getLearningRule();
 		learningRule.setLearningRate(gene.getLearningRate());
 		learningRule.setMomentum(gene.getMomentum());
 		learningRule.setMaxIterations(gene.getMaxIterations());
-		Timer t=new Timer();
-		TimerTask tt=new TimerTask(){
+		if (maxTrainTime != 0)
+		{
+			Timer t = new Timer();
+			TimerTask tt = new TimerTask() {
 
-			@Override
-			public void run()
-			{
-				stopLearning();
-			}
-		};
-		t.schedule(tt, maxTrainTime);
+				@Override
+				public void run()
+				{
+					stopLearning();
+				}
+			};
+			t.schedule(tt, maxTrainTime);
+		}
 		learn(gene.getDataSet());
 	}
 
