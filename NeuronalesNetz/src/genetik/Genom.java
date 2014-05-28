@@ -80,39 +80,8 @@ public class Genom implements Comparable<Genom> {
 		}
 		learningRate = Double.parseDouble(part[1]);
 		momentum = Double.parseDouble(part[2]);
-		maxIterations = Integer.parseInt(part[4]);
-		switch (Integer.parseInt(part[5])) {
-		case 0:
-			transferFunktion = TransferFunctionType.GAUSSIAN;
-			break;
-		case 1:
-			transferFunktion = TransferFunctionType.LINEAR;
-			break;
-		case 2:
-			transferFunktion = TransferFunctionType.LOG;
-			break;
-		case 3:
-			transferFunktion = TransferFunctionType.RAMP;
-			break;
-		case 4:
-			transferFunktion = TransferFunctionType.SGN;
-			break;
-		case 5:
-			transferFunktion = TransferFunctionType.SIGMOID;
-			break;
-		case 6:
-			transferFunktion = TransferFunctionType.SIN;
-			break;
-		case 7:
-			transferFunktion = TransferFunctionType.STEP;
-			break;
-		case 8:
-			transferFunktion = TransferFunctionType.TANH;
-			break;
-		case 9:
-			transferFunktion = TransferFunctionType.TRAPEZOID;
-			break;
-		}
+		maxIterations = Integer.parseInt(part[3]);
+		transferFunktion = TransferFunctionType.valueOf(part[4]);
 		fitness = Integer.parseInt(part[5]);
 		if(fitness != 0)
 			isTested = true;
@@ -323,26 +292,7 @@ public class Genom implements Comparable<Genom> {
 			ret += layers[i];
 		}
 		ret += "," + learningRate + "," + momentum + "," + maxIterations + ",";
-		if(transferFunktion == TransferFunctionType.GAUSSIAN)
-			ret += 0;
-		if(transferFunktion == TransferFunctionType.LINEAR)
-			ret += 1;
-		if(transferFunktion == TransferFunctionType.LOG)
-			ret += 2;
-		if(transferFunktion == TransferFunctionType.RAMP)
-			ret += 3;
-		if(transferFunktion == TransferFunctionType.SGN)
-			ret += 4;
-		if(transferFunktion == TransferFunctionType.SIGMOID)
-			ret += 5;
-		if(transferFunktion == TransferFunctionType.SIN)
-			ret += 6;
-		if(transferFunktion == TransferFunctionType.STEP)
-			ret += 7;
-		if(transferFunktion == TransferFunctionType.TANH)
-			ret += 8;
-		if(transferFunktion == TransferFunctionType.TRAPEZOID)
-			ret += 9;
+		ret += transferFunktion.name();
 		ret += ",";
 		ret += fitness;
 		return ret;
