@@ -47,7 +47,7 @@ public class EVKontrolle
 					{
 						int i = Integer.parseInt(subDir.replace("Generation_",
 								""));
-						if (i < generationCount)
+						if (i > generationCount)
 							generationCount = i;
 					} catch (Exception e)
 					{
