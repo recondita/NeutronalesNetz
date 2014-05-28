@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import org.neuroph.core.data.DataSet;
 import org.neuroph.util.TrainingSetImport;
 import org.neuroph.util.TransferFunctionType;
 
@@ -23,11 +24,13 @@ public class EVKontrolle
 	private int generationCount = 0;
 	private int maxTrainTime;
 	private String saveDir;
+	private DataSet trainingSet;
 	final static int cores = Runtime.getRuntime().availableProcessors();
 
 	public EVKontrolle(int induvidien, int anzTests, int maxTrainTime,
-			String saveDir) throws IOException
+			String saveDir, DataSet trainingSet) throws IOException
 	{
+		this.trainingSet=trainingSet;
 		this.saveDir = saveDir.endsWith(File.separator) ? saveDir
 				: (saveDir + File.separator);
 		this.anzTests = anzTests;
@@ -62,7 +65,7 @@ public class EVKontrolle
 						line = bR.readLine();
 					}
 					bR.close();
-					genomList.add(new Genom(inhalt.toString()));
+					genomList.add(new Genom(inhalt.toString(),this.trainingSet));
 				}
 			}
 			gen = genomList.toArray(new Genom[genomList.size()]);
@@ -76,9 +79,7 @@ public class EVKontrolle
 			for (int i = 0; i < gen.length; i++)
 			{
 				gen[i] = new Genom(new int[] { 100, 36, 4, 2 }, 0.001, 0.7,
-						200, TransferFunctionType.TANH,
-						TrainingSetImport.importFromFile("spiel.log", 100, 2,
-								","));
+						200, TransferFunctionType.TANH,this.trainingSet);
 			}
 			mutation();
 			testeFitness();
@@ -230,7 +231,8 @@ public class EVKontrolle
 	{
 		try
 		{
-			EVKontrolle eK = new EVKontrolle(16, 10000, 300000, "EV");
+			EVKontrolle eK = new EVKontrolle(16, 10000, 300000, "EV",TrainingSetImport.importFromFile("afterMove.log", 100, 2,
+					","));
 			eK.entwickle(100);
 		} catch (Exception e)
 		{

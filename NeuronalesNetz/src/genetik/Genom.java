@@ -7,7 +7,8 @@ import org.neuroph.core.data.DataSet;
 import org.neuroph.util.TrainingSetImport;
 import org.neuroph.util.TransferFunctionType;
 
-public class Genom implements Comparable<Genom> {
+public class Genom implements Comparable<Genom>
+{
 	/**
 	 * [0] muss zum feld passen und [length-1] muss 2 sein!
 	 */
@@ -20,18 +21,20 @@ public class Genom implements Comparable<Genom> {
 	private int fitness;
 	private boolean isTested;
 
-	public boolean isTested() {
+	public boolean isTested()
+	{
 		return isTested;
 	}
 
-	public void setTested() {
+	public void setTested()
+	{
 		this.isTested = true;
 	}
 
-
 	public Genom(int[] layers, double learningRate, double momentum,
 			int maxIterations, TransferFunctionType transferFunktion,
-			DataSet trainingSet) {
+			DataSet trainingSet)
+	{
 		this.layers = layers;
 		this.learningRate = learningRate;
 		this.momentum = momentum;
@@ -40,7 +43,8 @@ public class Genom implements Comparable<Genom> {
 		this.dataSet = trainingSet;
 	}
 
-	public Genom(Genom gen1, Genom gen2) {
+	public Genom(Genom gen1, Genom gen2)
+	{
 		Genom[] gene = { gen1, gen2 };
 		java.util.Arrays.sort(gene);
 		int comfit = gene[0].getFitness() + gene[1].getFitness();
@@ -58,12 +62,14 @@ public class Genom implements Comparable<Genom> {
 		this.dataSet = gene[Math.random() * comfit <= maxfit ? 0 : 1]
 				.getDataSet();
 	}
-	
-	public Genom(String in){
+
+	public Genom(String in, DataSet trainingSet)
+	{
 		String[] part = in.split(",");
 		String[] lay = part[0].split(".");
 		layers = new int[lay.length];
-		for(int i = 0; i<layers.length;i++){
+		for (int i = 0; i < layers.length; i++)
+		{
 			layers[i] = Integer.parseInt(lay[i]);
 		}
 		learningRate = Double.parseDouble(part[1]);
@@ -71,18 +77,7 @@ public class Genom implements Comparable<Genom> {
 		maxIterations = Integer.parseInt(part[3]);
 		transferFunktion = TransferFunctionType.valueOf(part[4]);
 		fitness = Integer.parseInt(part[5]);
-		try {
-			dataSet = TrainingSetImport.importFromFile("spiel.log", 100, 2,",");
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		dataSet = trainingSet;
 	}
 
 	/*
@@ -96,35 +91,43 @@ public class Genom implements Comparable<Genom> {
 	 * gene.length)].getDataSet(); }
 	 */
 
-	public int[] getLayers() {
+	public int[] getLayers()
+	{
 		return layers;
 	}
 
-	public double getLearningRate() {
+	public double getLearningRate()
+	{
 		return learningRate;
 	}
 
-	public double getMomentum() {
+	public double getMomentum()
+	{
 		return momentum;
 	}
 
-	public int getMaxIterations() {
+	public int getMaxIterations()
+	{
 		return maxIterations;
 	}
 
-	public TransferFunctionType getTransferFunktion() {
+	public TransferFunctionType getTransferFunktion()
+	{
 		return transferFunktion;
 	}
 
-	public DataSet getDataSet() {
+	public DataSet getDataSet()
+	{
 		return dataSet;
 	}
 
-	public int getFitness() {
+	public int getFitness()
+	{
 		return fitness;
 	}
 
-	public void mutation() {
+	public void mutation()
+	{
 		isTested = false;
 		if ((int) (Math.random() * 10) == 0) // So geht das..
 		{
@@ -136,7 +139,8 @@ public class Genom implements Comparable<Genom> {
 					learningRate = Math.random() * 0.7;// geneere zufaellige
 														// neue lerningRate
 				}
-			} else {
+			} else
+			{
 				learningRate = learningRate - Math.random() * 2 * learningRate;
 				if (learningRate <= 0)// wird immer true sein
 				{
@@ -144,62 +148,81 @@ public class Genom implements Comparable<Genom> {
 				}
 			}
 		}
-		if ((int) (Math.random() * 10) == 0) {
-			if ((int) (Math.random() + 0.5) == 0) {
+		if ((int) (Math.random() * 10) == 0)
+		{
+			if ((int) (Math.random() + 0.5) == 0)
+			{
 				momentum = Math.random() * (momentum / 2) + momentum;
-				if (momentum >= 1) {
+				if (momentum >= 1)
+				{
 					momentum = Math.random() * 0.7;
 				}
-			} else {
+			} else
+			{
 				momentum = momentum - Math.random() * (momentum / 2);
-				if (momentum <= 0) {
+				if (momentum <= 0)
+				{
 					momentum = Math.random() * 0.3;
 				}
 			}
 		}
-		if ((int) (Math.random() * 10) == 0) {
-			if ((int) (Math.random() + 0.5) == 0) {
+		if ((int) (Math.random() * 10) == 0)
+		{
+			if ((int) (Math.random() + 0.5) == 0)
+			{
 				int layerso[] = layers;
 				layers = new int[layerso.length + 1];
 				int insert = (int) (Math.random() * 100);
 				int pos = (int) (Math.random() * (layers.length - 2)) + 1;
-				for (int i = 0; i < pos; i++) {
+				for (int i = 0; i < pos; i++)
+				{
 					layers[i] = layerso[i];
 				}
 				layers[pos] = insert;
-				for (int i = pos + 1; i < layers.length; i++) {
+				for (int i = pos + 1; i < layers.length; i++)
+				{
 					layers[i] = layerso[i - 1];
 				}
-			} else {
-				if (layers.length > 3) {
+			} else
+			{
+				if (layers.length > 3)
+				{
 					int layerso[] = layers;
 					layers = new int[layerso.length - 1];
 					int pos = (int) (Math.random() * (layerso.length - 2)) + 1;
-					for (int i = 0; i < pos; i++) {
+					for (int i = 0; i < pos; i++)
+					{
 						layers[i] = layerso[i];
 					}
-					for (int i = pos; i < layers.length; i++) {
+					for (int i = pos; i < layers.length; i++)
+					{
 						layers[i] = layerso[i + 1];
 					}
 				}
 
 			}
 		}
-		if ((int) (Math.random() * 10) == 0) {
-			if ((int) (Math.random() + 0.5) == 0) {
+		if ((int) (Math.random() * 10) == 0)
+		{
+			if ((int) (Math.random() + 0.5) == 0)
+			{
 				maxIterations = (int) (Math.random() * (maxIterations / 3))
 						+ maxIterations;
-			} else {
+			} else
+			{
 				maxIterations = maxIterations
 						- (int) (Math.random() * (maxIterations / 3));
-				if (maxIterations <= 0) {
+				if (maxIterations <= 0)
+				{
 					maxIterations = (int) (Math.random() * 200);
 				}
 			}
 		}
-		if ((int) (Math.random() * 20) == 0) {
+		if ((int) (Math.random() * 20) == 0)
+		{
 			int auswahl = (int) (Math.random() * 10);
-			switch (auswahl) {
+			switch (auswahl)
+			{
 			case 0:
 				transferFunktion = TransferFunctionType.GAUSSIAN;
 				break;
@@ -235,45 +258,56 @@ public class Genom implements Comparable<Genom> {
 	}
 
 	@Override
-	public int compareTo(Genom arg0) {
-		if (fitness < arg0.getFitness()) {
+	public int compareTo(Genom arg0)
+	{
+		if (fitness < arg0.getFitness())
+		{
 			return 1;
 		}
-		if (fitness > arg0.getFitness()) {
+		if (fitness > arg0.getFitness())
+		{
 			return -1;
 		}
 		return 0;
 	}
 
-	void setFitness(int fitness) {
+	void setFitness(int fitness)
+	{
 		this.fitness = fitness;
 		isTested = true;
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{
 		Genom gen;
-		try {
+		try
+		{
 			gen = new Genom(new int[] { 100, 64, 36, 16, 4, 2 }, 0.001, 0.25,
 					Integer.MAX_VALUE, TransferFunctionType.TANH,
 					TrainingSetImport.importFromFile("spiel.log", 100, 2, ","));
 			System.out
 					.println(new FitnessTester().test(gen, Integer.MAX_VALUE));
-		} catch (NumberFormatException e) {
+		} catch (NumberFormatException e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (FileNotFoundException e) {
+		} catch (FileNotFoundException e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (IOException e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	public String toString(){
-		String ret ="";
-		for(int i = 0; i<layers.length;i++){
-			if(i!=0)
+	public String toString()
+	{
+		String ret = "";
+		for (int i = 0; i < layers.length; i++)
+		{
+			if (i != 0)
 				ret += ".";
 			ret += layers[i];
 		}
