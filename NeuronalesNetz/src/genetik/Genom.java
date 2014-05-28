@@ -343,6 +343,7 @@ public class Genom implements Comparable<Genom> {
 			ret += 8;
 		if(transferFunktion == TransferFunctionType.TRAPEZOID)
 			ret += 9;
+		ret += ",";
 		ret += fitness;
 		return ret;
 	}
