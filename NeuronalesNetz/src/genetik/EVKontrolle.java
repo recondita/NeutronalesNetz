@@ -21,7 +21,7 @@ public class EVKontrolle
 
 	public static void main(String[] args)
 	{
-		EVKontrolle eK = new EVKontrolle(10, 10000,300000);
+		EVKontrolle eK = new EVKontrolle(16, 10000,300000);
 		eK.entwickle(100);
 		System.exit(0);
 	}
