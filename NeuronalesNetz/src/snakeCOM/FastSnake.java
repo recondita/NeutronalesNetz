@@ -2,7 +2,7 @@ package snakeCOM;
 
 import genetik.FitnessTester;
 
-public class FastSnake extends LogSnake
+public class FastSnake extends ControlSnake
 {
 
 	public FastSnake(int x, int y, int richtung, LogBrett brett,FitnessTester fitnessTester, boolean wachsen)

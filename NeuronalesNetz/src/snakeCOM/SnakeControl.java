@@ -6,7 +6,7 @@ public abstract class SnakeControl
 {
 
 	protected LogBrett brett;
-	protected LogSnake snake;
+	protected ControlSnake snake;
 	protected GUI gui;
 	private static boolean wachsen = false;
 
@@ -24,7 +24,7 @@ public abstract class SnakeControl
 
 	public abstract void afterMove();
 
-	public final LogSnake newSnake()
+	public final ControlSnake newSnake()
 	{
 		this.snake = customSnake();
 		return snake;
@@ -35,9 +35,9 @@ public abstract class SnakeControl
 		brett.start();
 	}
 	
-	public LogSnake customSnake()
+	public ControlSnake customSnake()
 	{
-		return new LogSnake(brett.getBreite() / 2, brett.getHoehe() / 2,
+		return new ControlSnake(brett.getBreite() / 2, brett.getHoehe() / 2,
 				1, 500L, this.brett, this, wachsen);
 	}
 	

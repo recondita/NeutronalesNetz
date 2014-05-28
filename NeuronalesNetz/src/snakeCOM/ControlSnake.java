@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import snake.Snake;
 import snake.Spielbrett;
 
-public class LogSnake extends Snake
+public class ControlSnake extends Snake
 {
 
 	SnakeControl logger;
@@ -12,7 +12,7 @@ public class LogSnake extends Snake
 	int tempZug = 0;
 	Spielbrett brett;
 
-	public LogSnake(int x, int y, int richtung, long warte, Spielbrett brett,
+	public ControlSnake(int x, int y, int richtung, long warte, Spielbrett brett,
 			SnakeControl logger, boolean wachsen)
 	{
 		super(x, y, richtung, warte, brett, wachsen);
