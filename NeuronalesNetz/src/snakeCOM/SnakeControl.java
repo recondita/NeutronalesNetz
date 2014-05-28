@@ -8,7 +8,7 @@ public abstract class SnakeControl
 	protected LogBrett brett;
 	protected LogSnake snake;
 	protected GUI gui;
-	private static boolean wachsen = false;
+	private static boolean wachsen = true;
 
 	public SnakeControl()
 	{

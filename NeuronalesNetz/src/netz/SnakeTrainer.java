@@ -12,12 +12,12 @@ import org.neuroph.util.TrainingSetImport;
 public class SnakeTrainer implements Trainer
 {
 	DataSet trainingSet;
-	public SnakeTrainer() throws NumberFormatException, FileNotFoundException,
+	public SnakeTrainer(String trainingSet) throws NumberFormatException, FileNotFoundException,
 			IOException
 	{
 		System.out.println("Lade Dataset");
-		trainingSet = TrainingSetImport
-				.importFromFile("afterMove.log", 100, 2, ",");
+		this.trainingSet = TrainingSetImport
+				.importFromFile(trainingSet, 200, 2, ",");
 		System.out.println("fertig!");
 	}
 
@@ -34,12 +34,12 @@ public class SnakeTrainer implements Trainer
 		System.out.print("Netz speichern unter: ");
 		String saveName=sc.nextLine();
 		System.out.println("Erstelle Netz");
-		SnakeNetz netz = SnakeNetz.newNetz(10, 10);
+		SnakeNetz netz = SnakeNetz.newNetz();
 		System.out.println("fertig");
 		Autosaver as=new Autosaver(netz,saveName);
 		try
 		{
-			new SnakeTrainer().train(netz);
+			new SnakeTrainer("doppelMatrix.log").train(netz);
 		} catch (NumberFormatException e)
 		{
 			// TODO Auto-generated catch block

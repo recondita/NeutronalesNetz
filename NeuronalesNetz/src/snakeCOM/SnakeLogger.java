@@ -12,9 +12,11 @@ public class SnakeLogger extends SnakeControl
 {
 	private LinkedList<String> templog;
 	private StringBuffer move = null;
+	private File log;
 
-	public SnakeLogger()
+	public SnakeLogger(File log)
 	{
+		this.log=log;
 		templog = new LinkedList<String>();
 		gui.start();
 	}
@@ -24,8 +26,7 @@ public class SnakeLogger extends SnakeControl
 		if (move == null)
 		{
 			move = new StringBuffer();
-		}
-		else if(move.length()!=0)
+		} else if (move.length() != 0)
 		{
 			move.append(snake.richtungBreite());// ((double)(snake.getRichtung()-2)/2)-1.0);
 			move.append(",");
@@ -33,31 +34,43 @@ public class SnakeLogger extends SnakeControl
 			move.append("\n");
 			// snake.setRichtung(snake.richtungBreite(), snake.richtungHoehe());
 			templog.add(move.toString());
-			move=new StringBuffer();
+			move = new StringBuffer();
+		}
+		for (int x = 0; x < brett.getBreite(); x++)
+		{
+			for (int y = 0; y < brett.getHoehe(); y++)
+			{
+				move.append(brett.feldAsDouble(x, y));
+				move.append(",");
+			}
+
 		}
 		for (int x = 0; x < brett.getBreite(); x++)
 		{
 			for (int y = 0; y < brett.getHoehe(); y++)
 			{
 				int i = brett.getFeld(x, y);
-				move.append(LogBrett.feldToDouble(i));
+				if (10 <= i && i < 20)
+				{
+					move.append(1.0);
+				} else if (i == 1)
+				{
+					move.append(-1.0);
+				} else
+				{
+					move.append(0.0);
+				}
 				move.append(",");
 			}
 
 		}
 	}
 
-	public static void main(String[] args)
-	{
-		new SnakeLogger();
-	}
-
 	public void speichern(int wegschneiden)
 	{
 		try
 		{
-			BufferedWriter writer = new BufferedWriter(new FileWriter(new File(
-					"afterMove.log"), true));
+			BufferedWriter writer = new BufferedWriter(new FileWriter(log, true));
 			for (int i = 0; i < wegschneiden && !templog.isEmpty(); i++)
 				templog.removeLast();
 			while (!templog.isEmpty())
@@ -94,8 +107,12 @@ public class SnakeLogger extends SnakeControl
 			System.exit(0);
 		}
 		templog.clear();
-		move=null;
+		move = null;
 
 	}
-
+	
+	public static void main(String[] args)
+	{
+		new SnakeLogger(new File("doppelMatrix.log"));
+	}
 }
