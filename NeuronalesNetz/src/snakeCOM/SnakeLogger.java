@@ -45,25 +45,6 @@ public class SnakeLogger extends SnakeControl
 			}
 
 		}
-		for (int x = 0; x < brett.getBreite(); x++)
-		{
-			for (int y = 0; y < brett.getHoehe(); y++)
-			{
-				int i = brett.getFeld(x, y);
-				if (10 <= i && i < 20)
-				{
-					move.append(1.0);
-				} else if (i == 1)
-				{
-					move.append(-1.0);
-				} else
-				{
-					move.append(0.0);
-				}
-				move.append(",");
-			}
-
-		}
 	}
 
 	public void speichern(int wegschneiden)

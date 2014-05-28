@@ -17,7 +17,7 @@ public class SnakeTrainer implements Trainer
 	{
 		System.out.println("Lade Dataset");
 		this.trainingSet = TrainingSetImport
-				.importFromFile(trainingSet, 200, 2, ",");
+				.importFromFile(trainingSet, 100, 2, ",");
 		System.out.println("fertig!");
 	}
 
