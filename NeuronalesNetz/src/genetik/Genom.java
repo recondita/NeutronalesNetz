@@ -123,57 +123,43 @@ public class Genom implements Comparable<Genom> {
 														// neue lerningRate
 				}
 			} else {
-				learningRate = Math.random() * 2 * learningRate - learningRate;
+				learningRate = learningRate - Math.random() * 2 * learningRate;
 				if (learningRate <= 0)// wird immer true sein
 				{
 					learningRate = Math.random() * 0.01;
 				}
 			}
 		}
-		if ((int) (Math.random() * 10) == 0)// in 9/10 der Faelle...
-		{
-			if ((int) (Math.random() + 0.5) == 0) { // Integer Division... hier
-													// wird 0 rauskommen
-				momentum = Math.random() * (momentum / 5) + momentum;
-				if (momentum >= 1) // immer false
-				{
+		if ((int) (Math.random() * 10) == 0) {
+			if ((int) (Math.random() + 0.5) == 0) {
+				momentum = Math.random() * (momentum / 2) + momentum;
+				if (momentum >= 1) {
 					momentum = Math.random() * 0.7;
-				}// Das momentum ändert sich also nie
-			} else {// Gleiches wie oben
-				momentum = Math.random() * (momentum / 5) - momentum;
+				}
+			} else {
+				momentum = momentum - Math.random() * (momentum / 2);
 				if (momentum <= 0) {
 					momentum = Math.random() * 0.3;
 				}
 			}
 		}
-		if ((int) (Math.random() * 10) == 0)// 9/10... viel zu haeufig
-		{
+		if ((int) (Math.random() * 10) == 0) {
 			if ((int) (Math.random() + 0.5) == 0) {
 				int layerso[] = layers;
-				layers = new int[layerso.length + 1]; // um vergroessern
-				int insert = (int) (Math.random() * 100);// <100, mach lieber
-															// <=100..
-				int pos = (int) (Math.random() * (layers.length - 3)) + 1;// 1<=pos<=array.length-3
-																			// (Math.random
-																			// macht
-																			// nur
-																			// <1,
-																			// aber
-																			// nie
-																			// 1!
+				layers = new int[layerso.length + 1];
+				int insert = (int) (Math.random() * 100);
+				int pos = (int) (Math.random() * (layers.length - 2)) + 1;
 				for (int i = 0; i < pos; i++) {
-					layers[i] = layerso[i]; // kopiere bis zu pos
+					layers[i] = layerso[i];
 				}
 				layers[pos] = insert;
-				for (int i = pos + 1; i < layers.length; i++) { // kopiere den
-																// rest
+				for (int i = pos + 1; i < layers.length; i++) {
 					layers[i] = layerso[i - 1];
 				}
 			} else {
-				if (layers.length > 3)// wenn mehr als 3 layer...
-				{
+				if (layers.length > 3) {
 					int layerso[] = layers;
-					layers = new int[layerso.length - 1];// um 1 verkleinern
+					layers = new int[layerso.length - 1];
 					int pos = (int) (Math.random() * (layerso.length - 2)) + 1;
 					for (int i = 0; i < pos; i++) {
 						layers[i] = layerso[i];
@@ -185,12 +171,13 @@ public class Genom implements Comparable<Genom> {
 
 			}
 		}
-		if ((int) (Math.random() * 10) == 0)
-		{
+		if ((int) (Math.random() * 10) == 0) {
 			if ((int) (Math.random() + 0.5) == 0) {
-				maxIterations = (int) (Math.random() * (maxIterations/5)) + maxIterations;
+				maxIterations = (int) (Math.random() * (maxIterations / 5))
+						+ maxIterations;
 			} else {
-				maxIterations = maxIterations - (int) (Math.random() * (maxIterations/5));
+				maxIterations = maxIterations
+						- (int) (Math.random() * (maxIterations / 5));
 				if (maxIterations <= 0) {
 					maxIterations = (int) (Math.random() * 200);
 				}
