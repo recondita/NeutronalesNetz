@@ -19,12 +19,7 @@ public class EVKontrolle
 	private int maxTrainTime;
 	final static int cores = Runtime.getRuntime().availableProcessors();
 
-	public static void main(String[] args)
-	{
-		EVKontrolle eK = new EVKontrolle(16, 10000,300000);
-		eK.entwickle(100);
-		System.exit(0);
-	}
+
 
 	public EVKontrolle(int induvidien, int anzTests, int maxTrainTime)
 	{
@@ -156,6 +151,13 @@ public class EVKontrolle
 
 		}
 
+	}
+	
+	public static void main(String[] args)
+	{
+		EVKontrolle eK = new EVKontrolle(16, 10000,300000);
+		eK.entwickle(100);
+		System.exit(0);
 	}
 
 }
