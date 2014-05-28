@@ -1,6 +1,8 @@
 package genetik;
 
-import java.io.FileNotFoundException;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import org.neuroph.util.TrainingSetImport;
@@ -15,38 +17,33 @@ public class EVKontrolle
 	private Genom[] agen;
 	// private FitnessTester[] fT;
 	private int anzTests;
-	private int durchlaeufe = 0;
+	private int generationCount = 0;
 	private int maxTrainTime;
+	private String saveDir;
 	final static int cores = Runtime.getRuntime().availableProcessors();
 
-
-
-	public EVKontrolle(int induvidien, int anzTests, int maxTrainTime)
+	public EVKontrolle(int induvidien, int anzTests, int maxTrainTime,
+			String saveDir) throws IOException
 	{
+		this.saveDir = (saveDir.charAt(saveDir.length()-1)==File.separatorChar)?saveDir:(saveDir+File.pathSeparatorChar);
 		this.anzTests = anzTests;
-		this.maxTrainTime=maxTrainTime;
+		this.maxTrainTime = maxTrainTime;
+		File dir = new File(saveDir);
+		if (!dir.exists())
+		{
+			dir.mkdir();
+		} else
+		{
+			// TODO Laden hinzufügen
+		}
 		gen = new Genom[induvidien];
 		agen = new Genom[induvidien];
 		// fT = new FitnessTester[induvidien];
 		for (int i = 0; i < gen.length; i++)
 		{
-			// fT[i] = new FitnessTester();
-			try
-			{
-				gen[i] = new Genom(new int[] { 100, 36, 4, 2 }, 0.001, 0.7, 200,
-						TransferFunctionType.TANH,
-						TrainingSetImport.importFromFile("spiel.log", 100, 2,
-								","));
-			} catch (NumberFormatException e)
-			{
-				e.printStackTrace();
-			} catch (FileNotFoundException e)
-			{
-				e.printStackTrace();
-			} catch (IOException e)
-			{
-				e.printStackTrace();
-			}
+			gen[i] = new Genom(new int[] { 100, 36, 4, 2 }, 0.001, 0.7, 200,
+					TransferFunctionType.TANH,
+					TrainingSetImport.importFromFile("spiel.log", 100, 2, ","));
 		}
 		mutation();
 		testeFitness();
@@ -56,8 +53,8 @@ public class EVKontrolle
 	{
 		for (int i = 0; i < anzGenerationen; i++)
 		{
-			durchlaeufe++;
-			System.out.println("Durchlauf: " + durchlaeufe);
+			generationCount++;
+			System.out.println("Durchlauf: " + generationCount);
 			rekombination();
 			mutation();
 			testeFitness();
@@ -145,19 +142,51 @@ public class EVKontrolle
 						break;
 					job = jobs.removeFirst();
 				}
-				gen[job].setFitness(new FitnessTester(maxTrainTime).testWerteZeit(
-						gen[job], anzTests));
+				gen[job].setFitness(new FitnessTester(maxTrainTime)
+						.testWerteZeit(gen[job], anzTests));
 			}
 
 		}
 
 	}
-	
+
+	public void speicherGeneration()
+	{
+		StringBuffer generationDir=new StringBuffer(saveDir);
+		generationDir.append("Generation_");
+		for(int i=(generationCount+"").length(); i<6; i++)
+			generationDir.append(0);
+		generationDir.append(generationCount);
+		new File(generationDir.toString()).mkdir();
+		generationDir.append(File.separator);
+		generationDir.append("Genom_");
+		for(int i=0; i<gen.length; i++)
+		{
+			try
+			{
+				BufferedWriter bW=new BufferedWriter(new FileWriter(new File(generationDir.toString()+i)));
+				bW.write(gen[i].toString());
+				bW.close();
+			} catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+			
+		}
+	}
+
 	public static void main(String[] args)
 	{
-		EVKontrolle eK = new EVKontrolle(16, 10000,300000);
-		eK.entwickle(100);
+		try
+		{
+			EVKontrolle eK = new EVKontrolle(16, 10000, 300000, "EV");
+			eK.entwickle(100);
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 		System.exit(0);
 	}
+	
 
 }
