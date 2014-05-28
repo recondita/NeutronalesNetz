@@ -37,12 +37,13 @@ public class EVKontrolle
 		{
 			dir.mkdir();
 		}
-		File info=new File(this.saveDir+"Generation.info");
+		File info = new File(this.saveDir + "Generation.info");
 		if (info.exists())
 		{
 			String genDir;
-			 BufferedReader infoReader=new BufferedReader(new FileReader(info));
-			 genDir=this.saveDir+infoReader.readLine();
+			BufferedReader infoReader = new BufferedReader(new FileReader(info));
+			genDir = this.saveDir + infoReader.readLine();
+			infoReader.close();
 			String[] genFiles = new File(genDir).list();
 			ArrayList<Genom> genomList = new ArrayList<Genom>(genFiles.length);
 			genDir = genDir + File.separator;
@@ -194,18 +195,19 @@ public class EVKontrolle
 		for (int i = (generationCount + "").length(); i < 6; i++)
 			generationDir.append(0);
 		generationDir.append(generationCount);
-		File genDir=new File(generationDir.toString());
+		File genDir = new File(generationDir.toString());
 		genDir.mkdir();
 		try
 		{
-			FileWriter genWriter=new FileWriter(new File(saveDir+"Generation.info"));
+			FileWriter genWriter = new FileWriter(new File(saveDir
+					+ "Generation.info"));
 			genWriter.write(genDir.getName());
 			genWriter.close();
 		} catch (IOException e1)
 		{
 			e1.printStackTrace();
 		}
-		
+
 		generationDir.append(File.separator);
 		generationDir.append("Genom_");
 		for (int i = 0; i < gen.length; i++)
