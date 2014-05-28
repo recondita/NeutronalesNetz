@@ -188,9 +188,9 @@ public class Genom implements Comparable<Genom> {
 		if ((int) (Math.random() * 10) == 0)
 		{
 			if ((int) (Math.random() + 0.5) == 0) {
-				maxIterations = (int) (Math.random() * 80) + maxIterations;
+				maxIterations = (int) (Math.random() * (maxIterations/5)) + maxIterations;
 			} else {
-				maxIterations = maxIterations - (int) (Math.random() * 80);
+				maxIterations = maxIterations - (int) (Math.random() * (maxIterations/5));
 				if (maxIterations <= 0) {
 					maxIterations = (int) (Math.random() * 200);
 				}
