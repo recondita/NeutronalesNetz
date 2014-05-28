@@ -55,28 +55,30 @@ public class EVKontrolle
 					}
 				}
 			}
-			String genDir=this.saveDir + "Generation_" + generationCount;
+			String genDir = this.saveDir + "Generation_" + generationCount;
 			String[] genFiles = new File(genDir).list();
-			ArrayList<Genom> genomList=new ArrayList<Genom>(genFiles.length);
-			genDir=genDir+File.separator;
-			for(String genFile:genFiles)
+			ArrayList<Genom> genomList = new ArrayList<Genom>(genFiles.length);
+			genDir = genDir + File.separator;
+			for (String genFile : genFiles)
 			{
-				if(genFile.contains("Genom_"))
+				if (genFile.contains("Genom_"))
 				{
-					BufferedReader bR = new BufferedReader(new InputStreamReader(new FileInputStream(genDir+genFile), "UTF-8"));
-					StringBuffer inhalt=new StringBuffer();
-					String line=bR.readLine();
-					while(line!=null)
+					BufferedReader bR = new BufferedReader(
+							new InputStreamReader(new FileInputStream(genDir
+									+ genFile), "UTF-8"));
+					StringBuffer inhalt = new StringBuffer();
+					String line = bR.readLine();
+					while (line != null)
 					{
 						inhalt.append(line);
-						line=bR.readLine();
+						line = bR.readLine();
 					}
 					bR.close();
 					genomList.add(new Genom(inhalt.toString()));
 				}
 			}
-			gen=genomList.toArray(new Genom[genomList.size()]);
-			agen=new Genom[gen.length];
+			gen = genomList.toArray(new Genom[genomList.size()]);
+			agen = new Genom[gen.length];
 
 		} else
 		{
