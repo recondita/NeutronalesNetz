@@ -5,7 +5,7 @@ import java.io.File;
 import org.neuroph.core.NeuralNetwork;
 
 import snakeCOM.FastSnake;
-import snakeCOM.ControlSnake;
+import snakeCOM.COMSnake;
 import snakeCOM.SnakePlayer;
 
 public class FitnessTester extends SnakePlayer
@@ -58,7 +58,7 @@ public class FitnessTester extends SnakePlayer
 	}
 	
 	@Override
-	public ControlSnake customSnake()
+	public COMSnake customSnake()
 	{
 		return new FastSnake(brett.getBreite() / 2, brett.getHoehe() / 2, 1,
 				this.brett, this, false);

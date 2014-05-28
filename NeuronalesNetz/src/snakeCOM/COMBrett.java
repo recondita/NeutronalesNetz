@@ -2,7 +2,7 @@ package snakeCOM;
 
 import snake.Spielbrett;
 
-public class LogBrett extends Spielbrett
+public class COMBrett extends Spielbrett
 {
 
 	private static final long serialVersionUID = 4278636303152012557L;
@@ -10,13 +10,13 @@ public class LogBrett extends Spielbrett
 	private boolean superVerloren = true;
 	private boolean repaint;
 
-	public LogBrett(SnakeControl snakeControl)
+	public COMBrett(SnakeControl snakeControl)
 	{
 		super(10, 10);
 		this.sl = snakeControl;
 	}
 
-	public LogBrett(SnakeControl snakeControl, boolean repaint)
+	public COMBrett(SnakeControl snakeControl, boolean repaint)
 	{
 		super(10, 10);
 		this.repaint = repaint;

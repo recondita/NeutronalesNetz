@@ -5,8 +5,8 @@ import snake.GUI;
 public abstract class SnakeControl
 {
 
-	protected LogBrett brett;
-	protected ControlSnake snake;
+	protected COMBrett brett;
+	protected COMSnake snake;
 	protected GUI gui;
 	private static boolean wachsen = false;
 
@@ -17,14 +17,14 @@ public abstract class SnakeControl
 
 	public SnakeControl(boolean gui)
 	{
-		this.brett = new LogBrett(this,gui);
+		this.brett = new COMBrett(this,gui);
 		if (gui)
 			this.gui = new GUI(this.brett);
 	}
 
 	public abstract void afterMove();
 
-	public final ControlSnake newSnake()
+	public final COMSnake newSnake()
 	{
 		this.snake = customSnake();
 		return snake;
@@ -35,9 +35,9 @@ public abstract class SnakeControl
 		brett.start();
 	}
 	
-	public ControlSnake customSnake()
+	public COMSnake customSnake()
 	{
-		return new ControlSnake(brett.getBreite() / 2, brett.getHoehe() / 2,
+		return new COMSnake(brett.getBreite() / 2, brett.getHoehe() / 2,
 				1, 500L, this.brett, this, wachsen);
 	}
 	
