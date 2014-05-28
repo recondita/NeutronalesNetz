@@ -27,8 +27,8 @@ public class EVKontrolle
 	public EVKontrolle(int induvidien, int anzTests, int maxTrainTime,
 			String saveDir) throws IOException
 	{
-		this.saveDir = (saveDir.charAt(saveDir.length() - 1) == File.separatorChar) ? saveDir
-				: (saveDir + File.pathSeparatorChar);
+		this.saveDir = saveDir.endsWith(File.separator) ? saveDir
+				: (saveDir + File.separator);
 		this.anzTests = anzTests;
 		this.maxTrainTime = maxTrainTime;
 		File dir = new File(saveDir);
