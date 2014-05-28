@@ -11,15 +11,32 @@ import snakeCOM.SnakePlayer;
 public class FitnessTester extends SnakePlayer
 {
 	private int fitness = 0;
+	private long maxTrainTime=3000L;
 
 	public FitnessTester()
 	{
 		super(null, false);
 	}
+	
+	public FitnessTester(long maxTrainTime)
+	{
+		super(null, false);
+		this.maxTrainTime=maxTrainTime;
+	}
 
 	public int test(Genom gen, int tests)
 	{
 		return test(new GenNetz(gen),tests);
+	}
+	
+	public int testWerteZeit(Genom gen, int tests)
+	{
+		long time=System.currentTimeMillis();
+		GenNetz netz=new GenNetz(gen,30000L);
+		time=System.currentTimeMillis()-time;
+		int fitness=test(netz,tests);
+		fitness=(fitness*7-fitness*(int)(time/maxTrainTime))/7;
+		return fitness;
 	}
 
 	public int test(NeuralNetwork<?> nn, int tests)

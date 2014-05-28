@@ -134,7 +134,7 @@ public class EVKontrolle
 			if (!gen[nummer].isTested())
 			{
 				//fT[nummer]=new FitnessTester();
-				gen[nummer].setFitness(new FitnessTester().test(gen[nummer], anzTests));
+				gen[nummer].setFitness(new FitnessTester(30000L).testWerteZeit(gen[nummer], anzTests));
 				//gen[nummer].setTested();
 				//fT[nummer]=null;
 			}
