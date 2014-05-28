@@ -66,7 +66,7 @@ public class Genom implements Comparable<Genom>
 	public Genom(String in, DataSet trainingSet)
 	{
 		String[] part = in.split(",");
-		String[] lay = part[0].split(".");
+		String[] lay = part[0].split("\\.");
 		layers = new int[lay.length];
 		for (int i = 0; i < layers.length; i++)
 		{
@@ -172,7 +172,7 @@ public class Genom implements Comparable<Genom>
 			{
 				int layerso[] = layers;
 				layers = new int[layerso.length + 1];
-				int insert = (int) (Math.random() * 100);
+				int insert = (int) (Math.random() * 201);
 				int pos = (int) (Math.random() * (layers.length - 2)) + 1;
 				for (int i = 0; i < pos; i++)
 				{

@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 
 import org.neuroph.core.data.DataSet;
@@ -19,7 +20,7 @@ public class EVKontrolle
 {
 	private Genom[] gen;
 	private Genom[] agen;
-	// private FitnessTester[] fT;
+	//private FitnessTester[] fT;
 	private int anzTests;
 	private int generationCount = 0;
 	private int maxTrainTime;
@@ -45,8 +46,10 @@ public class EVKontrolle
 		{
 			String genDir;
 			BufferedReader infoReader = new BufferedReader(new FileReader(info));
-			genDir = this.saveDir + infoReader.readLine();
+			genDir =infoReader.readLine();
 			infoReader.close();
+			generationCount=Integer.parseInt(genDir.replace("Generation_",""));
+			genDir=this.saveDir+genDir;
 			String[] genFiles = new File(genDir).list();
 			ArrayList<Genom> genomList = new ArrayList<Genom>(genFiles.length);
 			genDir = genDir + File.separator;
@@ -54,9 +57,7 @@ public class EVKontrolle
 			{
 				if (genFile.contains("Genom_"))
 				{
-					BufferedReader bR = new BufferedReader(
-							new InputStreamReader(new FileInputStream(genDir
-									+ genFile), "UTF-8"));
+					BufferedReader bR = new BufferedReader(new InputStreamReader(new FileInputStream(genDir+ genFile), "UTF-8"));
 					StringBuffer inhalt = new StringBuffer();
 					String line = bR.readLine();
 					while (line != null)
@@ -69,6 +70,7 @@ public class EVKontrolle
 				}
 			}
 			gen = genomList.toArray(new Genom[genomList.size()]);
+			Arrays.sort(gen);
 			agen = new Genom[gen.length];
 
 		} else
