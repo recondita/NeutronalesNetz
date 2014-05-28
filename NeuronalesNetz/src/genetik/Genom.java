@@ -83,8 +83,6 @@ public class Genom implements Comparable<Genom> {
 		maxIterations = Integer.parseInt(part[3]);
 		transferFunktion = TransferFunctionType.valueOf(part[4]);
 		fitness = Integer.parseInt(part[5]);
-		if(fitness != 0)
-			isTested = true;
 		try {
 			dataSet = TrainingSetImport.importFromFile("spiel.log", 100, 2,",");
 		} catch (NumberFormatException e) {
