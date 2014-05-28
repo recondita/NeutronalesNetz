@@ -316,7 +316,7 @@ public class Genom implements Comparable<Genom> {
 	}
 
 	public String toString(){
-		String ret = null;
+		String ret ="";
 		for(int i = 0; i<layers.length;i++){
 			if(i!=0)
 				ret += ".";
