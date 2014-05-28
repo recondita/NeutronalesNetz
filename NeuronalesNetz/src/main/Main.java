@@ -2,7 +2,6 @@ package main;
 
 import netz.Loader;
 import netz.SimpleNetwork;
-
 import ui.UI;
 
 public class Main

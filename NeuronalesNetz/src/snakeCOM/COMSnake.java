@@ -1,6 +1,7 @@
 package snakeCOM;
 
 import java.util.ArrayList;
+
 import snake.Snake;
 import snake.Spielbrett;
 

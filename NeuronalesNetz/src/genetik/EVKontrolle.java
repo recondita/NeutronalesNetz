@@ -1,15 +1,17 @@
 package genetik;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 import org.neuroph.util.TrainingSetImport;
 import org.neuroph.util.TransferFunctionType;
-
-import java.lang.Thread;
-import java.util.LinkedList;
 
 public class EVKontrolle
 {
@@ -25,28 +27,72 @@ public class EVKontrolle
 	public EVKontrolle(int induvidien, int anzTests, int maxTrainTime,
 			String saveDir) throws IOException
 	{
-		this.saveDir = (saveDir.charAt(saveDir.length()-1)==File.separatorChar)?saveDir:(saveDir+File.pathSeparatorChar);
+		this.saveDir = (saveDir.charAt(saveDir.length() - 1) == File.separatorChar) ? saveDir
+				: (saveDir + File.pathSeparatorChar);
 		this.anzTests = anzTests;
 		this.maxTrainTime = maxTrainTime;
 		File dir = new File(saveDir);
 		if (!dir.exists())
 		{
 			dir.mkdir();
+		}
+		String[] subDirs = dir.list();
+		if (subDirs.toString().contains("Generation_"))
+		{
+			for (String subDir : subDirs)
+			{
+				if (subDir.contains("Generation_"))
+				{
+					try
+					{
+						int i = Integer.parseInt(subDir.replace("Generation_",
+								""));
+						if (i < generationCount)
+							generationCount = i;
+					} catch (Exception e)
+					{
+						e.printStackTrace();
+					}
+				}
+			}
+			String genDir=this.saveDir + "Generation_" + generationCount;
+			String[] genFiles = new File(genDir).list();
+			ArrayList<Genom> genomList=new ArrayList<Genom>(genFiles.length);
+			genDir=genDir+File.separator;
+			for(String genFile:genFiles)
+			{
+				if(genFile.contains("Genom_"))
+				{
+					BufferedReader bR = new BufferedReader(new InputStreamReader(new FileInputStream(genDir+genFile), "UTF-8"));
+					StringBuffer inhalt=new StringBuffer();
+					String line=bR.readLine();
+					while(line!=null)
+					{
+						inhalt.append(line);
+						line=bR.readLine();
+					}
+					bR.close();
+					genomList.add(new Genom(inhalt.toString()));
+				}
+			}
+			gen=genomList.toArray(new Genom[genomList.size()]);
+			agen=new Genom[gen.length];
+
 		} else
 		{
-			// TODO Laden hinzufügen
+			gen = new Genom[induvidien];
+			agen = new Genom[induvidien];
+			// fT = new FitnessTester[induvidien];
+			for (int i = 0; i < gen.length; i++)
+			{
+				gen[i] = new Genom(new int[] { 100, 36, 4, 2 }, 0.001, 0.7,
+						200, TransferFunctionType.TANH,
+						TrainingSetImport.importFromFile("spiel.log", 100, 2,
+								","));
+			}
+			mutation();
+			testeFitness();
 		}
-		gen = new Genom[induvidien];
-		agen = new Genom[induvidien];
-		// fT = new FitnessTester[induvidien];
-		for (int i = 0; i < gen.length; i++)
-		{
-			gen[i] = new Genom(new int[] { 100, 36, 4, 2 }, 0.001, 0.7, 200,
-					TransferFunctionType.TANH,
-					TrainingSetImport.importFromFile("spiel.log", 100, 2, ","));
-		}
-		mutation();
-		testeFitness();
 	}
 
 	public void entwickle(int anzGenerationen)
@@ -58,6 +104,7 @@ public class EVKontrolle
 			rekombination();
 			mutation();
 			testeFitness();
+			speicherGeneration();
 			System.out.println(toString());
 		}
 	}
@@ -152,26 +199,27 @@ public class EVKontrolle
 
 	public void speicherGeneration()
 	{
-		StringBuffer generationDir=new StringBuffer(saveDir);
+		StringBuffer generationDir = new StringBuffer(saveDir);
 		generationDir.append("Generation_");
-		for(int i=(generationCount+"").length(); i<6; i++)
+		for (int i = (generationCount + "").length(); i < 6; i++)
 			generationDir.append(0);
 		generationDir.append(generationCount);
 		new File(generationDir.toString()).mkdir();
 		generationDir.append(File.separator);
 		generationDir.append("Genom_");
-		for(int i=0; i<gen.length; i++)
+		for (int i = 0; i < gen.length; i++)
 		{
 			try
 			{
-				BufferedWriter bW=new BufferedWriter(new FileWriter(new File(generationDir.toString()+i)));
+				BufferedWriter bW = new BufferedWriter(new FileWriter(new File(
+						generationDir.toString() + i)));
 				bW.write(gen[i].toString());
 				bW.close();
 			} catch (IOException e)
 			{
 				e.printStackTrace();
 			}
-			
+
 		}
 	}
 
@@ -187,6 +235,5 @@ public class EVKontrolle
 		}
 		System.exit(0);
 	}
-	
 
 }

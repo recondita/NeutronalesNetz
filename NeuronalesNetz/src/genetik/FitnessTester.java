@@ -4,8 +4,8 @@ import java.io.File;
 
 import org.neuroph.core.NeuralNetwork;
 
-import snakeCOM.FastSnake;
 import snakeCOM.COMSnake;
+import snakeCOM.FastSnake;
 import snakeCOM.SnakePlayer;
 
 public class FitnessTester extends SnakePlayer
