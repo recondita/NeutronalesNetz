@@ -2,6 +2,7 @@ package genetik;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Arrays;
 
 import org.neuroph.core.data.DataSet;
 import org.neuroph.util.TrainingSetImport;
@@ -69,6 +70,65 @@ public class Genom implements Comparable<Genom> {
 				.getTransferFunktion();
 		this.dataSet = gene[Math.random() * comfit <= maxfit ? 0 : 1]
 				.getDataSet();
+	}
+	
+	public Genom(String in){
+		String[] part = in.split(",");
+		String[] lay = part[0].split(".");
+		layers = new int[lay.length];
+		for(int i = 0; i<layers.length;i++){
+			layers[i] = Integer.parseInt(lay[i]);
+		}
+		learningRate = Double.parseDouble(part[1]);
+		momentum = Double.parseDouble(part[2]);
+		maxIterations = Integer.parseInt(part[4]);
+		switch (Integer.parseInt(part[5])) {
+		case 0:
+			transferFunktion = TransferFunctionType.GAUSSIAN;
+			break;
+		case 1:
+			transferFunktion = TransferFunctionType.LINEAR;
+			break;
+		case 2:
+			transferFunktion = TransferFunctionType.LOG;
+			break;
+		case 3:
+			transferFunktion = TransferFunctionType.RAMP;
+			break;
+		case 4:
+			transferFunktion = TransferFunctionType.SGN;
+			break;
+		case 5:
+			transferFunktion = TransferFunctionType.SIGMOID;
+			break;
+		case 6:
+			transferFunktion = TransferFunctionType.SIN;
+			break;
+		case 7:
+			transferFunktion = TransferFunctionType.STEP;
+			break;
+		case 8:
+			transferFunktion = TransferFunctionType.TANH;
+			break;
+		case 9:
+			transferFunktion = TransferFunctionType.TRAPEZOID;
+			break;
+		}
+		fitness = Integer.parseInt(part[5]);
+		if(fitness != 0)
+			isTested = true;
+		try {
+			dataSet = TrainingSetImport.importFromFile("spiel.log", 100, 2,",");
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/*
@@ -254,6 +314,38 @@ public class Genom implements Comparable<Genom> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public String toString(){
+		String ret = null;
+		for(int i = 0; i<layers.length;i++){
+			if(i!=0)
+				ret += ".";
+			ret += layers[i];
+		}
+		ret += "," + learningRate + "," + momentum + "," + maxIterations + ",";
+		if(transferFunktion == TransferFunctionType.GAUSSIAN)
+			ret += 0;
+		if(transferFunktion == TransferFunctionType.LINEAR)
+			ret += 1;
+		if(transferFunktion == TransferFunctionType.LOG)
+			ret += 2;
+		if(transferFunktion == TransferFunctionType.RAMP)
+			ret += 3;
+		if(transferFunktion == TransferFunctionType.SGN)
+			ret += 4;
+		if(transferFunktion == TransferFunctionType.SIGMOID)
+			ret += 5;
+		if(transferFunktion == TransferFunctionType.SIN)
+			ret += 6;
+		if(transferFunktion == TransferFunctionType.STEP)
+			ret += 7;
+		if(transferFunktion == TransferFunctionType.TANH)
+			ret += 8;
+		if(transferFunktion == TransferFunctionType.TRAPEZOID)
+			ret += 9;
+		ret += fitness;
+		return ret;
 	}
 
 }
