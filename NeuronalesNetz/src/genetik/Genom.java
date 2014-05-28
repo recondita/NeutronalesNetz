@@ -7,8 +7,7 @@ import org.neuroph.core.data.DataSet;
 import org.neuroph.util.TrainingSetImport;
 import org.neuroph.util.TransferFunctionType;
 
-public class Genom implements Comparable<Genom>
-{
+public class Genom implements Comparable<Genom> {
 	/**
 	 * [0] muss zum feld passen und [length-1] muss 2 sein!
 	 */
@@ -22,33 +21,28 @@ public class Genom implements Comparable<Genom>
 	private boolean isTested;
 	private boolean bias;
 
-	public boolean isTested()
-	{
+	public boolean isTested() {
 		return isTested;
 	}
 
-	public void setTested()
-	{
+	public void setTested() {
 		this.isTested = true;
 	}
 
 	public Genom(int[] layers, double learningRate, double momentum,
 			int maxIterations, TransferFunctionType transferFunktion,
-			DataSet trainingSet)
-	{
+			DataSet trainingSet) {
 		this(layers, learningRate, momentum, maxIterations, transferFunktion,
 				trainingSet, false);
 	}
 
-	public boolean isBias()
-	{
+	public boolean isBias() {
 		return bias;
 	}
 
 	public Genom(int[] layers, double learningRate, double momentum,
 			int maxIterations, TransferFunctionType transferFunktion,
-			DataSet trainingSet, boolean bias)
-	{
+			DataSet trainingSet, boolean bias) {
 		this.layers = layers;
 		this.learningRate = learningRate;
 		this.momentum = momentum;
@@ -58,8 +52,7 @@ public class Genom implements Comparable<Genom>
 		this.bias = bias;
 	}
 
-	public Genom(Genom gen1, Genom gen2)
-	{
+	public Genom(Genom gen1, Genom gen2) {
 		Genom[] gene = { gen1, gen2 };
 		java.util.Arrays.sort(gene);
 		int comfit = gene[0].getFitness() + gene[1].getFitness();
@@ -89,158 +82,188 @@ public class Genom implements Comparable<Genom>
 	 * gene.length)].getDataSet(); }
 	 */
 
-	public int[] getLayers()
-	{
+	public int[] getLayers() {
 		return layers;
 	}
 
-	public double getLearningRate()
-	{
+	public double getLearningRate() {
 		return learningRate;
 	}
 
-	public double getMomentum()
-	{
+	public double getMomentum() {
 		return momentum;
 	}
 
-	public int getMaxIterations()
-	{
+	public int getMaxIterations() {
 		return maxIterations;
 	}
 
-	public TransferFunctionType getTransferFunktion()
-	{
+	public TransferFunctionType getTransferFunktion() {
 		return transferFunktion;
 	}
 
-	public DataSet getDataSet()
-	{
+	public DataSet getDataSet() {
 		return dataSet;
 	}
 
-	public int getFitness()
-	{
+	public int getFitness() {
 		return fitness;
 	}
 
-	public void mutation()
-	{
+	public void mutation() {
 		isTested = false;
-		if ((int)(Math.random()*10)==0) //So geht das..
+		if ((int) (Math.random() * 10) == 0) // So geht das..
 		{
-			if ((int) (Math.random() + 0.5) == 0) //50% der Fälle
+			if ((int) (Math.random() + 0.5) == 0) // 50% der Fälle
 			{
 				learningRate = Math.random() * 2 * learningRate + learningRate;
-				if (learningRate >= 1)//wird immer true sein
+				if (learningRate >= 1)// wird immer true sein
 				{
-					learningRate = Math.random() * 0.7;//geneere zufaellige neue lerningRate
+					learningRate = Math.random() * 0.7;// geneere zufaellige
+														// neue lerningRate
 				}
-			} else
-			{
+			} else {
 				learningRate = Math.random() * 2 * learningRate - learningRate;
-				if (learningRate <= 0)//wird immer true sein
+				if (learningRate <= 0)// wird immer true sein
 				{
 					learningRate = Math.random() * 0.01;
 				}
 			}
 		}
-		if ((int)(Math.random()*10)==0)//in 9/10 der Faelle...
+		if ((int) (Math.random() * 10) == 0)// in 9/10 der Faelle...
 		{
-			if ((int) (Math.random() + 0.5) == 0)
-			{								//Integer Division... hier wird 0 rauskommen
+			if ((int) (Math.random() + 0.5) == 0) { // Integer Division... hier
+													// wird 0 rauskommen
 				momentum = Math.random() * (momentum / 5) + momentum;
-				if (momentum >= 1) //immer false
+				if (momentum >= 1) // immer false
 				{
 					momentum = Math.random() * 0.7;
-				}//Das momentum ändert sich also nie
-			} else
-			{//Gleiches wie oben
+				}// Das momentum ändert sich also nie
+			} else {// Gleiches wie oben
 				momentum = Math.random() * (momentum / 5) - momentum;
-				if (momentum <= 0)
-				{
+				if (momentum <= 0) {
 					momentum = Math.random() * 0.3;
 				}
 			}
 		}
-		if ((int)(Math.random()*10)==0)// 9/10... viel zu haeufig
+		if ((int) (Math.random() * 10) == 0)// 9/10... viel zu haeufig
 		{
-			if ((int) (Math.random() + 0.5) == 0)
-			{
+			if ((int) (Math.random() + 0.5) == 0) {
 				int layerso[] = layers;
-				layers = new int[layerso.length + 1]; //um  vergroessern
-				int insert = (int) (Math.random() * 100);//<100, mach lieber <=100..
-				int pos = (int) (Math.random() * (layers.length - 3)) + 1;//1<=pos<=array.length-3 (Math.random macht nur <1, aber nie 1!
-				for (int i = 0; i < pos; i++)
-				{
-					layers[i] = layerso[i]; //kopiere bis zu pos
+				layers = new int[layerso.length + 1]; // um vergroessern
+				int insert = (int) (Math.random() * 100);// <100, mach lieber
+															// <=100..
+				int pos = (int) (Math.random() * (layers.length - 3)) + 1;// 1<=pos<=array.length-3
+																			// (Math.random
+																			// macht
+																			// nur
+																			// <1,
+																			// aber
+																			// nie
+																			// 1!
+				for (int i = 0; i < pos; i++) {
+					layers[i] = layerso[i]; // kopiere bis zu pos
 				}
 				layers[pos] = insert;
-				for (int i = pos + 1; i < layers.length; i++)
-				{	//kopiere den rest
+				for (int i = pos + 1; i < layers.length; i++) { // kopiere den
+																// rest
 					layers[i] = layerso[i - 1];
 				}
-			} else
-			{
-				if (layers.length > 3)//wenn mehr als 3 layer...
+			} else {
+				if (layers.length > 3)// wenn mehr als 3 layer...
 				{
 					int layerso[] = layers;
-					layers = new int[layerso.length - 1];//um 1 verkleinern
+					layers = new int[layerso.length - 1];// um 1 verkleinern
 					int pos = (int) (Math.random() * (layerso.length - 2)) + 1;
-					for (int i = 0; i < pos; i++)
-					{
+					for (int i = 0; i < pos; i++) {
 						layers[i] = layerso[i];
 					}
-					for (int i = pos; i < layers.length; i++)
-					{
+					for (int i = pos; i < layers.length; i++) {
 						layers[i] = layerso[i + 1];
 					}
 				}
 
 			}
 		}
+		if ((int) (Math.random() * 10) == 0)
+		{
+			if ((int) (Math.random() + 0.5) == 0) {
+				maxIterations = (int) (Math.random() * 80) + maxIterations;
+			} else {
+				maxIterations = maxIterations - (int) (Math.random() * 80);
+				if (maxIterations <= 0) {
+					maxIterations = (int) (Math.random() * 200);
+				}
+			}
+		}
+		if ((int) (Math.random() * 20) == 0) {
+			int auswahl = (int) (Math.random() * 10);
+			switch (auswahl) {
+			case 0:
+				transferFunktion = TransferFunctionType.GAUSSIAN;
+				break;
+			case 1:
+				transferFunktion = TransferFunctionType.LINEAR;
+				break;
+			case 2:
+				transferFunktion = TransferFunctionType.LOG;
+				break;
+			case 3:
+				transferFunktion = TransferFunctionType.RAMP;
+				break;
+			case 4:
+				transferFunktion = TransferFunctionType.SGN;
+				break;
+			case 5:
+				transferFunktion = TransferFunctionType.SIGMOID;
+				break;
+			case 6:
+				transferFunktion = TransferFunctionType.SIN;
+				break;
+			case 7:
+				transferFunktion = TransferFunctionType.STEP;
+				break;
+			case 8:
+				transferFunktion = TransferFunctionType.TANH;
+				break;
+			case 9:
+				transferFunktion = TransferFunctionType.TRAPEZOID;
+				break;
+			}
+		}
 	}
 
 	@Override
-	public int compareTo(Genom arg0)
-	{
-		if (fitness < arg0.getFitness())
-		{
+	public int compareTo(Genom arg0) {
+		if (fitness < arg0.getFitness()) {
 			return 1;
 		}
-		if (fitness > arg0.getFitness())
-		{
+		if (fitness > arg0.getFitness()) {
 			return -1;
 		}
 		return 0;
 	}
 
-	void setFitness(int fitness)
-	{
+	void setFitness(int fitness) {
 		this.fitness = fitness;
 		isTested = true;
 	}
 
-	public static void main(String[] args)
-	{
+	public static void main(String[] args) {
 		Genom gen;
-		try
-		{
+		try {
 			gen = new Genom(new int[] { 100, 64, 36, 16, 4, 2 }, 0.001, 0.25,
 					Integer.MAX_VALUE, TransferFunctionType.TANH,
 					TrainingSetImport.importFromFile("spiel.log", 100, 2, ","));
 			System.out
 					.println(new FitnessTester().test(gen, Integer.MAX_VALUE));
-		} catch (NumberFormatException e)
-		{
+		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (FileNotFoundException e)
-		{
+		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IOException e)
-		{
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
