@@ -707,7 +707,10 @@ public class GUI extends JFrame {
 	        type, extention);
 	    chooser.setFileFilter(filter);
 	    chooser.showSaveDialog(chooser);
-	    return chooser.getSelectedFile().getAbsolutePath();
+	    if(chooser.getSelectedFile().isDirectory())
+	    	return "";
+	    String name=chooser.getSelectedFile().getAbsolutePath();
+	    return name.endsWith(extention)?name:(name+"."+extention);
 	}
 	
 	public String chooseFileToOpen(String type,String extention)
