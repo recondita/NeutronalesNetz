@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 
-import org.neuroph.core.data.DataSet;
-import org.neuroph.util.TrainingSetImport;
+import netz.SnakeTrainer;
+
 import org.neuroph.util.TransferFunctionType;
 
 import util.MyUtils;
@@ -23,22 +23,22 @@ public class EVKontrolle
 	private int generationCount = 0;
 	private int maxTrainTime;
 	private String saveDir;
-	private DataSet trainingSet;
+	private SnakeTrainer trainer;
 	final static int cores = Runtime.getRuntime().availableProcessors();
 
 	/**
-	 * Konstruktor für die EVKontrolle und Beginn der Evolution
+	 * Konstruktor fï¿½r die EVKontrolle und Beginn der Evolution
 	 * @param induvidien Die Anzahl der Individuen
 	 * @param anzTests Die Anzahl der Tests
 	 * @param maxTrainTime Die maximale Zeit die zum trainieren verwendet werden darf
-	 * @param saveDir Der Speicherort für die Genome
+	 * @param saveDir Der Speicherort fï¿½r die Genome
 	 * @param trainingSet Das gelogte Snake Spiel
 	 * @throws IOException
 	 */
 	public EVKontrolle(int induvidien, int anzTests, int maxTrainTime,
-			String saveDir, DataSet trainingSet) throws IOException
+			String saveDir, String trainingSet) throws IOException
 	{
-		this.trainingSet=trainingSet;
+		this.trainer=new SnakeTrainer(trainingSet,10,10);
 		this.saveDir = saveDir.endsWith(File.separator) ? saveDir
 				: (saveDir + File.separator);
 		this.anzTests = anzTests;
@@ -61,7 +61,7 @@ public class EVKontrolle
 			{
 				if (genFile.contains("Genom_"))
 				{
-					genomList.add(new Genom(MyUtils.readFile(genDir+genFile),this.trainingSet));
+					genomList.add(new Genom(MyUtils.readFile(genDir+genFile),this.trainer));
 				}
 			}
 			gen = genomList.toArray(new Genom[genomList.size()]);
@@ -76,7 +76,7 @@ public class EVKontrolle
 			for (int i = 0; i < gen.length; i++)
 			{
 				gen[i] = new Genom(new int[] { 100, 36, 4, 2 }, 0.001, 0.7,
-						200, TransferFunctionType.TANH,this.trainingSet);
+						200, TransferFunctionType.TANH,this.trainer);
 			}
 			mutation();
 			testeFitness();
@@ -175,7 +175,7 @@ public class EVKontrolle
 	}
 
 	/**
-	 * für mutlithreading
+	 * fï¿½r mutlithreading
 	 */
 	private class TestThread extends Thread
 	{
@@ -246,8 +246,7 @@ public class EVKontrolle
 	{
 		try
 		{
-			EVKontrolle eK = new EVKontrolle(16, 10000, 300000, "EV",TrainingSetImport.importFromFile("afterMove.log", 100, 2,
-					","));
+			EVKontrolle eK = new EVKontrolle(16, 10000, 300000, "EV","afterMove.log");
 			eK.entwickle(100);
 		} catch (Exception e)
 		{

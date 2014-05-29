@@ -1,8 +1,5 @@
 package genetik;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import netz.Autosaver;
 
 import org.neuroph.nnet.MultiLayerPerceptron;
@@ -49,21 +46,12 @@ public class GenNetz extends MultiLayerPerceptron
 		Autosaver aS=null;
 		if (maxTrainTime != 0)
 		{
-			Timer t = new Timer();
-			TimerTask tt = new TimerTask() {
 
-				@Override
-				public void run()
-				{
-					stopLearning();
-				}
-			};
-			t.schedule(tt, maxTrainTime);
 			if(autoSave&&speichern!=null)
 			{
 				aS=new Autosaver(this,speichern);
 			}
-			learn(gene.getDataSet());
+			gene.getTrainer().train(this, maxTrainTime);
 			if(aS!=null)
 				aS.stop();
 		}

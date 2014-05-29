@@ -3,8 +3,8 @@ package genetik;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import org.neuroph.core.data.DataSet;
-import org.neuroph.util.TrainingSetImport;
+import netz.SnakeTrainer;
+
 import org.neuroph.util.TransferFunctionType;
 /**
  * Speichert die Attribute eines neuronalen Netzwerks
@@ -17,7 +17,7 @@ public class Genom implements Comparable<Genom>
 	private double momentum;
 	private int maxIterations;
 	private TransferFunctionType transferFunktion;
-	private DataSet dataSet;
+	private SnakeTrainer trainer;
 	private int fitness;
 	private boolean isTested;
 
@@ -28,18 +28,18 @@ public class Genom implements Comparable<Genom>
 	 * @param momentum Das Momentum
 	 * @param maxIterations Die maximale Anzahl der Iterationen
 	 * @param transferFunktion Die Transferfunktion
-	 * @param trainingSet Das gespeicherte log
+	 * @param trainer Trainer der das Netz dann trainiert
 	 */
 	public Genom(int[] layers, double learningRate, double momentum,
 			int maxIterations, TransferFunctionType transferFunktion,
-			DataSet trainingSet)
+			SnakeTrainer trainer)
 	{
 		this.layers = layers;
 		this.learningRate = learningRate;
 		this.momentum = momentum;
 		this.maxIterations = maxIterations;
 		this.transferFunktion = transferFunktion;
-		this.dataSet = trainingSet;
+		this.trainer = trainer;
 	}
 
 	/**
@@ -63,16 +63,16 @@ public class Genom implements Comparable<Genom>
 				.getMaxIterations();
 		this.transferFunktion = gene[Math.random() * comfit <= maxfit ? 0 : 1]
 				.getTransferFunktion();
-		this.dataSet = gene[Math.random() * comfit <= maxfit ? 0 : 1]
-				.getDataSet();
+		this.trainer = gene[Math.random() * comfit <= maxfit ? 0 : 1]
+				.getTrainer();
 	}
 
 	/**
 	 * Erzeugt ein Genom aus einem String und dem DataSet
-	 * @param in Der String, der das Genom repräsentiert
+	 * @param in Der String, der das Genom reprï¿½sentiert
 	 * @param trainingSet Das gespeicherte log
 	 */
-	public Genom(String in, DataSet trainingSet)
+	public Genom(String in, SnakeTrainer trainer)
 	{
 		String[] part = in.split(",");
 		String[] lay = part[0].split("\\.");
@@ -89,7 +89,7 @@ public class Genom implements Comparable<Genom>
 		maxIterations = Integer.parseInt(part[3]);
 		transferFunktion = TransferFunctionType.valueOf(part[4]);
 		fitness = Integer.parseInt(part[5]);
-		dataSet = trainingSet;
+		this.trainer = trainer;
 	}
 
 	/*
@@ -149,12 +149,12 @@ public class Genom implements Comparable<Genom>
 	}
 
 	/**
-	 * Gibt das DataSet zurueck
-	 * @return Das DataSet
+	 * Gibt den verwendeten Trainer zurueck
+	 * @return Der Trainer
 	 */
-	public DataSet getDataSet()
+	public SnakeTrainer getTrainer()
 	{
-		return dataSet;
+		return trainer;
 	}
 
 	/**
@@ -184,7 +184,7 @@ public class Genom implements Comparable<Genom>
 	}
 
 	/**
-	 * Hier werden die Attribute zufällig verändert
+	 * Hier werden die Attribute zufï¿½llig verï¿½ndert
 	 */
 	public void mutation()
 	{
@@ -348,7 +348,7 @@ public class Genom implements Comparable<Genom>
 		Genom gen;
 		try
 		{
-			gen = new Genom("100.36.4.2,0.0020231507795779864,0.3833402030155874,MAX,TANH,3289866",TrainingSetImport.importFromFile("afterMove.log",100,2,","));//(new int[]{ 100, 64, 36, 16, 4, 2 }, 0.001, 0.25,
+			gen = new Genom("100.36.4.2,0.0020231507795779864,0.3833402030155874,MAX,TANH,3289866",new SnakeTrainer("afterMove.log",100,2));//(new int[]{ 100, 64, 36, 16, 4, 2 }, 0.001, 0.25,
 					//Integer.MAX_VALUE, TransferFunctionType.TANH,
 					//TrainingSetImport.importFromFile("spiel.log", 100, 2, ","));
 			//System.out.println(new FitnessTester().test(gen, Integer.MAX_VALUE));
