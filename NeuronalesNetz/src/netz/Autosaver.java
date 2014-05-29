@@ -10,10 +10,15 @@ public class Autosaver
 	final NeuralNetwork<?> nn;
 	final Thread thread;
 
-	public Autosaver(NeuralNetwork<?> neuralNetwork, String name)
+	/**
+	 * Speichert das Netz automatisch einmal pro Minute
+	 * @param neuralNetwork
+	 * @param file Pfad in den das Netz gespeichert wird
+	 */
+	public Autosaver(NeuralNetwork<?> neuralNetwork, String pfad)
 	{
 		this.nn = neuralNetwork;
-		this.file = name;
+		this.file = pfad;
 		thread = new Thread() {
 			@Override
 			public void run()
@@ -44,6 +49,9 @@ public class Autosaver
 		thread.start();
 	}
 
+	/**
+	 * Beendet den Autosaver
+	 */
 	public void stop()
 	{
 		weiter = false;
