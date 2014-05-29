@@ -35,7 +35,7 @@ public class FitnessTester extends SnakePlayer
 		GenNetz netz=new GenNetz(gen,30000L);
 		time=System.currentTimeMillis()-time;
 		int fitness=test(netz,tests);
-		fitness=(fitness*7-fitness*(int)(time/maxTrainTime))/7;
+		fitness=(fitness*5-fitness*(int)(time/maxTrainTime))/5;
 		return fitness;
 	}
 

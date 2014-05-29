@@ -286,7 +286,7 @@ public class Genom implements Comparable<Genom>
 					//Integer.MAX_VALUE, TransferFunctionType.TANH,
 					//TrainingSetImport.importFromFile("spiel.log", 100, 2, ","));
 			//System.out.println(new FitnessTester().test(gen, Integer.MAX_VALUE));
-			new GenNetz(gen,300000).save("EVProdukt.nn");
+			new GenNetz(gen,1200000).save("EVProdukt.nn");
 		} catch (NumberFormatException e)
 		{
 			// TODO Auto-generated catch block
