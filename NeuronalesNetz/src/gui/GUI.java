@@ -103,14 +103,8 @@ public class GUI extends JFrame {
 		JButton btnLogZuAufzeichnen = new JButton("...");
 		btnLogZuAufzeichnen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			    JFileChooser chooser = new JFileChooser();
-			    FileNameExtensionFilter filter = new FileNameExtensionFilter(
-			        "Snakelog", "slog");
-			    chooser.setFileFilter(filter);
-			    int returnVal = chooser.showSaveDialog(chooser);
-			    if(returnVal == JFileChooser.APPROVE_OPTION) {
-			       logZuAufzeichnen.setText(chooser.getSelectedFile().getAbsolutePath());
-			    }
+			       logZuAufzeichnen.setText(chooseFileToSave("Snakelog","slog"));
+			    
 			}
 		});
 		
@@ -165,14 +159,7 @@ public class GUI extends JFrame {
 		JButton btnGenomZuErstellen = new JButton("...");
 		btnGenomZuErstellen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			    JFileChooser chooser = new JFileChooser();
-			    FileNameExtensionFilter filter = new FileNameExtensionFilter(
-			        "Genom", "gen");
-			    chooser.setFileFilter(filter);
-			    int returnVal = chooser.showOpenDialog(chooser);
-			    if(returnVal == JFileChooser.APPROVE_OPTION) {
-			    	genomZuErstellen.setText(chooser.getSelectedFile().getAbsolutePath());
-			    }
+			    	genomZuErstellen.setText(chooseFileToOpen("Genom","gen"));
 			}
 		});
 		
@@ -227,14 +214,7 @@ public class GUI extends JFrame {
 		JButton btnSpeicherortZuErstellen = new JButton("...");
 		btnSpeicherortZuErstellen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			    JFileChooser chooser = new JFileChooser();
-			    FileNameExtensionFilter filter = new FileNameExtensionFilter(
-			        "Neuronal Network", "nnet");
-			    chooser.setFileFilter(filter);
-			    int returnVal = chooser.showSaveDialog(chooser);
-			    if(returnVal == JFileChooser.APPROVE_OPTION) {
-			       speicherortZuErstellen.setText(chooser.getSelectedFile().getAbsolutePath());
-			    }
+			       speicherortZuErstellen.setText(chooseFileToSave("Neuronal Network", "nnet"));
 			}
 		});
 		JButton btnErstellenZuErstellen = new JButton("Erstellen");
@@ -491,14 +471,7 @@ public class GUI extends JFrame {
 		JButton btnNetzwerkZuTrainieren = new JButton("...");
 		btnNetzwerkZuTrainieren.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			    JFileChooser chooser = new JFileChooser();
-			    FileNameExtensionFilter filter = new FileNameExtensionFilter(
-			        "Neuronal Network", "nnet");
-			    chooser.setFileFilter(filter);
-			    int returnVal = chooser.showOpenDialog(chooser);
-			    if(returnVal == JFileChooser.APPROVE_OPTION) {
-			    	netzwerkZuTrainieren.setText(chooser.getSelectedFile().getAbsolutePath());
-			    }
+			    	netzwerkZuTrainieren.setText(chooseFileToOpen("Neuronal Network", "nnet"));			    
 			}
 		});
 		
@@ -510,14 +483,7 @@ public class GUI extends JFrame {
 		JButton btnSpielaufzeichnungZuTrainieren = new JButton("...");
 		btnSpielaufzeichnungZuTrainieren.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			    JFileChooser chooser = new JFileChooser();
-			    FileNameExtensionFilter filter = new FileNameExtensionFilter(
-			        "SnakeLog", "slog");
-			    chooser.setFileFilter(filter);
-			    int returnVal = chooser.showOpenDialog(chooser);
-			    if(returnVal == JFileChooser.APPROVE_OPTION) {
-			    	spielaufzeichnungZuTrainieren.setText(chooser.getSelectedFile().getAbsolutePath());
-			    }
+			    	spielaufzeichnungZuTrainieren.setText(chooseFileToOpen("SnakeLog", "slog"));
 			}
 		});
 		
@@ -732,5 +698,25 @@ public class GUI extends JFrame {
 					.addContainerGap())
 		);
 		evolution.setLayout(gl_evolution);
+	}
+	
+	public String chooseFileToSave(String type,String extention)
+	{
+	    JFileChooser chooser = new JFileChooser();
+	    FileNameExtensionFilter filter = new FileNameExtensionFilter(
+	        type, extention);
+	    chooser.setFileFilter(filter);
+	    chooser.showSaveDialog(chooser);
+	    return chooser.getSelectedFile().getAbsolutePath();
+	}
+	
+	public String chooseFileToOpen(String type,String extention)
+	{
+	    JFileChooser chooser = new JFileChooser();
+	    FileNameExtensionFilter filter = new FileNameExtensionFilter(
+	        type, extention);
+	    chooser.setFileFilter(filter);
+	    chooser.showOpenDialog(chooser);
+	    return chooser.getSelectedFile().getAbsolutePath();
 	}
 }
