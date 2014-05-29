@@ -282,11 +282,11 @@ public class Genom implements Comparable<Genom>
 		Genom gen;
 		try
 		{
-			gen = new Genom(new int[] { 100, 64, 36, 16, 4, 2 }, 0.001, 0.25,
-					Integer.MAX_VALUE, TransferFunctionType.TANH,
-					TrainingSetImport.importFromFile("spiel.log", 100, 2, ","));
-			System.out
-					.println(new FitnessTester().test(gen, Integer.MAX_VALUE));
+			gen = new Genom("100.36.4.2,0.0020231507795779864,0.3833402030155874,228,TANH,3289866",TrainingSetImport.importFromFile("afterMove.log",100,2,","));//(new int[]{ 100, 64, 36, 16, 4, 2 }, 0.001, 0.25,
+					//Integer.MAX_VALUE, TransferFunctionType.TANH,
+					//TrainingSetImport.importFromFile("spiel.log", 100, 2, ","));
+			//System.out.println(new FitnessTester().test(gen, Integer.MAX_VALUE));
+			new GenNetz(gen,300000).save("EVProdukt.nn");
 		} catch (NumberFormatException e)
 		{
 			// TODO Auto-generated catch block
