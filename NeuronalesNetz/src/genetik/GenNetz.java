@@ -12,16 +12,32 @@ public class GenNetz extends MultiLayerPerceptron
 {
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Erstellt aus dem Genom ein Neuronales Netz und Trainiert es 5 Minuten lang
+	 * @param gene Genom aus dem das Netz generiert wird.
+	 */
 	public GenNetz(Genom gene)
 	{
 		this(gene, 30000L);
 	}
 
+	/**
+	 * Erstellt aus dem Genom ein Neuronales Netz
+	 * @param gene Genom aus dem das Netz generiert wird
+	 * @param maxTrainTime Zeit die dem Netz maximal zum Trainieren zur Verfuegung stehen
+	 */
 	public GenNetz(Genom gene, long maxTrainTime)
 	{
 		this(gene, maxTrainTime, null, false);
 	}
 
+	/**
+	 * Erstellt aus dem Genom ein Neuronales Netz
+	 * @param gene Genom aus dem das Netz generiert wird
+	 * @param maxTrainTime Zeit die dem Netz maximal zum Trainieren zur Verfuegung stehen
+	 * @param speichern Pfad wohin es am Ende gespeichert wird
+	 * @param autoSave während dem trainieren automatisch zwischenspeichern?
+	 */
 	public GenNetz(Genom gene, long maxTrainTime, String speichern,
 			boolean autoSave)
 	{

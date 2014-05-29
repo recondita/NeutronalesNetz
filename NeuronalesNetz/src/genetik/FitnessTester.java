@@ -66,7 +66,7 @@ public class FitnessTester extends SnakePlayer
 	 */
 	public int test(Genom gen)
 	{
-		return test(new GenNetz(gen));
+		return test(new GenNetz(gen,maxTrainTime));
 	}
 
 	/**
@@ -82,7 +82,7 @@ public class FitnessTester extends SnakePlayer
 	public int testWerteZeit(Genom gen)
 	{
 		long time = System.currentTimeMillis();
-		GenNetz netz = new GenNetz(gen, 30000L);
+		GenNetz netz = new GenNetz(gen, maxTrainTime);
 		time = System.currentTimeMillis() - time;
 		int fitness = test(netz);
 		fitness = (fitness * 5 - fitness * (int) (time / maxTrainTime)) / 5;
