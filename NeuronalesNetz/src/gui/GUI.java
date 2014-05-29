@@ -528,10 +528,11 @@ public class GUI extends JFrame {
 		btnStartZuTrainieren.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			    final NeuralNetwork<?> nn=NeuralNetwork.createFromFile(netzwerkZuTrainieren.getText());
-			    ((MomentumBackpropagation)nn.getLearningRule()).setMaxIterations("".equals(maxIterationsZuTrainieren.getText())?Integer.MAX_VALUE:Integer.parseInt(maxIterationsZuTrainieren.getText()));
+			    ((MomentumBackpropagation) nn.getLearningRule()).setMaxIterations("".equals(maxIterationsZuTrainieren.getText())?Integer.MAX_VALUE:Integer.parseInt(maxIterationsZuTrainieren.getText()));
 			    try
 				{
 					new SnakeTrainer(spielaufzeichnungZuTrainieren.getText(),nn.getInputsCount(),nn.getOutputsCount()).train(nn,Integer.parseInt(maxTrainingZuTrainieren.getText())*1000);
+					nn.save(netzwerkZuTrainieren.getText());
 				} catch (NumberFormatException e)
 				{
 					JOptionPane.showMessageDialog(null, "Fehlerhafte Eingabe", "Fehler",JOptionPane.WARNING_MESSAGE);

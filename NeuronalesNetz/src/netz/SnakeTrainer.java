@@ -42,6 +42,7 @@ public class SnakeTrainer
 		netz.learn(trainingSet);
 		System.out.println("fertig");
 	}
+	
 
 	public static void main(String[] agrs)
 	{
