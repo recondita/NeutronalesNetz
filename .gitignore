@@ -1,5 +1,5 @@
 *.class
-
+/NeuronalesNetz/EV
 # Package Files #
 *.war
 *.ear
