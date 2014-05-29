@@ -38,6 +38,7 @@ import org.neuroph.util.TrainingSetImport;
 import org.neuroph.util.TransferFunctionType;
 
 import snakeCOM.SnakeLogger;
+import snakeCOM.SnakePlayer;
 import util.MyUtils;
 
 public class GUI extends JFrame {
@@ -103,7 +104,9 @@ public class GUI extends JFrame {
 		JButton btnLogZuAufzeichnen = new JButton("...");
 		btnLogZuAufzeichnen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			       logZuAufzeichnen.setText(chooseFileToSave("Snakelog","slog"));
+				String pfad = chooseFileToSave("Snakelog","slog");
+				if(pfad != null)
+			    logZuAufzeichnen.setText(pfad);
 			    
 			}
 		});
@@ -159,7 +162,9 @@ public class GUI extends JFrame {
 		JButton btnGenomZuErstellen = new JButton("...");
 		btnGenomZuErstellen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			    	genomZuErstellen.setText(chooseFileToOpen("Genom","gen"));
+					String pfad = chooseFileToOpen("Genom","gen");
+					if(pfad != null)
+			    	genomZuErstellen.setText(pfad);
 			}
 		});
 		
@@ -186,6 +191,13 @@ public class GUI extends JFrame {
 		spielaufzeichnungZuErstellen.setColumns(10);
 		
 		final JButton btnSpielaufzeichnungZuErstellen = new JButton("...");
+		btnSpielaufzeichnungZuErstellen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String pfad = chooseFileToOpen("Snakelog","slog");
+				if(pfad != null)
+				spielaufzeichnungZuErstellen.setText(pfad);
+			}
+		});
 		
 		JLabel lblSpielaufzeichnung = new JLabel("Spielaufzeichnung:");
 		
@@ -214,7 +226,9 @@ public class GUI extends JFrame {
 		JButton btnSpeicherortZuErstellen = new JButton("...");
 		btnSpeicherortZuErstellen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			       speicherortZuErstellen.setText(chooseFileToSave("Neuronal Network", "nnet"));
+				String pfad = chooseFileToSave("Neuronal Network","nnet");
+				if(pfad != null)
+			    speicherortZuErstellen.setText(pfad);
 			}
 		});
 		JButton btnErstellenZuErstellen = new JButton("Erstellen");
@@ -232,7 +246,7 @@ public class GUI extends JFrame {
 					layer[i]=Integer.parseInt(layerStr[i]);
 				if(chckbxTrainierenZuErstellen.isSelected())
 				{
-					new GenNetz(new Genom(layer,Double.parseDouble(learningRateZuErstellen.getText()),Double.parseDouble(momentumZuErstellen.getText()),"".equals(maxIterationsZuErstellen.getText())?Integer.MAX_VALUE:Integer.parseInt(maxIterationsZuErstellen.getText()), TransferFunctionType.valueOf(transferFunktion.getName()),TrainingSetImport.importFromFile(spielaufzeichnungZuErstellen.getText(),layer[0],layer[layer.length-1],",")),Integer.parseInt(maxTrainingZuErstellen.getText())*1000,speicherortZuErstellen.getText(),chckbxAutosaveZuErstellen.isSelected());					
+					new GenNetz(new Genom(layer,Double.parseDouble(learningRateZuErstellen.getText()),Double.parseDouble(momentumZuErstellen.getText()),"".equals(maxIterationsZuErstellen.getText())?Integer.MAX_VALUE:Integer.parseInt(maxIterationsZuErstellen.getText()), (TransferFunctionType)transferFunktion.getSelectedItem(),TrainingSetImport.importFromFile(spielaufzeichnungZuErstellen.getText(),layer[0],layer[layer.length-1],",")),Integer.parseInt(maxTrainingZuErstellen.getText())*1000,speicherortZuErstellen.getText(),chckbxAutosaveZuErstellen.isSelected());					
 				}
 				else
 				{
@@ -252,6 +266,13 @@ public class GUI extends JFrame {
 		speicherortZuAlsGenomSpeichern.setColumns(10);
 		
 		final JButton btnSpeicherortZuAlsGenomSpeichern = new JButton("...");
+		btnSpeicherortZuAlsGenomSpeichern.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String pfad = chooseFileToSave("Geonom","gen");
+				if(pfad != null)
+			    speicherortZuAlsGenomSpeichern.setText(pfad);
+			}
+		});
 		
 		final JButton btnAlsGenomSpeichern = new JButton("Als Genom speichern");
 		btnAlsGenomSpeichern.addActionListener(new ActionListener(){
@@ -471,7 +492,9 @@ public class GUI extends JFrame {
 		JButton btnNetzwerkZuTrainieren = new JButton("...");
 		btnNetzwerkZuTrainieren.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			    	netzwerkZuTrainieren.setText(chooseFileToOpen("Neuronal Network", "nnet"));			    
+				String pfad = chooseFileToOpen("Neuronal Network","nnet");
+				if(pfad != null)
+				netzwerkZuTrainieren.setText(pfad);			    
 			}
 		});
 		
@@ -483,7 +506,9 @@ public class GUI extends JFrame {
 		JButton btnSpielaufzeichnungZuTrainieren = new JButton("...");
 		btnSpielaufzeichnungZuTrainieren.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			    	spielaufzeichnungZuTrainieren.setText(chooseFileToOpen("SnakeLog", "slog"));
+				String pfad = chooseFileToOpen("SnakeLog","slog");
+				if(pfad != null)
+				spielaufzeichnungZuTrainieren.setText(pfad);
 			}
 		});
 		
@@ -606,8 +631,20 @@ public class GUI extends JFrame {
 		JLabel lblNetzwerkAuswhlen = new JLabel("Netzwerk ausw\u00E4hlen:");
 		
 		JButton btnNetzwerkZuSpielen = new JButton("...");
+		btnNetzwerkZuSpielen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String pfad = chooseFileToOpen("Neuronal Network","nnet");
+				if(pfad != null)
+			    netzwerkZuSpielen.setText(pfad);
+			}
+		});
 		
 		JButton btnStartZuSpielen = new JButton("Start");
+		btnStartZuSpielen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new SnakePlayer(NeuralNetwork.createFromFile(netzwerkZuSpielen.getText())).start();;
+			}
+		});
 		GroupLayout gl_spielen = new GroupLayout(spielen);
 		gl_spielen.setHorizontalGroup(
 			gl_spielen.createParallelGroup(Alignment.LEADING)
@@ -706,11 +743,15 @@ public class GUI extends JFrame {
 	    FileNameExtensionFilter filter = new FileNameExtensionFilter(
 	        type, extention);
 	    chooser.setFileFilter(filter);
-	    chooser.showSaveDialog(chooser);
+	    int returnVal = chooser.showSaveDialog(chooser);
+	    if(returnVal == JFileChooser.APPROVE_OPTION) {
 	    if(chooser.getSelectedFile().isDirectory())
-	    	return "";
+	    	return null;
 	    String name=chooser.getSelectedFile().getAbsolutePath();
 	    return name.endsWith(extention)?name:(name+"."+extention);
+	    } else {
+	    	return null;
+	    }
 	}
 	
 	public String chooseFileToOpen(String type,String extention)
@@ -719,7 +760,12 @@ public class GUI extends JFrame {
 	    FileNameExtensionFilter filter = new FileNameExtensionFilter(
 	        type, extention);
 	    chooser.setFileFilter(filter);
-	    chooser.showOpenDialog(chooser);
-	    return chooser.getSelectedFile().getAbsolutePath();
+	    int returnVal = chooser.showOpenDialog(chooser);
+	    if(returnVal == JFileChooser.APPROVE_OPTION) {
+	    	return chooser.getSelectedFile().getAbsolutePath();
+	    } else {
+	    	return null;
+	    }
+	    
 	}
 }
