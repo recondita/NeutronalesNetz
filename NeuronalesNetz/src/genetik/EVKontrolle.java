@@ -11,7 +11,9 @@ import org.neuroph.util.TrainingSetImport;
 import org.neuroph.util.TransferFunctionType;
 
 import util.MyUtils;
-
+/**
+ * Kontrolliert die Evolution
+ */
 public class EVKontrolle
 {
 	private Genom[] gen;
@@ -24,6 +26,15 @@ public class EVKontrolle
 	private DataSet trainingSet;
 	final static int cores = Runtime.getRuntime().availableProcessors();
 
+	/**
+	 * Konstruktor für die EVKontrolle und Beginn der Evolution
+	 * @param induvidien Die Anzahl der Individuen
+	 * @param anzTests Die Anzahl der Tests
+	 * @param maxTrainTime Die maximale Zeit die zum trainieren verwendet werden darf
+	 * @param saveDir Der Speicherort für die Genome
+	 * @param trainingSet Das gelogte Snake Spiel
+	 * @throws IOException
+	 */
 	public EVKontrolle(int induvidien, int anzTests, int maxTrainTime,
 			String saveDir, DataSet trainingSet) throws IOException
 	{
@@ -72,6 +83,10 @@ public class EVKontrolle
 		}
 	}
 
+	/**
+	 * Zuechtet Generationen
+	 * @param anzGenerationen Die Anzahl der Generationen die gezuechtet werden sollen
+	 */
 	public void entwickle(int anzGenerationen)
 	{
 		for (int i = 0; i < anzGenerationen; i++)
@@ -86,6 +101,9 @@ public class EVKontrolle
 		}
 	}
 
+	/**
+	 * @return Einen String zur Uebersicht
+	 */
 	public String toString()
 	{
 		StringBuilder sb = new StringBuilder();
@@ -97,6 +115,9 @@ public class EVKontrolle
 		return sb.toString();
 	}
 
+	/**
+	 * Kombiniert die Layer neu
+	 */
 	private void rekombination()
 	{
 		java.util.Arrays.sort(gen);
@@ -114,6 +135,9 @@ public class EVKontrolle
 		}
 	}
 
+	/**
+	 * Mutiert die Genome
+	 */
 	private void mutation()
 	{
 		java.util.Arrays.sort(gen);
@@ -125,6 +149,9 @@ public class EVKontrolle
 		}
 	}
 
+	/**
+	 * Testet die Fitness 
+	 */
 	private void testeFitness()
 	{
 		LinkedList<Integer> jobs = new LinkedList<Integer>();
@@ -147,6 +174,9 @@ public class EVKontrolle
 			}
 	}
 
+	/**
+	 * für mutlithreading
+	 */
 	private class TestThread extends Thread
 	{
 		private LinkedList<Integer> jobs;
@@ -175,6 +205,9 @@ public class EVKontrolle
 
 	}
 
+	/**
+	 * Speichert die aktuelle Generation
+	 */
 	public void speicherGeneration()
 	{
 		java.util.Arrays.sort(gen);
