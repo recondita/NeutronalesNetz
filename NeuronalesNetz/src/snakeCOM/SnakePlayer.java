@@ -4,6 +4,9 @@ import java.io.File;
 
 import org.neuroph.core.NeuralNetwork;
 
+/**
+ * Laesst ein Neuronales Netz Snake Spielen
+ */
 public class SnakePlayer extends SnakeControl
 {
 

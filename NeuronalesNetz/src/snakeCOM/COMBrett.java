@@ -16,7 +16,7 @@ public class COMBrett extends Spielbrett
 	/**
 	 * SnakeControl Objekt das alles steuert.
 	 */
-	private SnakeControl sl;
+	private SnakeControl sC;
 
 	/**
 	 * Soll die normale im Snake eingebaute Verlorenmeldung aufgerufen werden?
@@ -37,7 +37,7 @@ public class COMBrett extends Spielbrett
 	public COMBrett(SnakeControl snakeControl)
 	{
 		super(10, 10);
-		this.sl = snakeControl;
+		this.sC = snakeControl;
 	}
 
 	/**
@@ -53,7 +53,7 @@ public class COMBrett extends Spielbrett
 	{
 		super(10, 10);
 		this.repaint = repaint;
-		this.sl = snakeControl;
+		this.sC = snakeControl;
 	}
 
 	/**
@@ -63,7 +63,7 @@ public class COMBrett extends Spielbrett
 	@Override
 	public void newSnake()
 	{
-		snake = sl.newSnake();
+		snake = sC.newSnake();
 	}
 
 	/**
@@ -142,7 +142,7 @@ public class COMBrett extends Spielbrett
 	@Override
 	public void verloren(int laenge)
 	{
-		sl.verloren(laenge);
+		sC.verloren(laenge);
 		if (superVerloren)
 			super.verloren(laenge);
 		else

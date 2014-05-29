@@ -8,19 +8,44 @@ import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
 
+/**
+ * Zeichnet das SNake Spiel auf
+ */
 public class SnakeLogger extends SnakeControl
 {
+	/**
+	 * Hier werden die Zustaende zusammen mit der Richtung zwischengespeichert
+	 */
 	private LinkedList<String> templog;
+
+	/**
+	 * Zwischenspeichern den Zustandes des Feldes.
+	 */
 	private StringBuffer move = null;
+
+	/**
+	 * Hier rein wird die Spielaufzeichnung gespeichert
+	 */
 	private File log;
 
+	/**
+	 * Konstruktor
+	 * 
+	 * @param log
+	 *            hier rein soll die AUfzeichnung gespeichert werden, falls die
+	 *            Datei schon existiert, wird die neue Aufzeichnung angehaengt
+	 */
 	public SnakeLogger(File log)
 	{
-		this.log=log;
+		this.log = log;
 		templog = new LinkedList<String>();
 		gui.start();
 	}
 
+	/**
+	 * Zeichnet jeden Zustand und die darauf folgende vom Spieler gewaehlte
+	 * Richtung
+	 */
 	public void afterMove()
 	{
 		if (move == null)
@@ -47,11 +72,16 @@ public class SnakeLogger extends SnakeControl
 		}
 	}
 
+	/**
+	 * Schreibt die Aufzeichnung in eine Datei, ohne die letzten paar Schritte
+	 * @param wegschneiden Anzahl der Schritte (von hinten) die nicht gespeichert werden sollen
+	 */
 	public void speichern(int wegschneiden)
 	{
 		try
 		{
-			BufferedWriter writer = new BufferedWriter(new FileWriter(log, true));
+			BufferedWriter writer = new BufferedWriter(
+					new FileWriter(log, true));
 			for (int i = 0; i < wegschneiden && !templog.isEmpty(); i++)
 				templog.removeLast();
 			while (!templog.isEmpty())
@@ -65,6 +95,11 @@ public class SnakeLogger extends SnakeControl
 		}
 	}
 
+	/**
+	 * Zeigt einen Dialog an ob das aufgzeichnete Spiel gespeichert werden soll.
+	 * Wird automatisch aufgerufen wenn das Spiel verloren wurde
+	 * @param laenge So viele Aepfel wurden gefressen
+	 */
 	@Override
 	public void verloren(int laenge)
 	{
@@ -91,9 +126,9 @@ public class SnakeLogger extends SnakeControl
 		move = null;
 
 	}
-	
+
 	public static void main(String[] args)
 	{
-		new SnakeLogger(new File("doppelMatrix.log"));
+		new SnakeLogger(new File(args[0]));
 	}
 }
