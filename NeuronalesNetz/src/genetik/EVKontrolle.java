@@ -1,6 +1,5 @@
 package genetik;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -205,10 +204,7 @@ public class EVKontrolle
 		{
 			try
 			{
-				BufferedWriter bW = new BufferedWriter(new FileWriter(new File(
-						generationDir.toString() + i)));
-				bW.write(gen[i].toString());
-				bW.close();
+				MyUtils.writeFile(gen[i].toString(), generationDir.toString() + i+".gen");
 			} catch (IOException e)
 			{
 				e.printStackTrace();
