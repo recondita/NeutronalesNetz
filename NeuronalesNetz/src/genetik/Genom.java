@@ -368,6 +368,9 @@ public class Genom implements Comparable<Genom>
 		}
 	}
 
+	/**
+	 * Gibr einen String zurueck, der das Genom mit seinen Attributen repraesentiert
+	 */
 	public String toString()
 	{
 		String ret = "";
