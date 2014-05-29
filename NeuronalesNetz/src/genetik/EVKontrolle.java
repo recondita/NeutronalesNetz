@@ -132,6 +132,7 @@ public class EVKontrolle
 
 	private void mutation()
 	{
+		java.util.Arrays.sort(gen);
 		for (int i = gen.length / 4; i < gen.length; i++) // die oberen 20%
 															// sollen nicht
 															// mutieren (elite)
@@ -192,6 +193,7 @@ public class EVKontrolle
 
 	public void speicherGeneration()
 	{
+		java.util.Arrays.sort(gen);
 		StringBuffer generationDir = new StringBuffer();
 		generationDir.append(saveDir);
 		generationDir.append("Generation_");
