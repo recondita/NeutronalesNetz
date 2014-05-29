@@ -1,7 +1,6 @@
 package genetik;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -189,10 +188,7 @@ public class EVKontrolle
 		genDir.mkdir();
 		try
 		{
-			FileWriter genWriter = new FileWriter(new File(saveDir
-					+ "Generation.info"));
-			genWriter.write(genDir.getName());
-			genWriter.close();
+			MyUtils.writeFile(genDir.getName(),saveDir+ "Generation.info");
 		} catch (IOException e1)
 		{
 			e1.printStackTrace();
