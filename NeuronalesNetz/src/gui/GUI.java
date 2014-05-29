@@ -234,7 +234,7 @@ public class GUI extends JFrame {
 		});
 		JButton btnErstellenZuErstellen = new JButton("Erstellen");
 		
-		JCheckBox chckbxAutosaveZuErstellen = new JCheckBox("Autosave");
+		final JCheckBox chckbxAutosaveZuErstellen = new JCheckBox("Autosave");
 		
 		btnErstellenZuErstellen.addActionListener(new ActionListener(){
 
@@ -247,11 +247,11 @@ public class GUI extends JFrame {
 					layer[i]=Integer.parseInt(layerStr[i]);
 				if(chckbxTrainierenZuErstellen.isSelected())
 				{
-					new GenNetz(new Genom(layer,Double.parseDouble(learningRateZuErstellen.getText()),Double.parseDouble(momentumZuErstellen.getText()),"".equals(maxIterationsZuErstellen.getText())?Integer.MAX_VALUE:Integer.parseInt(maxIterationsZuErstellen.getText()), TransferFunctionType.valueOf(transferFunktion.getName()),TrainingSetImport.importFromFile(spielaufzeichnungZuErstellen.getText(),layer[0],layer[layer.length-1],",")));					
+					new GenNetz(new Genom(layer,Double.parseDouble(learningRateZuErstellen.getText()),Double.parseDouble(momentumZuErstellen.getText()),"".equals(maxIterationsZuErstellen.getText())?Integer.MAX_VALUE:Integer.parseInt(maxIterationsZuErstellen.getText()), TransferFunctionType.valueOf(transferFunktion.getName()),TrainingSetImport.importFromFile(spielaufzeichnungZuErstellen.getText(),layer[0],layer[layer.length-1],",")),Integer.parseInt(maxTrainingZuErstellen.getText())*1000,speicherortZuErstellen.getText(),chckbxAutosaveZuErstellen.isSelected());					
 				}
 				else
 				{
-					new GenNetz(new Genom(layer,Double.parseDouble(learningRateZuErstellen.getText()),Double.parseDouble(momentumZuErstellen.getText()),Integer.MAX_VALUE, TransferFunctionType.valueOf(transferFunktion.getName()),null),0,null,false);
+					new GenNetz(new Genom(layer,Double.parseDouble(learningRateZuErstellen.getText()),Double.parseDouble(momentumZuErstellen.getText()),Integer.MAX_VALUE, TransferFunctionType.valueOf(transferFunktion.getName()),null),0,speicherortZuErstellen.getText(),false);
 				}
 			}catch( Exception e){JOptionPane.showMessageDialog(null, "Fehlerhafte Eingabe", "Fehler",JOptionPane.WARNING_MESSAGE);}
 			}
