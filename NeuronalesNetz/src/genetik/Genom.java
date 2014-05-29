@@ -6,12 +6,12 @@ import java.io.IOException;
 import org.neuroph.core.data.DataSet;
 import org.neuroph.util.TrainingSetImport;
 import org.neuroph.util.TransferFunctionType;
-
+/**
+ * Speichert die Attribute eines neuronalen Netzwerks
+ *
+ */
 public class Genom implements Comparable<Genom>
 {
-	/**
-	 * [0] muss zum feld passen und [length-1] muss 2 sein!
-	 */
 	private int[] layers;
 	private double learningRate;
 	private double momentum;
@@ -21,16 +21,15 @@ public class Genom implements Comparable<Genom>
 	private int fitness;
 	private boolean isTested;
 
-	public boolean isTested()
-	{
-		return isTested;
-	}
-
-	public void setTested()
-	{
-		this.isTested = true;
-	}
-
+	/**
+	 * Erzeut ein Genom mit angegebenen Attribute
+	 * @param layers Die Ebenen
+	 * @param learningRate Die Lernrate
+	 * @param momentum Das Momentum
+	 * @param maxIterations Die maximale Anzahl der Iterationen
+	 * @param transferFunktion Die Transferfunktion
+	 * @param trainingSet Das gespeicherte log
+	 */
 	public Genom(int[] layers, double learningRate, double momentum,
 			int maxIterations, TransferFunctionType transferFunktion,
 			DataSet trainingSet)
@@ -43,6 +42,11 @@ public class Genom implements Comparable<Genom>
 		this.dataSet = trainingSet;
 	}
 
+	/**
+	 * Verbinde 2 Genome
+	 * @param gen1 Das erste Genom
+	 * @param gen2 Das zweite Genom
+	 */
 	public Genom(Genom gen1, Genom gen2)
 	{
 		Genom[] gene = { gen1, gen2 };
@@ -63,6 +67,11 @@ public class Genom implements Comparable<Genom>
 				.getDataSet();
 	}
 
+	/**
+	 * Erzeugt ein Genom aus einem String und dem DataSet
+	 * @param in Der String, der das Genom repräsentiert
+	 * @param trainingSet Das gespeicherte log
+	 */
 	public Genom(String in, DataSet trainingSet)
 	{
 		String[] part = in.split(",");
@@ -94,16 +103,28 @@ public class Genom implements Comparable<Genom>
 	 * gene.length)].getDataSet(); }
 	 */
 
+	/**
+	 * Gibt die Layer zurueck
+	 * @return Die Layer als int[]
+	 */
 	public int[] getLayers()
 	{
 		return layers;
 	}
 
+	/**
+	 * Gibt die LearningRate zurueck
+	 * @return Die LearningRate als double
+	 */
 	public double getLearningRate()
 	{
 		return learningRate;
 	}
 
+	/**
+	 * Gibt das Momentum zurueck
+	 * @return Dass Momentum als double
+	 */
 	public double getMomentum()
 	{
 		return momentum;
@@ -127,6 +148,16 @@ public class Genom implements Comparable<Genom>
 	public int getFitness()
 	{
 		return fitness;
+	}
+
+	public boolean isTested()
+	{
+		return isTested;
+	}
+
+	public void setTested()
+	{
+		this.isTested = true;
 	}
 
 	public void mutation()
