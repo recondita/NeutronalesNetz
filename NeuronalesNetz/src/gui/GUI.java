@@ -24,6 +24,7 @@ import java.awt.Dimension;
 
 public class GUI extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField logZuAufzeichnen;
 	private JTextField genomZuErstellen;
@@ -137,8 +138,8 @@ public class GUI extends JFrame {
 		
 		JButton btnLadenZuErstellen = new JButton("Laden");
 		
-		JComboBox transferFunktion = new JComboBox();
-		transferFunktion.setModel(new DefaultComboBoxModel(TransferFunctionType.values()));
+		JComboBox<TransferFunctionType> transferFunktion = new JComboBox<TransferFunctionType>();
+		transferFunktion.setModel(new DefaultComboBoxModel<TransferFunctionType>(TransferFunctionType.values()));
 		
 		JLabel lblTransferfunktion = new JLabel("Transferfunktion:");
 		
