@@ -1,5 +1,6 @@
 package gui;
 
+import genetik.GenNetz;
 import genetik.Genom;
 
 import java.awt.BorderLayout;
@@ -27,6 +28,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import org.neuroph.util.TrainingSetImport;
 import org.neuroph.util.TransferFunctionType;
 
 import snakeCOM.SnakeLogger;
@@ -216,12 +218,47 @@ public class GUI extends JFrame {
 		
 		speicherortZuErstellen = new JTextField();
 		speicherortZuErstellen.setColumns(10);
-		
+				
 		JButton btnSpeicherortZuErstellen = new JButton("...");
-		
+		btnSpeicherortZuErstellen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			    JFileChooser chooser = new JFileChooser();
+			    FileNameExtensionFilter filter = new FileNameExtensionFilter(
+			        "Neuronal Network", "nnet");
+			    chooser.setFileFilter(filter);
+			    int returnVal = chooser.showSaveDialog(chooser);
+			    if(returnVal == JFileChooser.APPROVE_OPTION) {
+			       spielaufzeichnungZuErstellen.setText(chooser.getSelectedFile().getAbsolutePath());
+			    }
+			}
+		});
 		JButton btnErstellenZuErstellen = new JButton("Erstellen");
 		
 		JCheckBox chckbxAutosaveZuErstellen = new JCheckBox("Autosave");
+		
+		btnErstellenZuErstellen.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				boolean train=chckbxTrainierenZuErstellen.isSelected();
+				if(train)
+				{
+					try{
+						String[] layerStr=layerZuErstellen.getText().split(" ");
+						int[] layer=new int[layerStr.length];
+						for(int i=0; i<layerStr.length; i++)
+							layer[i]=Integer.parseInt(layerStr[i]);
+						new GenNetz(new Genom(layer,Double.parseDouble(learningRateZuErstellen.getText()),Double.parseDouble(momentumZuErstellen.getText()),"".equals(maxIterationsZuErstellen.getText())?Integer.MAX_VALUE:Integer.parseInt(maxIterationsZuErstellen.getText()), TransferFunctionType.valueOf(transferFunktion.getName()),TrainingSetImport.importFromFile(spielaufzeichnungZuErstellen.getText(),layer[0],layer[layer.length-1],",")));
+					}catch( Exception e){JOptionPane.showMessageDialog(null, "Fehlerhafte Eingabe", "Fehler",JOptionPane.WARNING_MESSAGE);}
+				}
+					else
+					{
+						
+					}
+			}
+			
+		});
 		
 		JLabel lblAlsGenomSpeichern = new JLabel("Als Genom speichern:");
 		
@@ -234,6 +271,21 @@ public class GUI extends JFrame {
 		
 		JButton btnAlsGenomSpeichern = new JButton("Als Genom speichern");
 		
+		chckbxTrainierenZuErstellen.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				boolean active=chckbxTrainierenZuErstellen.isSelected();
+				maxIterationsZuErstellen.setEnabled(active);
+				learningRateZuErstellen.setEnabled(active);
+				momentumZuErstellen.setEnabled(active);
+				speicherortZuAlsGenomSpeichern.setEnabled(active);
+				maxTrainingZuErstellen.setEnabled(active);
+				spielaufzeichnungZuErstellen.setEnabled(active);
+			}
+			
+		});
 		btnLadenZuErstellen.addActionListener(new ActionListener(){
 
 			@Override

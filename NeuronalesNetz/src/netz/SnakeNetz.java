@@ -14,7 +14,7 @@ public class SnakeNetz extends MultiLayerPerceptron
 		super(TransferFunctionType.TANH,layers);
 
 	}
-
+	
 	public static SnakeNetz newNetz()//int breite, int laenge)
 	{
 		/*

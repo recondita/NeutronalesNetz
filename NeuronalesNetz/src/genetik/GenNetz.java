@@ -3,6 +3,8 @@ package genetik;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import netz.Autosaver;
+
 import org.neuroph.nnet.MultiLayerPerceptron;
 import org.neuroph.nnet.learning.MomentumBackpropagation;
 
@@ -17,11 +19,18 @@ public class GenNetz extends MultiLayerPerceptron
 
 	public GenNetz(Genom gene, long maxTrainTime)
 	{
+		this(gene, maxTrainTime, null, false);
+	}
+
+	public GenNetz(Genom gene, long maxTrainTime, String speichern,
+			boolean autoSave)
+	{
 		super(gene.getTransferFunktion(), gene.getLayers());
 		MomentumBackpropagation learningRule = (MomentumBackpropagation) getLearningRule();
 		learningRule.setLearningRate(gene.getLearningRate());
 		learningRule.setMomentum(gene.getMomentum());
 		learningRule.setMaxIterations(gene.getMaxIterations());
+		Autosaver aS=null;
 		if (maxTrainTime != 0)
 		{
 			Timer t = new Timer();
@@ -34,8 +43,16 @@ public class GenNetz extends MultiLayerPerceptron
 				}
 			};
 			t.schedule(tt, maxTrainTime);
+			if(autoSave&&speichern!=null)
+			{
+				aS=new Autosaver(this,speichern);
+			}
+			learn(gene.getDataSet());
+			if(aS!=null)
+				aS.stop();
 		}
-		learn(gene.getDataSet());
+		if (speichern != null)
+			save(speichern);
 	}
 
 }
