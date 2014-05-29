@@ -1,36 +1,36 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import genetik.Genom;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.JFileChooser;
-import javax.swing.JTabbedPane;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JTextField;
 import javax.swing.JButton;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JLabel;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.neuroph.util.TransferFunctionType;
 
 import snakeCOM.SnakeLogger;
-
-import javax.swing.JCheckBox;
-import javax.swing.JTextArea;
-
-import java.awt.Dimension;
-import java.io.File;
+import util.MyUtils;
 
 public class GUI extends JFrame {
 
@@ -158,12 +158,20 @@ public class GUI extends JFrame {
 		JButton btnGenomZuErstellen = new JButton("...");
 		btnGenomZuErstellen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+			    JFileChooser chooser = new JFileChooser();
+			    FileNameExtensionFilter filter = new FileNameExtensionFilter(
+			        "Genom", "gen");
+			    chooser.setFileFilter(filter);
+			    int returnVal = chooser.showOpenDialog(chooser);
+			    if(returnVal == JFileChooser.APPROVE_OPTION) {
+			    	genomZuErstellen.setText(chooser.getSelectedFile().getAbsolutePath());
+			    }
 			}
 		});
 		
 		JButton btnLadenZuErstellen = new JButton("Laden");
 		
-		JComboBox<TransferFunctionType> transferFunktion = new JComboBox<TransferFunctionType>();
+		final JComboBox<TransferFunctionType> transferFunktion = new JComboBox<TransferFunctionType>();
 		transferFunktion.setModel(new DefaultComboBoxModel<TransferFunctionType>(TransferFunctionType.values()));
 		
 		JLabel lblTransferfunktion = new JLabel("Transferfunktion:");
@@ -196,7 +204,7 @@ public class GUI extends JFrame {
 		maxTrainingZuErstellen = new JTextField();
 		maxTrainingZuErstellen.setColumns(10);
 		
-		JCheckBox chckbxTrainierenZuErstellen = new JCheckBox("Trainieren");
+		final JCheckBox chckbxTrainierenZuErstellen = new JCheckBox("Trainieren");
 		chckbxTrainierenZuErstellen.setSelected(true);
 		
 		JLabel lblMaximaleIterationen = new JLabel("Maximale Iterationen:");
@@ -225,6 +233,38 @@ public class GUI extends JFrame {
 		JButton btnSpeicherortZuAlsGenomSpeichern = new JButton("...");
 		
 		JButton btnAlsGenomSpeichern = new JButton("Als Genom speichern");
+		
+		btnLadenZuErstellen.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				try
+				{
+					String genStr=MyUtils.readFile(genomZuErstellen.getText());
+					Genom gen=new Genom(genStr,null);
+					transferFunktion.setSelectedItem(gen.getTransferFunktion());
+					StringBuffer layerStr=new StringBuffer();
+					int[] layers=gen.getLayers();
+					for(int lay:layers)
+					{
+						layerStr.append(lay);
+						layerStr.append(" ");
+					}
+					layerZuErstellen.setText(layerStr.toString());
+					chckbxTrainierenZuErstellen.setSelected(true);
+					maxIterationsZuErstellen.setText(gen.getMaxIterations()+"");
+					learningRateZuErstellen.setText(gen.getLearningRate()+"");
+					momentumZuErstellen.setText(gen.getMomentum()+"");
+					speicherortZuAlsGenomSpeichern.setText(genomZuErstellen.getText());								
+				} catch (Exception e)
+				{
+					JOptionPane.showMessageDialog(null, "Fehler beim Lesen des Genoms", "Fehler",JOptionPane.WARNING_MESSAGE);
+				}				
+			}
+			
+		});
+		
 		GroupLayout gl_erstellen = new GroupLayout(erstellen);
 		gl_erstellen.setHorizontalGroup(
 			gl_erstellen.createParallelGroup(Alignment.LEADING)

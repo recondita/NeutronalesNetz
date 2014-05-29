@@ -1,13 +1,9 @@
 package genetik;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -15,6 +11,8 @@ import java.util.LinkedList;
 import org.neuroph.core.data.DataSet;
 import org.neuroph.util.TrainingSetImport;
 import org.neuroph.util.TransferFunctionType;
+
+import util.MyUtils;
 
 public class EVKontrolle
 {
@@ -44,10 +42,7 @@ public class EVKontrolle
 		File info = new File(this.saveDir + "Generation.info");
 		if (info.exists())
 		{
-			String genDir;
-			BufferedReader infoReader = new BufferedReader(new FileReader(info));
-			genDir =infoReader.readLine();
-			infoReader.close();
+			String genDir=MyUtils.readFile(info);
 			generationCount=Integer.parseInt(genDir.replace("Generation_",""));
 			genDir=this.saveDir+genDir;
 			String[] genFiles = new File(genDir).list();
@@ -57,16 +52,7 @@ public class EVKontrolle
 			{
 				if (genFile.contains("Genom_"))
 				{
-					BufferedReader bR = new BufferedReader(new InputStreamReader(new FileInputStream(genDir+ genFile), "UTF-8"));
-					StringBuffer inhalt = new StringBuffer();
-					String line = bR.readLine();
-					while (line != null)
-					{
-						inhalt.append(line);
-						line = bR.readLine();
-					}
-					bR.close();
-					genomList.add(new Genom(inhalt.toString(),this.trainingSet));
+					genomList.add(new Genom(MyUtils.readFile(genDir+genFile),this.trainingSet));
 				}
 			}
 			gen = genomList.toArray(new Genom[genomList.size()]);
