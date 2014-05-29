@@ -58,8 +58,6 @@ public class GUI extends JFrame {
 	private JTextField spielaufzeichnungZuTrainieren;
 	private JTextField maxIterationsZuTrainieren;
 	private JTextField maxTrainingZuTrainieren;
-	private JTextField momentumZuTrainieren;
-	private JTextField learningRateZuTrainieren;
 	private JTextField speicherortZuAlsGenomSpeichern;
 	private JTextField speicherortZuEvolution;
 	private JTextField maxTrainingZuEvolution;
@@ -522,9 +520,6 @@ public class GUI extends JFrame {
 			    }
 			}
 		});
-		JLabel label_1 = new JLabel("Learningrate:");
-		
-		JLabel label_2 = new JLabel("Momentum:");
 		
 		JLabel label_3 = new JLabel("Maximale Trainingszeit:");
 		
@@ -535,12 +530,6 @@ public class GUI extends JFrame {
 		
 		maxTrainingZuTrainieren = new JTextField();
 		maxTrainingZuTrainieren.setColumns(10);
-		
-		momentumZuTrainieren = new JTextField();
-		momentumZuTrainieren.setColumns(10);
-		
-		learningRateZuTrainieren = new JTextField();
-		learningRateZuTrainieren.setColumns(10);
 		
 		JCheckBox chckbxAutosaveZuTrainieren = new JCheckBox("Autosave");
 		
@@ -577,55 +566,40 @@ public class GUI extends JFrame {
 			gl_trainieren.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_trainieren.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_trainieren.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_trainieren.createSequentialGroup()
-							.addComponent(label_4)
-							.addGap(24)
-							.addComponent(maxIterationsZuTrainieren, GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-							.addContainerGap())
-						.addGroup(gl_trainieren.createSequentialGroup()
-							.addGroup(gl_trainieren.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_trainieren.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_trainieren.createParallelGroup(Alignment.LEADING)
+							.addGroup(Alignment.TRAILING, gl_trainieren.createSequentialGroup()
+								.addGroup(gl_trainieren.createParallelGroup(Alignment.LEADING)
+									.addComponent(lblNetzwerkAuswhlen_1)
+									.addComponent(label))
+								.addGap(24)
 								.addGroup(gl_trainieren.createParallelGroup(Alignment.TRAILING)
 									.addGroup(gl_trainieren.createSequentialGroup()
-										.addGroup(gl_trainieren.createParallelGroup(Alignment.LEADING)
-											.addComponent(lblNetzwerkAuswhlen_1)
-											.addComponent(label))
-										.addGap(24))
+										.addComponent(netzwerkZuTrainieren, GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(btnNetzwerkZuTrainieren, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
 									.addGroup(gl_trainieren.createSequentialGroup()
-										.addComponent(label_1)
-										.addGap(70)))
-								.addComponent(label_2))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_trainieren.createParallelGroup(Alignment.TRAILING)
-								.addGroup(gl_trainieren.createSequentialGroup()
-									.addComponent(learningRateZuTrainieren, GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-									.addContainerGap())
-								.addGroup(gl_trainieren.createSequentialGroup()
-									.addGroup(gl_trainieren.createParallelGroup(Alignment.TRAILING)
-										.addGroup(gl_trainieren.createSequentialGroup()
-											.addComponent(netzwerkZuTrainieren, GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(btnNetzwerkZuTrainieren, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
-										.addGroup(gl_trainieren.createSequentialGroup()
-											.addComponent(spielaufzeichnungZuTrainieren, GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(btnSpielaufzeichnungZuTrainieren, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED)))
-									.addGap(12))
-								.addGroup(gl_trainieren.createSequentialGroup()
-									.addComponent(momentumZuTrainieren, GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-									.addContainerGap())))
-						.addGroup(gl_trainieren.createSequentialGroup()
-							.addComponent(label_3)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(maxTrainingZuTrainieren, GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-							.addContainerGap())
-						.addGroup(gl_trainieren.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED, 261, Short.MAX_VALUE)
+										.addComponent(spielaufzeichnungZuTrainieren, GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(btnSpielaufzeichnungZuTrainieren, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)))
+								.addGap(12))
+							.addGroup(gl_trainieren.createSequentialGroup()
+								.addGroup(gl_trainieren.createParallelGroup(Alignment.TRAILING)
+									.addGroup(gl_trainieren.createSequentialGroup()
+										.addComponent(label_4)
+										.addGap(24)
+										.addComponent(maxIterationsZuTrainieren, GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE))
+									.addGroup(gl_trainieren.createSequentialGroup()
+										.addComponent(label_3)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(maxTrainingZuTrainieren, GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)))
+								.addContainerGap()))
+						.addGroup(Alignment.TRAILING, gl_trainieren.createSequentialGroup()
 							.addComponent(chckbxAutosaveZuTrainieren)
 							.addContainerGap())
 						.addGroup(gl_trainieren.createSequentialGroup()
-							.addComponent(btnStartZuTrainieren, GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
+							.addComponent(btnStartZuTrainieren, GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
 							.addContainerGap())))
 		);
 		gl_trainieren.setVerticalGroup(
@@ -643,25 +617,17 @@ public class GUI extends JFrame {
 						.addComponent(btnSpielaufzeichnungZuTrainieren, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_trainieren.createParallelGroup(Alignment.BASELINE)
-						.addComponent(label_1)
-						.addComponent(learningRateZuTrainieren, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_trainieren.createParallelGroup(Alignment.BASELINE)
-						.addComponent(momentumZuTrainieren, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(label_2))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_trainieren.createParallelGroup(Alignment.BASELINE)
 						.addComponent(label_3)
 						.addComponent(maxTrainingZuTrainieren, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(5)
 					.addGroup(gl_trainieren.createParallelGroup(Alignment.BASELINE)
 						.addComponent(maxIterationsZuTrainieren, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(label_4))
-					.addGap(8)
-					.addComponent(chckbxAutosaveZuTrainieren)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(chckbxAutosaveZuTrainieren)
+					.addGap(18)
 					.addComponent(btnStartZuTrainieren, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(263, Short.MAX_VALUE))
+					.addContainerGap(270, Short.MAX_VALUE))
 		);
 		trainieren.setLayout(gl_trainieren);
 		
