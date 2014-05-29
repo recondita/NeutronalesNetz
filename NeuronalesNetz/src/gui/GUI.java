@@ -6,6 +6,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.JFileChooser;
 import javax.swing.JTabbedPane;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -13,14 +15,22 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+
 import org.neuroph.util.TransferFunctionType;
+
+import snakeCOM.SnakeLogger;
+
 import javax.swing.JCheckBox;
 import javax.swing.JTextArea;
+
 import java.awt.Dimension;
+import java.io.File;
 
 public class GUI extends JFrame {
 
@@ -86,12 +96,27 @@ public class GUI extends JFrame {
 		JButton btnLogZuAufzeichnen = new JButton("...");
 		btnLogZuAufzeichnen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+			    JFileChooser chooser = new JFileChooser();
+			    FileNameExtensionFilter filter = new FileNameExtensionFilter(
+			        "Snakelog", "slog");
+			    chooser.setFileFilter(filter);
+			    int returnVal = chooser.showSaveDialog(chooser);
+			    if(returnVal == JFileChooser.APPROVE_OPTION) {
+			       logZuAufzeichnen.setText(chooser.getSelectedFile().getAbsolutePath());
+			    }
 			}
 		});
 		
 		JLabel lblLogdateiAuswhlen = new JLabel("Logdatei ausw\u00E4hlen:");
 		
 		JButton btnStartZuAufzeichnen = new JButton("Start");
+		btnStartZuAufzeichnen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			new SnakeLogger(new File(logZuAufzeichnen.getText()));
+			    }
+		
+			
+		});
 		GroupLayout gl_aufzeichnen = new GroupLayout(aufzeichnen);
 		gl_aufzeichnen.setHorizontalGroup(
 			gl_aufzeichnen.createParallelGroup(Alignment.LEADING)
