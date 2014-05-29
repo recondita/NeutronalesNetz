@@ -235,7 +235,7 @@ public class GUI extends JFrame {
 			    chooser.setFileFilter(filter);
 			    int returnVal = chooser.showSaveDialog(chooser);
 			    if(returnVal == JFileChooser.APPROVE_OPTION) {
-			       spielaufzeichnungZuErstellen.setText(chooser.getSelectedFile().getAbsolutePath());
+			       speicherortZuErstellen.setText(chooser.getSelectedFile().getAbsolutePath());
 			    }
 			}
 		});
