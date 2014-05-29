@@ -258,9 +258,10 @@ public class GUI extends JFrame {
 				}
 				else
 				{
-					new GenNetz(new Genom(layer,Double.parseDouble(learningRateZuErstellen.getText()),Double.parseDouble(momentumZuErstellen.getText()),Integer.MAX_VALUE, TransferFunctionType.valueOf(transferFunktion.getName()),null),0,speicherortZuErstellen.getText(),false);
+					new GenNetz(new Genom(layer,Double.parseDouble(learningRateZuErstellen.getText()),Double.parseDouble(momentumZuErstellen.getText()),Integer.MAX_VALUE, (TransferFunctionType)transferFunktion.getSelectedItem(),null),0,speicherortZuErstellen.getText(),false);
 				}
-			}catch( Exception e){JOptionPane.showMessageDialog(null, "Fehlerhafte Eingabe", "Fehler",JOptionPane.WARNING_MESSAGE);}
+			}catch( Exception e){JOptionPane.showMessageDialog(null, "Fehlerhafte Eingabe", "Fehler",JOptionPane.WARNING_MESSAGE);
+			e.printStackTrace();}
 			}
 			
 		});
@@ -336,6 +337,7 @@ public class GUI extends JFrame {
 				} catch (Exception e)
 				{
 					JOptionPane.showMessageDialog(null, "Fehler beim Lesen des Genoms", "Fehler",JOptionPane.WARNING_MESSAGE);
+					e.printStackTrace();
 				}				
 			}
 			
@@ -546,7 +548,7 @@ public class GUI extends JFrame {
 		btnStartZuTrainieren.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			    final NeuralNetwork<?> nn=NeuralNetwork.createFromFile(netzwerkZuTrainieren.getText());
-			    ((MomentumBackpropagation)nn.getLearningRule()).setMaxIterations(Integer.parseInt(maxIterationsZuTrainieren.getText()));
+			    ((MomentumBackpropagation)nn.getLearningRule()).setMaxIterations("".equals(maxIterationsZuTrainieren.getText())?Integer.MAX_VALUE:Integer.parseInt(maxIterationsZuTrainieren.getText()));
 			    try
 				{
 					new SnakeTrainer(spielaufzeichnungZuTrainieren.getText(),nn.getInputsCount(),nn.getOutputsCount()).train(nn,Integer.parseInt(maxTrainingZuTrainieren.getText())*1000);
@@ -565,6 +567,7 @@ public class GUI extends JFrame {
 				}catch (Exception e)
 			    {
 					JOptionPane.showMessageDialog(null, "Training Set passt nicht zum Netz", "Fehler",JOptionPane.WARNING_MESSAGE);
+					e.printStackTrace();
 			    }
 			}
 		});
