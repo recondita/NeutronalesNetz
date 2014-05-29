@@ -688,6 +688,7 @@ public class GUI extends JFrame {
 		JButton btnStartZuEvolution = new JButton("Start");
 		
 		JTextArea ausgabeKonsole = new JTextArea();
+		ausgabeKonsole.setEditable(false);
 		
 		JLabel label_6 = new JLabel("Maximale Trainingszeit:");
 		
