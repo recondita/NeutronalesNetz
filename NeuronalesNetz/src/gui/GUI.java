@@ -9,6 +9,8 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
@@ -28,6 +30,10 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import netz.SnakeTrainer;
+
+import org.neuroph.core.NeuralNetwork;
+import org.neuroph.nnet.learning.MomentumBackpropagation;
 import org.neuroph.util.TrainingSetImport;
 import org.neuroph.util.TransferFunctionType;
 
@@ -496,6 +502,18 @@ public class GUI extends JFrame {
 		JLabel lblNetzwerkAuswhlen_1 = new JLabel("Netzwerk ausw\u00E4hlen:");
 		
 		JButton btnNetzwerkZuTrainieren = new JButton("...");
+		btnNetzwerkZuTrainieren.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			    JFileChooser chooser = new JFileChooser();
+			    FileNameExtensionFilter filter = new FileNameExtensionFilter(
+			        "Neuronal Network", "nnet");
+			    chooser.setFileFilter(filter);
+			    int returnVal = chooser.showOpenDialog(chooser);
+			    if(returnVal == JFileChooser.APPROVE_OPTION) {
+			    	netzwerkZuTrainieren.setText(chooser.getSelectedFile().getAbsolutePath());
+			    }
+			}
+		});
 		
 		JLabel label = new JLabel("Spielaufzeichnung:");
 		
@@ -503,7 +521,18 @@ public class GUI extends JFrame {
 		spielaufzeichnungZuTrainieren.setColumns(10);
 		
 		JButton btnSpielaufzeichnungZuTrainieren = new JButton("...");
-		
+		btnSpielaufzeichnungZuTrainieren.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			    JFileChooser chooser = new JFileChooser();
+			    FileNameExtensionFilter filter = new FileNameExtensionFilter(
+			        "SnakeLog", "slog");
+			    chooser.setFileFilter(filter);
+			    int returnVal = chooser.showOpenDialog(chooser);
+			    if(returnVal == JFileChooser.APPROVE_OPTION) {
+			    	spielaufzeichnungZuTrainieren.setText(chooser.getSelectedFile().getAbsolutePath());
+			    }
+			}
+		});
 		JLabel label_1 = new JLabel("Learningrate:");
 		
 		JLabel label_2 = new JLabel("Momentum:");
@@ -527,6 +556,32 @@ public class GUI extends JFrame {
 		JCheckBox chckbxAutosaveZuTrainieren = new JCheckBox("Autosave");
 		
 		JButton btnStartZuTrainieren = new JButton("Start");
+		btnStartZuTrainieren.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			    final NeuralNetwork<?> nn=NeuralNetwork.createFromFile(netzwerkZuTrainieren.getText());
+			    ((MomentumBackpropagation)nn.getLearningRule()).setMaxIterations(Integer.parseInt(maxIterationsZuTrainieren.getText()));
+			    try
+				{
+					new SnakeTrainer(spielaufzeichnungZuTrainieren.getText(),nn.getInputsCount(),nn.getOutputsCount()).train(nn,Integer.parseInt(maxTrainingZuTrainieren.getText())*1000);
+				} catch (NumberFormatException e)
+				{
+					JOptionPane.showMessageDialog(null, "Fehlerhafte Eingabe", "Fehler",JOptionPane.WARNING_MESSAGE);
+					e.printStackTrace();
+				} catch (FileNotFoundException e)
+				{
+					JOptionPane.showMessageDialog(null, "Datei nicht gefunden", "Fehler",JOptionPane.WARNING_MESSAGE);
+					e.printStackTrace();
+				} catch (IOException e)
+				{
+					JOptionPane.showMessageDialog(null, "Fehler beim Lesen der Datei", "Fehler",JOptionPane.WARNING_MESSAGE);
+					e.printStackTrace();
+				}catch (Exception e)
+			    {
+					JOptionPane.showMessageDialog(null, "Training Set passt nicht zum Netz", "Fehler",JOptionPane.WARNING_MESSAGE);
+			    }
+			}
+		});
+		
 		GroupLayout gl_trainieren = new GroupLayout(trainieren);
 		gl_trainieren.setHorizontalGroup(
 			gl_trainieren.createParallelGroup(Alignment.LEADING)
