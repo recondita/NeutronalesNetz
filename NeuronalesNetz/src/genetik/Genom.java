@@ -74,6 +74,9 @@ public class Genom implements Comparable<Genom>
 		}
 		learningRate = Double.parseDouble(part[1]);
 		momentum = Double.parseDouble(part[2]);
+		if(part[3].equals("MAX"))
+			maxIterations=Integer.MAX_VALUE;
+		else
 		maxIterations = Integer.parseInt(part[3]);
 		transferFunktion = TransferFunctionType.valueOf(part[4]);
 		fitness = Integer.parseInt(part[5]);
@@ -282,7 +285,7 @@ public class Genom implements Comparable<Genom>
 		Genom gen;
 		try
 		{
-			gen = new Genom("100.36.4.2,0.0020231507795779864,0.3833402030155874,228,TANH,3289866",TrainingSetImport.importFromFile("afterMove.log",100,2,","));//(new int[]{ 100, 64, 36, 16, 4, 2 }, 0.001, 0.25,
+			gen = new Genom("100.36.4.2,0.0020231507795779864,0.3833402030155874,MAX,TANH,3289866",TrainingSetImport.importFromFile("afterMove.log",100,2,","));//(new int[]{ 100, 64, 36, 16, 4, 2 }, 0.001, 0.25,
 					//Integer.MAX_VALUE, TransferFunctionType.TANH,
 					//TrainingSetImport.importFromFile("spiel.log", 100, 2, ","));
 			//System.out.println(new FitnessTester().test(gen, Integer.MAX_VALUE));
