@@ -85,7 +85,7 @@ public class GUI extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
+		new Thread(){
 			public void run() {
 				try {
 					GUI frame = new GUI();
@@ -94,7 +94,7 @@ public class GUI extends JFrame {
 					e.printStackTrace();
 				}
 			}
-		});
+		}.start();
 	}
 
 	/**
@@ -718,7 +718,7 @@ public class GUI extends JFrame {
 				System.setOut(consoleStreamforTextArea);
 				try {
 					final EVKontrolle eK = new EVKontrolle(Integer.parseInt(individuenZuEvolution.getText()), Integer.parseInt(testsZuEvolution.getText()), Integer.parseInt(maxTrainingZuEvolution.getText())*1000, speicherortZuEvolution.getText(),TrainingSetImport.importFromFile(spielaufzeichnungZuEvolution.getText(), 100, 2,","));
-					eK.entwickle(Integer.parseInt(generationenZuEvolution.getText()));
+					new Thread(){public void run(){eK.entwickle(Integer.parseInt(generationenZuEvolution.getText()));}}.start();
 				} catch (NumberFormatException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -768,26 +768,22 @@ public class GUI extends JFrame {
 		GroupLayout gl_evolution = new GroupLayout(evolution);
 		gl_evolution.setHorizontalGroup(
 			gl_evolution.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_evolution.createSequentialGroup()
+				.addGroup(Alignment.LEADING, gl_evolution.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_evolution.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_evolution.createSequentialGroup()
-							.addGroup(gl_evolution.createParallelGroup(Alignment.TRAILING)
-								.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
-								.addComponent(btnStartZuEvolution, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+						.addComponent(scrollPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+						.addGroup(Alignment.TRAILING, gl_evolution.createSequentialGroup()
+							.addGroup(gl_evolution.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_evolution.createSequentialGroup()
-									.addGroup(gl_evolution.createParallelGroup(Alignment.LEADING)
-										.addGroup(gl_evolution.createSequentialGroup()
-											.addComponent(lblNewLabel)
-											.addGap(39)
-											.addComponent(spielaufzeichnungZuEvolution, GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))
-										.addComponent(speicherortZuEvolution, GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
-										.addComponent(lblSpeicherortAuswhlen, GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE))
-									.addGap(6)
-									.addGroup(gl_evolution.createParallelGroup(Alignment.LEADING)
-										.addComponent(btnSpielaufzeichnungZuEvolution, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
-										.addComponent(btnSpeicherortZuEvolution, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))))
-							.addContainerGap())
+									.addComponent(lblNewLabel)
+									.addGap(39)
+									.addComponent(spielaufzeichnungZuEvolution, GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))
+								.addComponent(speicherortZuEvolution, GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+								.addComponent(lblSpeicherortAuswhlen, GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE))
+							.addGap(6)
+							.addGroup(gl_evolution.createParallelGroup(Alignment.LEADING)
+								.addComponent(btnSpielaufzeichnungZuEvolution, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnSpeicherortZuEvolution, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(gl_evolution.createSequentialGroup()
 							.addGroup(gl_evolution.createParallelGroup(Alignment.LEADING)
 								.addComponent(label_6, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
@@ -796,11 +792,12 @@ public class GUI extends JFrame {
 								.addComponent(lblAnzahlDerGenerationen))
 							.addGap(4)
 							.addGroup(gl_evolution.createParallelGroup(Alignment.LEADING)
-								.addComponent(individuenZuEvolution, GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
-								.addComponent(testsZuEvolution, GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
-								.addComponent(generationenZuEvolution, GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
-								.addComponent(maxTrainingZuEvolution, GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE))
-							.addContainerGap())))
+								.addComponent(individuenZuEvolution, GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+								.addComponent(testsZuEvolution, GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+								.addComponent(generationenZuEvolution, GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+								.addComponent(maxTrainingZuEvolution, GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)))
+						.addComponent(btnStartZuEvolution, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+					.addContainerGap())
 		);
 		gl_evolution.setVerticalGroup(
 			gl_evolution.createParallelGroup(Alignment.LEADING)
@@ -835,10 +832,10 @@ public class GUI extends JFrame {
 					.addGroup(gl_evolution.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblAnzahlDerGenerationen)
 						.addComponent(generationenZuEvolution, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnStartZuEvolution, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 202, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
 					.addContainerGap())
 		);
 		
