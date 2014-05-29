@@ -1,5 +1,6 @@
 package gui;
 
+import genetik.EVKontrolle;
 import genetik.GenNetz;
 import genetik.Genom;
 
@@ -11,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintStream;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
@@ -23,12 +25,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.DefaultCaret;
 
 import netz.SnakeTrainer;
 
@@ -40,6 +44,8 @@ import org.neuroph.util.TransferFunctionType;
 import snakeCOM.SnakeLogger;
 import snakeCOM.SnakePlayer;
 import util.MyUtils;
+
+import javax.swing.ScrollPaneConstants;
 
 public class GUI extends JFrame {
 
@@ -62,6 +68,18 @@ public class GUI extends JFrame {
 	private JTextField speicherortZuAlsGenomSpeichern;
 	private JTextField speicherortZuEvolution;
 	private JTextField maxTrainingZuEvolution;
+	private JTextField individuenZuEvolution;
+	private JTextField testsZuEvolution;
+	private JTextArea ausgabeKonsole;
+	PrintStream consoleStreamforTextArea = new PrintStream(System.out) {
+		 
+        @Override
+        public void println(String s) {
+            updateFeld(s);
+        }
+    };
+	private JTextField generationenZuEvolution;
+	private JTextField spielaufzeichnungZuEvolution;
 
 	/**
 	 * Launch the application.
@@ -685,35 +703,104 @@ public class GUI extends JFrame {
 		JLabel lblSpeicherortAuswhlen = new JLabel("Speicherort ausw\u00E4hlen:");
 		
 		JButton btnSpeicherortZuEvolution = new JButton("...");
+		btnSpeicherortZuEvolution.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String pfad = chooseFolder();
+				if(pfad != null)
+				speicherortZuEvolution.setText(pfad);
+			}
+		});
 		
 		JButton btnStartZuEvolution = new JButton("Start");
-		
-		JTextArea ausgabeKonsole = new JTextArea();
-		ausgabeKonsole.setEditable(false);
+		btnStartZuEvolution.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				PrintStream stdout = System.out;
+				System.setOut(consoleStreamforTextArea);
+				try {
+					final EVKontrolle eK = new EVKontrolle(Integer.parseInt(individuenZuEvolution.getText()), Integer.parseInt(testsZuEvolution.getText()), Integer.parseInt(maxTrainingZuEvolution.getText())*1000, speicherortZuEvolution.getText(),TrainingSetImport.importFromFile(spielaufzeichnungZuEvolution.getText(), 100, 2,","));
+					eK.entwickle(Integer.parseInt(generationenZuEvolution.getText()));
+				} catch (NumberFormatException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.setOut(stdout);    
+				
+			}
+		});
 		
 		JLabel label_6 = new JLabel("Maximale Trainingszeit:");
 		
 		maxTrainingZuEvolution = new JTextField();
 		maxTrainingZuEvolution.setColumns(10);
+		
+		JLabel lblAnzahlDerIndividuen = new JLabel("Anzahl der Individuen:");
+		
+		individuenZuEvolution = new JTextField();
+		individuenZuEvolution.setColumns(10);
+		
+		JLabel lblAnzahlDerTests = new JLabel("Anzahl der Tests:");
+		
+		testsZuEvolution = new JTextField();
+		testsZuEvolution.setColumns(10);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		
+		JLabel lblAnzahlDerGenerationen = new JLabel("Anzahl der Generationen:");
+		
+		generationenZuEvolution = new JTextField();
+		generationenZuEvolution.setColumns(10);
+		
+		JLabel lblNewLabel = new JLabel("Spielaufzeichnung:");
+		
+		spielaufzeichnungZuEvolution = new JTextField();
+		spielaufzeichnungZuEvolution.setColumns(10);
+		
+		JButton btnSpielaufzeichnungZuEvolution = new JButton("...");
+		btnSpielaufzeichnungZuEvolution.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String pfad = chooseFileToOpen("Snakelog","slog");
+				if(pfad != null)
+				spielaufzeichnungZuEvolution.setText(pfad);
+				
+			}
+		});
 		GroupLayout gl_evolution = new GroupLayout(evolution);
 		gl_evolution.setHorizontalGroup(
 			gl_evolution.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_evolution.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_evolution.createParallelGroup(Alignment.TRAILING)
-						.addComponent(ausgabeKonsole, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
-						.addGroup(Alignment.LEADING, gl_evolution.createSequentialGroup()
-							.addGroup(gl_evolution.createParallelGroup(Alignment.TRAILING)
-								.addComponent(speicherortZuEvolution, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
-								.addComponent(lblSpeicherortAuswhlen, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE))
-							.addGap(6)
-							.addComponent(btnSpeicherortZuEvolution, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
+					.addGroup(gl_evolution.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_evolution.createSequentialGroup()
-							.addComponent(label_6, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
-							.addGap(12)
-							.addComponent(maxTrainingZuEvolution, GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
-						.addComponent(btnStartZuEvolution, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-					.addContainerGap())
+							.addGroup(gl_evolution.createParallelGroup(Alignment.TRAILING)
+								.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+								.addComponent(btnStartZuEvolution, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+								.addGroup(gl_evolution.createSequentialGroup()
+									.addGroup(gl_evolution.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_evolution.createSequentialGroup()
+											.addComponent(lblNewLabel)
+											.addGap(39)
+											.addComponent(spielaufzeichnungZuEvolution, GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))
+										.addComponent(speicherortZuEvolution, GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+										.addComponent(lblSpeicherortAuswhlen, GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE))
+									.addGap(6)
+									.addGroup(gl_evolution.createParallelGroup(Alignment.LEADING)
+										.addComponent(btnSpielaufzeichnungZuEvolution, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+										.addComponent(btnSpeicherortZuEvolution, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))))
+							.addContainerGap())
+						.addGroup(gl_evolution.createSequentialGroup()
+							.addGroup(gl_evolution.createParallelGroup(Alignment.LEADING)
+								.addComponent(label_6, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblAnzahlDerIndividuen)
+								.addComponent(lblAnzahlDerTests)
+								.addComponent(lblAnzahlDerGenerationen))
+							.addGap(4)
+							.addGroup(gl_evolution.createParallelGroup(Alignment.LEADING)
+								.addComponent(individuenZuEvolution, GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+								.addComponent(testsZuEvolution, GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+								.addComponent(generationenZuEvolution, GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+								.addComponent(maxTrainingZuEvolution, GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE))
+							.addContainerGap())))
 		);
 		gl_evolution.setVerticalGroup(
 			gl_evolution.createParallelGroup(Alignment.LEADING)
@@ -725,17 +812,40 @@ public class GUI extends JFrame {
 						.addComponent(speicherortZuEvolution, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnSpeicherortZuEvolution, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_evolution.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNewLabel)
+						.addComponent(spielaufzeichnungZuEvolution, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnSpielaufzeichnungZuEvolution, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
 					.addGroup(gl_evolution.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_evolution.createSequentialGroup()
-							.addGap(2)
+							.addGap(8)
 							.addComponent(label_6))
-						.addComponent(maxTrainingZuEvolution, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addGroup(gl_evolution.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(maxTrainingZuEvolution, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_evolution.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblAnzahlDerIndividuen)
+						.addComponent(individuenZuEvolution, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_evolution.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblAnzahlDerTests)
+						.addComponent(testsZuEvolution, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_evolution.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblAnzahlDerGenerationen)
+						.addComponent(generationenZuEvolution, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
 					.addComponent(btnStartZuEvolution, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
-					.addComponent(ausgabeKonsole, GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 202, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
+		
+		ausgabeKonsole = new JTextArea();
+		scrollPane.setViewportView(ausgabeKonsole);
+		ausgabeKonsole.setEditable(false);
+		DefaultCaret caret = (DefaultCaret)ausgabeKonsole.getCaret();
 		evolution.setLayout(gl_evolution);
 	}
 	
@@ -769,5 +879,21 @@ public class GUI extends JFrame {
 	    	return null;
 	    }
 	    
+	}
+	
+	public String chooseFolder(){
+		JFileChooser chooser = new JFileChooser(); 
+	    chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+	    chooser.setAcceptAllFileFilterUsed(false);
+	    int returnVal = chooser.showOpenDialog(chooser);
+	    if(returnVal == JFileChooser.APPROVE_OPTION) {
+	    	return chooser.getSelectedFile().getAbsolutePath();
+	    } else {
+	    	return null;
+	    }
+	}
+	
+	private void updateFeld(String str){
+		 ausgabeKonsole.append(str + "\n");
 	}
 }
