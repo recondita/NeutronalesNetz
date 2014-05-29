@@ -43,6 +43,7 @@ public class GUI extends JFrame {
 	private JTextField learningRateZuTrainieren;
 	private JTextField speicherortZuAlsGenomSpeichern;
 	private JTextField speicherortZuEvolution;
+	private JTextField maxTrainingZuEvolution;
 
 	/**
 	 * Launch the application.
@@ -538,19 +539,28 @@ public class GUI extends JFrame {
 		JButton btnStartZuEvolution = new JButton("Start");
 		
 		JTextArea ausgabeKonsole = new JTextArea();
+		
+		JLabel label_6 = new JLabel("Maximale Trainingszeit:");
+		
+		maxTrainingZuEvolution = new JTextField();
+		maxTrainingZuEvolution.setColumns(10);
 		GroupLayout gl_evolution = new GroupLayout(evolution);
 		gl_evolution.setHorizontalGroup(
 			gl_evolution.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_evolution.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_evolution.createParallelGroup(Alignment.LEADING)
-						.addComponent(ausgabeKonsole, GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
-						.addGroup(gl_evolution.createSequentialGroup()
+					.addGroup(gl_evolution.createParallelGroup(Alignment.TRAILING)
+						.addComponent(ausgabeKonsole, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
+						.addGroup(Alignment.LEADING, gl_evolution.createSequentialGroup()
 							.addGroup(gl_evolution.createParallelGroup(Alignment.TRAILING)
-								.addComponent(speicherortZuEvolution, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
-								.addComponent(lblSpeicherortAuswhlen, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE))
+								.addComponent(speicherortZuEvolution, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
+								.addComponent(lblSpeicherortAuswhlen, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE))
 							.addGap(6)
 							.addComponent(btnSpeicherortZuEvolution, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_evolution.createSequentialGroup()
+							.addComponent(label_6, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
+							.addGap(12)
+							.addComponent(maxTrainingZuEvolution, GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
 						.addComponent(btnStartZuEvolution, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
 					.addContainerGap())
 		);
@@ -563,10 +573,16 @@ public class GUI extends JFrame {
 					.addGroup(gl_evolution.createParallelGroup(Alignment.BASELINE)
 						.addComponent(speicherortZuEvolution, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnSpeicherortZuEvolution, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_evolution.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_evolution.createSequentialGroup()
+							.addGap(2)
+							.addComponent(label_6))
+						.addComponent(maxTrainingZuEvolution, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(btnStartZuEvolution, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
-					.addComponent(ausgabeKonsole, GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
+					.addComponent(ausgabeKonsole, GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
 					.addContainerGap())
 		);
 		evolution.setLayout(gl_evolution);
