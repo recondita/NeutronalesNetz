@@ -85,7 +85,7 @@ public class GUI extends JFrame {
 		setTitle("KNN");
 		setMinimumSize(new Dimension(350, 575));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 159, 575);
+		setBounds(100, 100, 179, 575);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -612,9 +612,9 @@ public class GUI extends JFrame {
 						.addComponent(lblNetzwerkAuswhlen_1))
 					.addGap(7)
 					.addGroup(gl_trainieren.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnSpielaufzeichnungZuTrainieren, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
 						.addComponent(spielaufzeichnungZuTrainieren, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(label)
-						.addComponent(btnSpielaufzeichnungZuTrainieren, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
+						.addComponent(label))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_trainieren.createParallelGroup(Alignment.BASELINE)
 						.addComponent(label_3)
