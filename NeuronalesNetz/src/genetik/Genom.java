@@ -130,36 +130,62 @@ public class Genom implements Comparable<Genom>
 		return momentum;
 	}
 
+	/**
+	 * Gibt die maximale Anzahl der Iterationen zurueck
+	 * @return Die maximale Anzahl der Iterationen
+	 */
 	public int getMaxIterations()
 	{
 		return maxIterations;
 	}
 
+	/**
+	 * Gibt die Transferfunktion zurueck
+	 * @return Die Transferfunktion
+	 */
 	public TransferFunctionType getTransferFunktion()
 	{
 		return transferFunktion;
 	}
 
+	/**
+	 * Gibt das DataSet zurueck
+	 * @return Das DataSet
+	 */
 	public DataSet getDataSet()
 	{
 		return dataSet;
 	}
 
+	/**
+	 * Gibt den Fitnesswert zurueck
+	 * @return Der Fitnesswert
+	 */
 	public int getFitness()
 	{
 		return fitness;
 	}
 
+	/**
+	 * Gibt zurueck ob das Genom schon getestet wurde
+	 * @return Den Teststaus
+	 */
 	public boolean isTested()
 	{
 		return isTested;
 	}
 
+	/**
+	 * Setzt das Genom als getestet
+	 */
 	public void setTested()
 	{
 		this.isTested = true;
 	}
 
+	/**
+	 * Hier werden die Attribute zufällig verändert
+	 */
 	public void mutation()
 	{
 		isTested = false;
@@ -291,7 +317,9 @@ public class Genom implements Comparable<Genom>
 		}
 	}
 
+
 	@Override
+
 	public int compareTo(Genom arg0)
 	{
 		if (fitness < arg0.getFitness())
@@ -305,6 +333,10 @@ public class Genom implements Comparable<Genom>
 		return 0;
 	}
 
+	/**
+	 * Setzt den Fitnesswert
+	 * @param fitness Der zu setzende Fitnesswert
+	 */
 	void setFitness(int fitness)
 	{
 		this.fitness = fitness;
