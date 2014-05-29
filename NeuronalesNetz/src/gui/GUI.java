@@ -84,7 +84,7 @@ public class GUI extends JFrame
 	 */
 	public static void main(String[] args)
 	{
-		new GUI().isVisible();
+		new GUI().setVisible(true);
 	}
 
 	/**
