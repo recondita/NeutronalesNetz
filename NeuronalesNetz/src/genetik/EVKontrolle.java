@@ -167,8 +167,8 @@ public class EVKontrolle
 						break;
 					job = jobs.removeFirst();
 				}
-				gen[job].setFitness(new FitnessTester(maxTrainTime)
-						.testWerteZeit(gen[job], anzTests));
+				gen[job].setFitness(new FitnessTester(maxTrainTime,anzTests)
+						.testWerteZeit(gen[job]));
 			}
 
 		}
