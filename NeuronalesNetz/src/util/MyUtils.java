@@ -20,7 +20,7 @@ public class MyUtils
 	 */
 	public static String readFile(File f) throws IOException
 	{
-		return readFile(f.getAbsoluteFile());
+		return readFile(f.getAbsolutePath());
 	}
 
 	/**
