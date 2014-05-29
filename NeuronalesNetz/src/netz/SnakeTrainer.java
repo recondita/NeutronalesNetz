@@ -12,8 +12,20 @@ import org.neuroph.util.TrainingSetImport;
 
 public class SnakeTrainer
 {
-	DataSet trainingSet;
+	/**
+	 * Trainingset mit dem Trainiert wird
+	 */
+	private DataSet trainingSet;
 
+	/**
+	 * 
+	 * @param trainingSet Pfad zum Trainingset mit dem trainiert werden soll
+	 * @param input Anzahl der Input Neuronen
+	 * @param output Anzahl der output Neuronen
+	 * @throws NumberFormatException
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	public SnakeTrainer(String trainingSet, int input, int output)
 			throws NumberFormatException, FileNotFoundException, IOException
 	{
@@ -23,6 +35,11 @@ public class SnakeTrainer
 		System.out.println("fertig!");
 	}
 
+	/**
+	 * Trainiert ein Neuronales Netz eine bestimmte Zeit lang
+	 * @param netz Netz das trainiert werden soll
+	 * @param time Zeit wie lange es trainiert werden soll
+	 */
 	public void train(final NeuralNetwork<?> netz, long time)
 	{
 		System.out.println("Beginne das Netz zu Trainieren");
@@ -44,18 +61,24 @@ public class SnakeTrainer
 	}
 	
 
+	/**
+	 * Main Methode um ein Netz zu Trainieren.
+	 * @param agrs werden ignoriert
+	 */
 	public static void main(String[] agrs)
 	{
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Netz speichern unter: ");
 		String saveName = sc.nextLine();
 		System.out.println("Erstelle Netz");
-		SnakeNetz netz = SnakeNetz.newNetz();
+		SnakeNetz netz = SnakeNetz.newNetz(10,10);
 		System.out.println("fertig");
+		System.out.println("Pfad des Trainingsets ");
+		
 		Autosaver as = new Autosaver(netz, saveName);
 		try
 		{
-			new SnakeTrainer("afterMove.log", 100, 2).train(netz,300000);
+			new SnakeTrainer(sc.nextLine(), 100, 2).train(netz,300000);
 		} catch (NumberFormatException e)
 		{
 			// TODO Auto-generated catch block
@@ -69,14 +92,6 @@ public class SnakeTrainer
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		/*
-		 * Scanner sc=new Scanner(System.in);
-		 * System.out.print("Netz speichern unter: "); String
-		 * line=sc.nextLine(); while(!"end".equals(line.toLowerCase())) {
-		 * netz.save(line); System.out.print("Netz speichern unter: ");
-		 * line=sc.nextLine(); System.out.println(); }
-		 */
 		as.stop();
 		netz.save(saveName);
 		sc.close();
