@@ -29,5 +29,11 @@ public class MyUtils
 		bR.close();
 		return inhalt.toString();
 	}
+
+	public static void writeFile(String string, String string2)
+	{
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
