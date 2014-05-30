@@ -1292,7 +1292,7 @@ public class GUI extends JFrame
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				System.setOut(stdout);
+				//System.setOut(stdout);
 
 			}
 		});
@@ -1564,7 +1564,6 @@ public class GUI extends JFrame
 		ausgabeKonsole = new JTextArea();
 		scrollPane.setViewportView(ausgabeKonsole);
 		ausgabeKonsole.setEditable(false);
-		//DefaultCaret caret = (DefaultCaret) ausgabeKonsole.getCaret();
 		evolution.setLayout(gl_evolution);
 	}
 

@@ -38,7 +38,7 @@ public class EVKontrolle
 	public EVKontrolle(int induvidien, int anzTests, int maxTrainTime,
 			String saveDir, String trainingSet) throws IOException
 	{
-		this.trainer=new SnakeTrainer(trainingSet,10,10);
+		this.trainer=new SnakeTrainer(trainingSet,100,2);
 		this.saveDir = saveDir.endsWith(File.separator) ? saveDir
 				: (saveDir + File.separator);
 		this.anzTests = anzTests;
