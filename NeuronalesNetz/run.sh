@@ -1,0 +1,1 @@
+java -Dfile.encoding=UTF-8 -classpath /home/jan/SK_WS/NeutronalesNetz/NeuronalesNetz/bin:/home/jan/SK_WS/NeutronalesNetz/NeuronalesNetz/lib/neuroph-core.jar:/home/jan/SK_WS/NeutronalesNetz/NeuronalesNetz/lib/neuroph-imgrec.jar:/home/jan/SK_WS/NeutronalesNetz/NeuronalesNetz/lib/neuroph-ocr.jar:/home/jan/SK_WS/Snake/bin gui.GUI
