@@ -131,11 +131,11 @@ public class COMSnake extends Snake
 			for (int i = moves.size() - 1; i >= 0; i--)
 			{
 				if (neu.equals(moves.get(i)))
-				{
+				{//Gucken ob die Schlange schonmal hier war
 					boolean loop = true;
 					int off = i;
 					for (int j = moves.size() - 1; j >= i && off > 0; j--)
-					{
+					{ //Pruefen ob auch die anderen Positionen uebereinstimmen
 						off--;
 						if (moves.get(off).equals(moves.get(j)))
 						{

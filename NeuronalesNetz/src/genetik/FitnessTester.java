@@ -102,12 +102,10 @@ public class FitnessTester extends SnakePlayer
 		{
 			setNetwork(nn);
 			fitness = 0;
-			// long time=System.currentTimeMillis();
 			for (int i = 0; i < tests; i++)
 			{
 				super.start();
 			}
-			// System.out.println(((System.currentTimeMillis()-time)/1000)+" Sekunden benoetigt um das Netz zu testen");
 			return fitness;
 		}
 	}

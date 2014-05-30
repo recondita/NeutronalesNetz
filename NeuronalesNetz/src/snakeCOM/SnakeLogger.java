@@ -53,11 +53,10 @@ public class SnakeLogger extends SnakeControl
 			move = new StringBuffer();
 		} else if (move.length() != 0)
 		{
-			move.append(snake.richtungBreite());// ((double)(snake.getRichtung()-2)/2)-1.0);
+			move.append(snake.richtungBreite());
 			move.append(",");
 			move.append(snake.richtungHoehe());
 			move.append("\n");
-			// snake.setRichtung(snake.richtungBreite(), snake.richtungHoehe());
 			templog.add(move.toString());
 			move = new StringBuffer();
 		}
