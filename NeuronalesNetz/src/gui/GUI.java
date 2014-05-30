@@ -32,6 +32,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.DefaultCaret;
 
 import netz.SnakeTrainer;
 
@@ -1564,6 +1565,8 @@ public class GUI extends JFrame
 		ausgabeKonsole = new JTextArea();
 		scrollPane.setViewportView(ausgabeKonsole);
 		ausgabeKonsole.setEditable(false);
+		DefaultCaret caret = (DefaultCaret)ausgabeKonsole.getCaret();
+		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 		evolution.setLayout(gl_evolution);
 	}
 
