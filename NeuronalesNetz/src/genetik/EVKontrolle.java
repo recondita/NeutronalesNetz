@@ -107,9 +107,9 @@ public class EVKontrolle
 	public String toString()
 	{
 		StringBuilder sb = new StringBuilder();
-		for (int j = 0; j < agen.length; j++)
+		for (int j = 0; j < gen.length; j++)
 		{
-			sb.append(agen[j].getFitness());
+			sb.append(gen[j].getFitness());
 			sb.append("\n");
 		}
 		return sb.toString();
