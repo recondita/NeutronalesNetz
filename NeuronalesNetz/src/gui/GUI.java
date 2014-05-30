@@ -450,7 +450,7 @@ public class GUI extends JFrame
 						layerStr.append(" ");
 					}
 					layerZuErstellen.setText(layerStr.toString());
-					chckbxTrainierenZuErstellen.setSelected(true);
+					//chckbxTrainierenZuErstellen.setSelected(true);
 					maxIterationsZuErstellen.setText(gen.getMaxIterations()
 							+ "");
 					learningRateZuErstellen.setText(gen.getLearningRate() + "");
