@@ -933,6 +933,9 @@ public class GUI extends JFrame
 							nn,
 							Integer.parseInt(maxTrainingZuTrainieren.getText()) * 1000);
 					nn.save(netzwerkZuTrainieren.getText());
+					JOptionPane.showMessageDialog(null,
+							"Das Netz wurde erfolgreich trainiert", "Training erfolgreich",
+							JOptionPane.INFORMATION_MESSAGE);
 				} catch (NumberFormatException e)
 				{
 					JOptionPane.showMessageDialog(null, "Fehlerhafte Eingabe",
