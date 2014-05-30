@@ -44,8 +44,7 @@ import snakeCOM.SnakeLogger;
 import snakeCOM.SnakePlayer;
 import util.MyUtils;
 
-public class GUI extends JFrame
-{
+public class GUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -72,8 +71,7 @@ public class GUI extends JFrame
 	PrintStream consoleStreamforTextArea = new PrintStream(System.out) {
 
 		@Override
-		public void println(String s)
-		{
+		public void println(String s) {
 			updateFeld(s);
 		}
 	};
@@ -83,16 +81,14 @@ public class GUI extends JFrame
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args)
-	{
+	public static void main(String[] args) {
 		new GUI().setVisible(true);
 	}
 
 	/**
 	 * Create the frame.
 	 */
-	public GUI()
-	{
+	public GUI() {
 		setTitle("KNN");
 		setMinimumSize(new Dimension(350, 575));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -113,8 +109,7 @@ public class GUI extends JFrame
 
 		JButton btnLogZuAufzeichnen = new JButton("...");
 		btnLogZuAufzeichnen.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0)
-			{
+			public void actionPerformed(ActionEvent arg0) {
 				String pfad = chooseFileToSave("Snakelog", "slog");
 				if (pfad != null)
 					logZuAufzeichnen.setText(pfad);
@@ -126,8 +121,7 @@ public class GUI extends JFrame
 
 		JButton btnStartZuAufzeichnen = new JButton("Start");
 		btnStartZuAufzeichnen.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0)
-			{
+			public void actionPerformed(ActionEvent arg0) {
 				new SnakeLogger(new File(logZuAufzeichnen.getText()));
 			}
 
@@ -217,8 +211,7 @@ public class GUI extends JFrame
 
 		JButton btnGenomZuErstellen = new JButton("...");
 		btnGenomZuErstellen.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0)
-			{
+			public void actionPerformed(ActionEvent arg0) {
 				String pfad = chooseFileToOpen("Genom", "gen");
 				if (pfad != null)
 					genomZuErstellen.setText(pfad);
@@ -252,8 +245,7 @@ public class GUI extends JFrame
 
 		final JButton btnSpielaufzeichnungZuErstellen = new JButton("...");
 		btnSpielaufzeichnungZuErstellen.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0)
-			{
+			public void actionPerformed(ActionEvent arg0) {
 				String pfad = chooseFileToOpen("Snakelog", "slog");
 				if (pfad != null)
 					spielaufzeichnungZuErstellen.setText(pfad);
@@ -281,7 +273,8 @@ public class GUI extends JFrame
 		JLabel lblMaximaleIterationen = new JLabel("Maximale Iterationen:");
 
 		maxIterationsZuErstellen = new JTextField();
-		maxIterationsZuErstellen.setToolTipText("Hier bitte eine Ganzzahl verwenden");
+		maxIterationsZuErstellen
+				.setToolTipText("Hier bitte eine Ganzzahl verwenden");
 		maxIterationsZuErstellen.setColumns(10);
 
 		JLabel lblSpeicherort = new JLabel("Speicherort:");
@@ -291,8 +284,7 @@ public class GUI extends JFrame
 
 		JButton btnSpeicherortZuErstellen = new JButton("...");
 		btnSpeicherortZuErstellen.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0)
-			{
+			public void actionPerformed(ActionEvent arg0) {
 				String pfad = chooseFileToSave("Neuronal Network", "nnet");
 				if (pfad != null)
 					speicherortZuErstellen.setText(pfad);
@@ -301,21 +293,19 @@ public class GUI extends JFrame
 		JButton btnErstellenZuErstellen = new JButton("Erstellen");
 
 		final JCheckBox chckbxAutosaveZuErstellen = new JCheckBox("Autosave");
-		chckbxAutosaveZuErstellen.setToolTipText("Automatische Speicherung jede Minute");
+		chckbxAutosaveZuErstellen
+				.setToolTipText("Automatische Speicherung jede Minute");
 
 		btnErstellenZuErstellen.addActionListener(new ActionListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				try
-				{
+			public void actionPerformed(ActionEvent arg0) {
+				try {
 					String[] layerStr = layerZuErstellen.getText().split(" ");
 					int[] layer = new int[layerStr.length];
 					for (int i = 0; i < layerStr.length; i++)
 						layer[i] = Integer.parseInt(layerStr[i]);
-					if (chckbxTrainierenZuErstellen.isSelected())
-					{
+					if (chckbxTrainierenZuErstellen.isSelected()) {
 						new GenNetz(
 								new Genom(
 										layer,
@@ -338,8 +328,7 @@ public class GUI extends JFrame
 										.getText()) * 1000,
 								speicherortZuErstellen.getText(),
 								chckbxAutosaveZuErstellen.isSelected());
-					} else
-					{
+					} else {
 						new GenNetz(new Genom(layer,
 								Double.parseDouble(learningRateZuErstellen
 										.getText()), Double
@@ -349,8 +338,7 @@ public class GUI extends JFrame
 										.getSelectedItem(), null), 0,
 								speicherortZuErstellen.getText(), false);
 					}
-				} catch (Exception e)
-				{
+				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, "Fehlerhafte Eingabe",
 							"Fehler", JOptionPane.WARNING_MESSAGE);
 					e.printStackTrace();
@@ -369,8 +357,7 @@ public class GUI extends JFrame
 		final JButton btnSpeicherortZuAlsGenomSpeichern = new JButton("...");
 		btnSpeicherortZuAlsGenomSpeichern
 				.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0)
-					{
+					public void actionPerformed(ActionEvent arg0) {
 						String pfad = chooseFileToSave("Geonom", "gen");
 						if (pfad != null)
 							speicherortZuAlsGenomSpeichern.setText(pfad);
@@ -380,14 +367,12 @@ public class GUI extends JFrame
 		final JButton btnAlsGenomSpeichern = new JButton("Als Genom speichern");
 		btnAlsGenomSpeichern.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
+			public void actionPerformed(ActionEvent arg0) {
 				String[] layerStr = layerZuErstellen.getText().split(" ");
 				int[] layer = new int[layerStr.length];
 				for (int i = 0; i < layerStr.length; i++)
 					layer[i] = Integer.parseInt(layerStr[i]);
-				try
-				{
+				try {
 					MyUtils.writeFile(
 							new Genom(
 									layer,
@@ -408,8 +393,7 @@ public class GUI extends JFrame
 											layer[layer.length - 1]))
 									.toString(),
 							btnSpeicherortZuAlsGenomSpeichern.getText());
-				} catch (Exception e)
-				{
+				} catch (Exception e) {
 
 				}
 			}
@@ -417,8 +401,7 @@ public class GUI extends JFrame
 		chckbxTrainierenZuErstellen.addActionListener(new ActionListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
+			public void actionPerformed(ActionEvent arg0) {
 				boolean active = chckbxTrainierenZuErstellen.isSelected();
 				maxIterationsZuErstellen.setEnabled(active);
 				// learningRateZuErstellen.setEnabled(active);
@@ -435,30 +418,26 @@ public class GUI extends JFrame
 		btnLadenZuErstellen.addActionListener(new ActionListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				try
-				{
+			public void actionPerformed(ActionEvent arg0) {
+				try {
 					String genStr = MyUtils.readFile(genomZuErstellen.getText());
 					Genom gen = new Genom(genStr, null);
 					transferFunktion.setSelectedItem(gen.getTransferFunktion());
 					StringBuffer layerStr = new StringBuffer();
 					int[] layers = gen.getLayers();
-					for (int lay : layers)
-					{
+					for (int lay : layers) {
 						layerStr.append(lay);
 						layerStr.append(" ");
 					}
 					layerZuErstellen.setText(layerStr.toString());
-					//chckbxTrainierenZuErstellen.setSelected(true);
+					// chckbxTrainierenZuErstellen.setSelected(true);
 					maxIterationsZuErstellen.setText(gen.getMaxIterations()
 							+ "");
 					learningRateZuErstellen.setText(gen.getLearningRate() + "");
 					momentumZuErstellen.setText(gen.getMomentum() + "");
 					speicherortZuAlsGenomSpeichern.setText(genomZuErstellen
 							.getText());
-				} catch (Exception e)
-				{
+				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null,
 							"Fehler beim Lesen des Genoms", "Fehler",
 							JOptionPane.WARNING_MESSAGE);
@@ -885,8 +864,7 @@ public class GUI extends JFrame
 
 		JButton btnNetzwerkZuTrainieren = new JButton("...");
 		btnNetzwerkZuTrainieren.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0)
-			{
+			public void actionPerformed(ActionEvent arg0) {
 				String pfad = chooseFileToOpen("Neuronal Network", "nnet");
 				if (pfad != null)
 					netzwerkZuTrainieren.setText(pfad);
@@ -901,8 +879,7 @@ public class GUI extends JFrame
 		JButton btnSpielaufzeichnungZuTrainieren = new JButton("...");
 		btnSpielaufzeichnungZuTrainieren
 				.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0)
-					{
+					public void actionPerformed(ActionEvent arg0) {
 						String pfad = chooseFileToOpen("SnakeLog", "slog");
 						if (pfad != null)
 							spielaufzeichnungZuTrainieren.setText(pfad);
@@ -922,46 +899,42 @@ public class GUI extends JFrame
 		maxTrainingZuTrainieren.setColumns(10);
 
 		JCheckBox chckbxAutosaveZuTrainieren = new JCheckBox("Autosave");
-		chckbxAutosaveZuTrainieren.setToolTipText("Automatische Speicherung jede Minute");
+		chckbxAutosaveZuTrainieren
+				.setToolTipText("Automatische Speicherung jede Minute");
 
 		JButton btnStartZuTrainieren = new JButton("Start");
 		btnStartZuTrainieren.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0)
-			{
+			public void actionPerformed(ActionEvent arg0) {
 				final NeuralNetwork<?> nn = NeuralNetwork
 						.createFromFile(netzwerkZuTrainieren.getText());
 				((MomentumBackpropagation) nn.getLearningRule())
 						.setMaxIterations("".equals(maxIterationsZuTrainieren
 								.getText()) ? Integer.MAX_VALUE : Integer
 								.parseInt(maxIterationsZuTrainieren.getText()));
-				try
-				{
+				try {
 					new SnakeTrainer(spielaufzeichnungZuTrainieren.getText(),
 							nn.getInputsCount(), nn.getOutputsCount()).train(
 							nn,
 							Integer.parseInt(maxTrainingZuTrainieren.getText()) * 1000);
 					nn.save(netzwerkZuTrainieren.getText());
 					JOptionPane.showMessageDialog(null,
-							"Das Netz wurde erfolgreich trainiert", "Training erfolgreich",
+							"Das Netz wurde erfolgreich trainiert",
+							"Training erfolgreich",
 							JOptionPane.INFORMATION_MESSAGE);
-				} catch (NumberFormatException e)
-				{
+				} catch (NumberFormatException e) {
 					JOptionPane.showMessageDialog(null, "Fehlerhafte Eingabe",
 							"Fehler", JOptionPane.WARNING_MESSAGE);
 					e.printStackTrace();
-				} catch (FileNotFoundException e)
-				{
+				} catch (FileNotFoundException e) {
 					JOptionPane.showMessageDialog(null, "Datei nicht gefunden",
 							"Fehler", JOptionPane.WARNING_MESSAGE);
 					e.printStackTrace();
-				} catch (IOException e)
-				{
+				} catch (IOException e) {
 					JOptionPane.showMessageDialog(null,
 							"Fehler beim Lesen der Datei", "Fehler",
 							JOptionPane.WARNING_MESSAGE);
 					e.printStackTrace();
-				} catch (Exception e)
-				{
+				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null,
 							"Training Set passt nicht zum Netz", "Fehler",
 							JOptionPane.WARNING_MESSAGE);
@@ -1166,8 +1139,7 @@ public class GUI extends JFrame
 
 		JButton btnNetzwerkZuSpielen = new JButton("...");
 		btnNetzwerkZuSpielen.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0)
-			{
+			public void actionPerformed(ActionEvent arg0) {
 				String pfad = chooseFileToOpen("Neuronal Network", "nnet");
 				if (pfad != null)
 					netzwerkZuSpielen.setText(pfad);
@@ -1176,8 +1148,7 @@ public class GUI extends JFrame
 
 		JButton btnStartZuSpielen = new JButton("Start");
 		btnStartZuSpielen.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0)
-			{
+			public void actionPerformed(ActionEvent arg0) {
 				new SnakePlayer(NeuralNetwork.createFromFile(netzwerkZuSpielen
 						.getText())).start();
 				;
@@ -1269,8 +1240,7 @@ public class GUI extends JFrame
 
 		JButton btnSpeicherortZuEvolution = new JButton("...");
 		btnSpeicherortZuEvolution.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0)
-			{
+			public void actionPerformed(ActionEvent arg0) {
 				String pfad = chooseFolder();
 				if (pfad != null)
 					speicherortZuEvolution.setText(pfad);
@@ -1279,29 +1249,24 @@ public class GUI extends JFrame
 
 		JButton btnStartZuEvolution = new JButton("Start");
 		btnStartZuEvolution.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0)
-			{
+			public void actionPerformed(ActionEvent arg0) {
 				final PrintStream stdout = System.out;
 				System.setOut(consoleStreamforTextArea);
-				try
-				{
+				try {
 					final EVKontrolle eK = new EVKontrolle(Integer
 							.parseInt(individuenZuEvolution.getText()), Integer
 							.parseInt(testsZuEvolution.getText()), Integer
 							.parseInt(maxTrainingZuEvolution.getText()) * 1000,
 							speicherortZuEvolution.getText(),
-											spielaufzeichnungZuEvolution
-													.getText());
+							spielaufzeichnungZuEvolution.getText());
 					new Thread() {
-						public void run()
-						{
+						public void run() {
 							eK.entwickle(Integer
 									.parseInt(generationenZuEvolution.getText()));
 							System.setOut(stdout);
 						}
 					}.start();
-				} catch (NumberFormatException | IOException e)
-				{
+				} catch (NumberFormatException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
@@ -1317,13 +1282,15 @@ public class GUI extends JFrame
 		JLabel lblAnzahlDerIndividuen = new JLabel("Anzahl der Individuen:");
 
 		individuenZuEvolution = new JTextField();
-		individuenZuEvolution.setToolTipText("Als Ganzzahl. Am Besten ein Vielfaches Ihrer CPU-Kerne");
+		individuenZuEvolution
+				.setToolTipText("Als Ganzzahl. Am Besten ein Vielfaches Ihrer CPU-Kerne");
 		individuenZuEvolution.setColumns(10);
 
 		JLabel lblAnzahlDerTests = new JLabel("Anzahl der Tests:");
 
 		testsZuEvolution = new JTextField();
-		testsZuEvolution.setToolTipText("Als Ganzzahl. Eine sehr hohe Anzahl ist hier Vorteilhaft. Ca. 10000");
+		testsZuEvolution
+				.setToolTipText("Als Ganzzahl. Eine sehr hohe Anzahl ist hier Vorteilhaft. Ca. 10000");
 		testsZuEvolution.setColumns(10);
 
 		JScrollPane scrollPane = new JScrollPane();
@@ -1343,8 +1310,7 @@ public class GUI extends JFrame
 
 		JButton btnSpielaufzeichnungZuEvolution = new JButton("...");
 		btnSpielaufzeichnungZuEvolution.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0)
-			{
+			public void actionPerformed(ActionEvent arg0) {
 				String pfad = chooseFileToOpen("Snakelog", "slog");
 				if (pfad != null)
 					spielaufzeichnungZuEvolution.setText(pfad);
@@ -1579,64 +1545,54 @@ public class GUI extends JFrame
 		ausgabeKonsole = new JTextArea();
 		scrollPane.setViewportView(ausgabeKonsole);
 		ausgabeKonsole.setEditable(false);
-		DefaultCaret caret = (DefaultCaret)ausgabeKonsole.getCaret();
+		DefaultCaret caret = (DefaultCaret) ausgabeKonsole.getCaret();
 		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 		evolution.setLayout(gl_evolution);
 	}
 
-	public String chooseFileToSave(String type, String extention)
-	{
+	public String chooseFileToSave(String type, String extention) {
 		JFileChooser chooser = new JFileChooser();
 		FileNameExtensionFilter filter = new FileNameExtensionFilter(type,
 				extention);
 		chooser.setFileFilter(filter);
 		int returnVal = chooser.showSaveDialog(chooser);
-		if (returnVal == JFileChooser.APPROVE_OPTION)
-		{
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			if (chooser.getSelectedFile().isDirectory())
 				return null;
 			String name = chooser.getSelectedFile().getAbsolutePath();
 			return name.endsWith(extention) ? name : (name + "." + extention);
-		} else
-		{
+		} else {
 			return null;
 		}
 	}
 
-	public String chooseFileToOpen(String type, String extention)
-	{
+	public String chooseFileToOpen(String type, String extention) {
 		JFileChooser chooser = new JFileChooser();
 		FileNameExtensionFilter filter = new FileNameExtensionFilter(type,
 				extention);
 		chooser.setFileFilter(filter);
 		int returnVal = chooser.showOpenDialog(chooser);
-		if (returnVal == JFileChooser.APPROVE_OPTION)
-		{
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			return chooser.getSelectedFile().getAbsolutePath();
-		} else
-		{
+		} else {
 			return null;
 		}
 
 	}
 
-	public String chooseFolder()
-	{
+	public String chooseFolder() {
 		JFileChooser chooser = new JFileChooser();
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		chooser.setAcceptAllFileFilterUsed(false);
 		int returnVal = chooser.showOpenDialog(chooser);
-		if (returnVal == JFileChooser.APPROVE_OPTION)
-		{
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			return chooser.getSelectedFile().getAbsolutePath();
-		} else
-		{
+		} else {
 			return null;
 		}
 	}
 
-	private void updateFeld(String str)
-	{
+	private void updateFeld(String str) {
 		ausgabeKonsole.append(str + "\n");
 	}
 }
