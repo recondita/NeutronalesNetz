@@ -1270,7 +1270,7 @@ public class GUI extends JFrame
 		btnStartZuEvolution.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0)
 			{
-				PrintStream stdout = System.out;
+				final PrintStream stdout = System.out;
 				System.setOut(consoleStreamforTextArea);
 				try
 				{
@@ -1286,6 +1286,7 @@ public class GUI extends JFrame
 						{
 							eK.entwickle(Integer
 									.parseInt(generationenZuEvolution.getText()));
+							System.setOut(stdout);
 						}
 					}.start();
 				} catch (NumberFormatException | IOException e)
@@ -1293,8 +1294,6 @@ public class GUI extends JFrame
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				//System.setOut(stdout);
-
 			}
 		});
 
