@@ -238,7 +238,7 @@ public class GUI extends JFrame
 
 		layerZuErstellen = new JTextField();
 		layerZuErstellen
-				.setToolTipText("Einzelne Schichten bitte durch einen Punkt trennen");
+				.setToolTipText("Einzelne Schichten bitte durch einen Leerzeichen trennen");
 		layerZuErstellen.setColumns(10);
 
 		JLabel lblLearningrate = new JLabel("Learningrate:");
@@ -263,12 +263,15 @@ public class GUI extends JFrame
 		JLabel lblSpielaufzeichnung = new JLabel("Spielaufzeichnung:");
 
 		momentumZuErstellen = new JTextField();
+		momentumZuErstellen.setToolTipText("Liegt im Wertebereich 0<=x<=1");
 		momentumZuErstellen.setColumns(10);
 
 		learningRateZuErstellen = new JTextField();
+		learningRateZuErstellen.setToolTipText("Liegt im Wertebereich 0<=x<=1");
 		learningRateZuErstellen.setColumns(10);
 
 		maxTrainingZuErstellen = new JTextField();
+		maxTrainingZuErstellen.setToolTipText("In Sekunden");
 		maxTrainingZuErstellen.setColumns(10);
 
 		final JCheckBox chckbxTrainierenZuErstellen = new JCheckBox(
@@ -278,6 +281,7 @@ public class GUI extends JFrame
 		JLabel lblMaximaleIterationen = new JLabel("Maximale Iterationen:");
 
 		maxIterationsZuErstellen = new JTextField();
+		maxIterationsZuErstellen.setToolTipText("Hier bitte eine Ganzzahl verwenden");
 		maxIterationsZuErstellen.setColumns(10);
 
 		JLabel lblSpeicherort = new JLabel("Speicherort:");
@@ -297,6 +301,7 @@ public class GUI extends JFrame
 		JButton btnErstellenZuErstellen = new JButton("Erstellen");
 
 		final JCheckBox chckbxAutosaveZuErstellen = new JCheckBox("Autosave");
+		chckbxAutosaveZuErstellen.setToolTipText("Automatische Speicherung jede Minute");
 
 		btnErstellenZuErstellen.addActionListener(new ActionListener() {
 
@@ -909,12 +914,15 @@ public class GUI extends JFrame
 		JLabel label_4 = new JLabel("Maximale Iterationen:");
 
 		maxIterationsZuTrainieren = new JTextField();
+		maxIterationsZuTrainieren.setToolTipText("Als Ganzzahl");
 		maxIterationsZuTrainieren.setColumns(10);
 
 		maxTrainingZuTrainieren = new JTextField();
+		maxTrainingZuTrainieren.setToolTipText("In Sekunden");
 		maxTrainingZuTrainieren.setColumns(10);
 
 		JCheckBox chckbxAutosaveZuTrainieren = new JCheckBox("Autosave");
+		chckbxAutosaveZuTrainieren.setToolTipText("Automatische Speicherung jede Minute");
 
 		JButton btnStartZuTrainieren = new JButton("Start");
 		btnStartZuTrainieren.addActionListener(new ActionListener() {
@@ -1303,16 +1311,19 @@ public class GUI extends JFrame
 		JLabel label_6 = new JLabel("Maximale Trainingszeit:");
 
 		maxTrainingZuEvolution = new JTextField();
+		maxTrainingZuEvolution.setToolTipText("In Sekunden");
 		maxTrainingZuEvolution.setColumns(10);
 
 		JLabel lblAnzahlDerIndividuen = new JLabel("Anzahl der Individuen:");
 
 		individuenZuEvolution = new JTextField();
+		individuenZuEvolution.setToolTipText("Als Ganzzahl. Am Besten ein Vielfaches Ihrer CPU-Kerne");
 		individuenZuEvolution.setColumns(10);
 
 		JLabel lblAnzahlDerTests = new JLabel("Anzahl der Tests:");
 
 		testsZuEvolution = new JTextField();
+		testsZuEvolution.setToolTipText("Als Ganzzahl. Eine sehr hohe Anzahl ist hier Vorteilhaft. Ca. 10000");
 		testsZuEvolution.setColumns(10);
 
 		JScrollPane scrollPane = new JScrollPane();
@@ -1322,6 +1333,7 @@ public class GUI extends JFrame
 		JLabel lblAnzahlDerGenerationen = new JLabel("Anzahl der Generationen:");
 
 		generationenZuEvolution = new JTextField();
+		generationenZuEvolution.setToolTipText("Als Ganzzahl");
 		generationenZuEvolution.setColumns(10);
 
 		JLabel lblNewLabel = new JLabel("Spielaufzeichnung:");
